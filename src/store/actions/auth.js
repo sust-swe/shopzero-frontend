@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import Axios from "axios";
 
 export const authStart = () => {
   return {
@@ -23,5 +24,20 @@ export const authFail = error => {
 export const auth = (email, password) => {
   return dispatch => {
     dispatch(authStart());
+
+    const authData = {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    };
+
+    Axios.post("sessions/login", authData)
+      .then(response => {
+        console.log(response);
+        dispatch(authSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(authFail(error));
+      });
   };
 };

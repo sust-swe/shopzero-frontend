@@ -5,6 +5,7 @@ import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Auth extends Component {
   state = {
@@ -117,17 +118,34 @@ class Auth extends Component {
       />
     ));
 
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
+    let response = null;
+
+    if (this.props.responseMessage) {
+      response = <p>{this.props.responseMessage}</p>;
+    }
+
     return (
       <div className={classes.Auth}>
         <form onSubmit={this.submitHandler}>
           {form}
           <button className={classes.LoginBtn}>SIGN IN</button>
         </form>
-        <button>Another page</button>
+        {response}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loading: state.loading,
+    responseMessage: state.responseMessage
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -136,6 +154,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withErrorHandler(Auth, Axios));
