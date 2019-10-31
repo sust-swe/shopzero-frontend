@@ -96,6 +96,12 @@ class Auth extends Component {
     );
   };
 
+  logoutHandler = event => {
+    event.preventDefault();
+    console.log(this.props.token);
+    this.props.onLogout();
+  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -130,11 +136,14 @@ class Auth extends Component {
 
     return (
       <div className={classes.Auth}>
+        {response}
         <form onSubmit={this.submitHandler}>
           {form}
           <button className={classes.LoginBtn}>SIGN IN</button>
         </form>
-        {response}
+        <button className={classes.LogoutBtn} onClick={this.logoutHandler}>
+          SIGN OUT
+        </button>
       </div>
     );
   }
@@ -143,13 +152,15 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.loading,
-    responseMessage: state.responseMessage
+    responseMessage: state.responseMessage,
+    token: state.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password))
+    onAuth: (email, password) => dispatch(actions.auth(email, password)),
+    onLogout: () => dispatch(actions.logout())
   };
 };
 

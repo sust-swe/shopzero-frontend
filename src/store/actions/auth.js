@@ -41,3 +41,29 @@ export const auth = (email, password) => {
       });
   };
 };
+
+export const logoutSuccess = () => {
+  return {
+    type: actionTypes.LOGOUT
+  };
+};
+
+export const logoutFail = error => {
+  return {
+    type: actionTypes.LOGOUT_FAIL,
+    error: error
+  };
+};
+
+export const logout = () => {
+  return dispatch => {
+    Axios.delete("sessions/logout")
+      .then(response => {
+        console.log(response);
+        dispatch(logoutSuccess());
+      })
+      .catch(error => {
+        dispatch(logoutFail(error));
+      });
+  };
+};
