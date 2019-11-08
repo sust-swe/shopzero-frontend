@@ -11,12 +11,11 @@ class Home extends Component {
   render() {
     return (
       <MDBContainer className={classes.Home}>
-        {this.props.isAuthenticated ? <h1>Signed In</h1> : <h1>Signed Out</h1>}
         <MDBRow>
-          <MDBCol>
+          <MDBCol md="2">
             <Logo className={classes.Logo} />
           </MDBCol>
-          <MDBCol>
+          <MDBCol md="10">
             <SearchBar className={classes.SearchBar} />
           </MDBCol>
         </MDBRow>

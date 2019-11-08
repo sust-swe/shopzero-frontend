@@ -4,9 +4,10 @@
   background-color: white;
   font: inherit;
   padding: 6px 10px;
-  display: block;
+  margin-top: 10px;
   width: 50%;
   box-sizing: border-box;
+  margin-right: 10px;
 }
 
 .SearchBar:focus {

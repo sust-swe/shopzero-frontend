@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Input from "../../../components/UI/Input/Input";
-import { MDBCol, MDBRow } from "mdbreact";
+import { MDBCol, MDBIcon } from "mdbreact";
 import classes from "./SearchBar.css";
 
 class SearchBar extends Component {
@@ -16,23 +16,20 @@ class SearchBar extends Component {
   render() {
     return (
       <Fragment>
-        <MDBRow>
-          <MDBCol>
-            <form className="form-inline mt-4 mb-4">
-              <input
-                className={classes.SearchBar}
-                type="text"
-                name="SearchText"
-                placeholder="Search by name, brand or category"
-                value={this.state.value}
-                onChange={this.changeHandler}
-              />
-            </form>
-          </MDBCol>
-          <MDBCol>
+        <MDBCol md="8">
+          <form className="form-inline mt-4 mb-4">
+            <MDBIcon icon="search" />
+            <input
+              className={classes.SearchBar}
+              type="text"
+              name="SearchText"
+              placeholder="Search by name, brand or category"
+              value={this.state.value}
+              onChange={this.changeHandler}
+            />
             <button>Search</button>
-          </MDBCol>
-        </MDBRow>
+          </form>
+        </MDBCol>
       </Fragment>
     );
   }
