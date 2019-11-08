@@ -1,0 +1,15 @@
+.SearchBar {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.SearchBar:focus {
+  outline: none;
+  background-color: #ccc;
+}

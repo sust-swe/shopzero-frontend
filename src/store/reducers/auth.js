@@ -6,14 +6,17 @@ const initialState = {
   userId: null,
   error: false,
   loading: false,
-  responseMessage: null
+  responseMessage: null,
+  signedIn: false,
+  authRedirectPath: "/"
 };
 
 const authStart = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: true,
-    responseMessage: null
+    responseMessage: null,
+    signedIn: false
   });
 };
 
@@ -22,7 +25,8 @@ const authSuccess = (state, action) => {
     token: action.authData.auth_token,
     error: null,
     loading: false,
-    responseMessage: action.authData.message
+    responseMessage: action.authData.message,
+    signedIn: true
   });
 };
 
@@ -30,7 +34,8 @@ const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: null
+    responseMessage: "Invalid email or password",
+    signedIn: false
   });
 };
 
@@ -39,7 +44,8 @@ const logout = (state, action) => {
     token: null,
     error: false,
     loading: false,
-    responseMessage: null
+    responseMessage: null,
+    signedIn: false
   });
 };
 
@@ -47,8 +53,13 @@ const logoutFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: null
+    responseMessage: null,
+    signedIn: true
   });
+};
+
+const setAuthRedirectPath = (state, action) => {
+  return updateObject(state, { authRedirectPath: action.path });
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,6 +78,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.LOGOUT_FAIL:
       return logoutFail(state, action);
+
+    case actionTypes.SET_AUTH_REDIRECT_PATH:
+      return setAuthRedirectPath(state, action);
 
     default:
       return state;

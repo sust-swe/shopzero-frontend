@@ -3,6 +3,7 @@ import Input from "../../components/UI/Input/Input";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -96,12 +97,6 @@ class Auth extends Component {
     );
   };
 
-  logoutHandler = event => {
-    event.preventDefault();
-    console.log(this.props.token);
-    this.props.onLogout();
-  };
-
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -134,16 +129,20 @@ class Auth extends Component {
       response = <p>{this.props.responseMessage}</p>;
     }
 
+    let authRedirect = null;
+
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/" />;
+    }
+
     return (
       <div className={classes.Auth}>
+        {authRedirect}
         {response}
         <form onSubmit={this.submitHandler}>
           {form}
           <button className={classes.LoginBtn}>SIGN IN</button>
         </form>
-        <button className={classes.LogoutBtn} onClick={this.logoutHandler}>
-          SIGN OUT
-        </button>
       </div>
     );
   }
@@ -153,14 +152,13 @@ const mapStateToProps = state => {
   return {
     loading: state.loading,
     responseMessage: state.responseMessage,
-    token: state.token
+    isAuthenticated: state.token !== null
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password)),
-    onLogout: () => dispatch(actions.logout())
+    onAuth: (email, password) => dispatch(actions.auth(email, password))
   };
 };
 

@@ -34,11 +34,19 @@ export const auth = (email, password) => {
     Axios.post("sessions/login", authData)
       .then(response => {
         console.log(response);
+        localStorage.setItem("token", response.data.auth_token);
         dispatch(authSuccess(response.data));
       })
       .catch(error => {
         dispatch(authFail(error));
       });
+  };
+};
+
+export const authenticated = () => {
+  console.log("authenticated");
+  return {
+    type: actionTypes.AUTHENTICATED
   };
 };
 
@@ -60,10 +68,30 @@ export const logout = () => {
     Axios.delete("sessions/logout")
       .then(response => {
         console.log(response);
+        localStorage.removeItem("token");
         dispatch(logoutSuccess());
       })
       .catch(error => {
         dispatch(logoutFail(error));
       });
+  };
+};
+
+export const setAuthRedirectPath = path => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path
+  };
+};
+
+export const authStateCheck = () => {
+  return dispatch => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      dispatch(logout());
+    } else {
+      dispatch(authSuccess(token));
+    }
   };
 };
