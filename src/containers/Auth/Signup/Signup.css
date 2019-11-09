@@ -1,4 +1,4 @@
-.Auth {
+.Signup {
   width: 80%;
   margin: 20px auto;
   text-align: center;
@@ -13,12 +13,12 @@
 }
 
 @media (min-width: 600px) {
-  .Auth {
+  .Signup {
     width: 500px;
   }
 }
 
-.LoginBtn {
+.SignupBtn {
   background-color: transparent;
   border: none;
   color: #5c9210;
@@ -30,7 +30,7 @@
   font-weight: bold;
 }
 
-.LoginBtn:disabled {
+.SignupBtn:disabled {
   color: #ccc;
   cursor: not-allowed;
 }
