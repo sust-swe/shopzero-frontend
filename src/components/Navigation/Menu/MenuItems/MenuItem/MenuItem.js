@@ -3,7 +3,7 @@ import classes from "./MenuItem.css";
 import { NavLink } from "react-router-dom";
 
 const MenuItem = props => (
-  <li className="list-group-item MenuItem">
+  <li className={classes.MenuItem}>
     <NavLink
       to={props.link}
       activeClassName={classes.active}
