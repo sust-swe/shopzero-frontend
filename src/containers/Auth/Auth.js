@@ -150,9 +150,9 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.loading,
-    responseMessage: state.responseMessage,
-    isAuthenticated: state.token !== null
+    loading: state.auth.loading,
+    responseMessage: state.auth.responseMessage,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

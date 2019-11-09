@@ -18,7 +18,6 @@ class SearchBar extends Component {
       <Fragment>
         <MDBCol md="8">
           <form className="form-inline mt-4 mb-4">
-            <MDBIcon icon="search" />
             <input
               className={classes.SearchBar}
               type="text"
