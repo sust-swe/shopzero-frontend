@@ -16,9 +16,8 @@ class SearchBar extends Component {
   render() {
     return (
       <Fragment>
-        <MDBCol md="8">
-          <form className="form-inline mt-4 mb-4">
-            <input type="text" className={classes.mainInput} 
+        <div className={classes.center}>
+          <input type="text" className={classes.mainInput} 
             onfocus="clearText(this)" 
             onblur="replaceText(this)"
             type="text"
@@ -27,9 +26,9 @@ class SearchBar extends Component {
               value={this.state.value}
               onChange={this.changeHandler}
            />
-            <button>Search</button>
-          </form>
-        </MDBCol>
+             <input id={classes.mainSubmit} class="" type="submit" value="Search" />
+            </div>
+
       </Fragment>
     );
   }

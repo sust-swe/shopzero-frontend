@@ -21,10 +21,11 @@ class Home extends Component {
   render() {
     return (
       <div className={`Container Home`}>
-        <MDBRow>
-          <Logo className={classes.Logo} />
-          <SearchBar className={classes.SearchBar} />
-        </MDBRow>
+        <div className="row">
+          <div className="col-md-2">          <Logo className={classes.Logo} />
+</div>
+          <div className="col-md-10"><SearchBar className={classes.SearchBar} /></div>
+        </div>
 
         <MDBRow>
           <MDBCol md="2">
