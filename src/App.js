@@ -10,6 +10,7 @@ import Menu from "./components/Navigation/Menu/Menu";
 import Products from "./containers/Products/Products";
 import ShowMenu from "./containers/ShowMenu/ShowMenu";
 import Help from "./components/Help/Help";
+import Signup from "./containers/Auth/Signup/Signup";
 
 class App extends Component {
   state = {};
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/showmenu" component={ShowMenu} />
             <Route path="/products" component={Products} />
             <Route path="/signout" component={Logout} />
+            <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Auth} />
             <Route path="/help" component={Help} />
             <Route path="/" exact component={Home} />

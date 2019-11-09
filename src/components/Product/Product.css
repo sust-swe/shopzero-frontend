@@ -7,13 +7,6 @@
   box-sizing: border-box;
 }
 
-.span {
-  display: inline-block;
-  margin: 0 8px;
-  border: 1px solid #ccc;
-  padding: 5px;
-}
-
 .Image {
   display: inline-block;
   width: 10%;

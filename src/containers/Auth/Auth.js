@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Logo from "../../components/Logo/Logo";
 
 class Auth extends Component {
   state = {
@@ -136,13 +137,16 @@ class Auth extends Component {
     }
 
     return (
-      <div className={classes.Auth}>
-        {authRedirect}
-        {response}
-        <form onSubmit={this.submitHandler}>
-          {form}
-          <button className={classes.LoginBtn}>SIGN IN</button>
-        </form>
+      <div className={classes.Logo}>
+        <Logo />
+        <div className={classes.Auth}>
+          {authRedirect}
+          {response}
+          <form onSubmit={this.submitHandler}>
+            {form}
+            <button className={classes.LoginBtn}>SIGN IN</button>
+          </form>
+        </div>
       </div>
     );
   }

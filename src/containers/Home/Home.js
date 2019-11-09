@@ -3,14 +3,20 @@ import { connect } from "react-redux";
 import classes from "./Home.css";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "./SearchBar/SearchBar";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBBtn, MDBRow, MDBCol } from "mdbreact";
 import Menu from "../../components/Navigation/Menu/Menu";
 import Products from "../Products/Products";
 import Signup from "../Auth/Signup/Signup";
 import ShowMenu from "../ShowMenu/ShowMenu";
+import { Redirect } from "react-router-dom";
 
 class Home extends Component {
   state = {};
+
+  signupBtnHandler = event => {
+    event.preventDefault();
+    this.props.history.push("/signup");
+  };
 
   render() {
     return (
@@ -24,12 +30,16 @@ class Home extends Component {
           <MDBCol md="2">
             <ShowMenu />
           </MDBCol>
-          <MDBCol md="6">
+          <MDBCol md="8">
             <Products className={classes.Products} />
           </MDBCol>
-          <MDBCol md="2">
-            <Signup className={classes.Signup} />
-          </MDBCol>
+          {!this.props.isAuthenticated ? (
+            <MDBCol md="2">
+              <MDBBtn outline color="success" onClick={this.signupBtnHandler}>
+                SIGN UP
+              </MDBBtn>
+            </MDBCol>
+          ) : null}
         </MDBRow>
       </div>
     );
@@ -38,7 +48,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.auth.token !== null
   };
 };
 
