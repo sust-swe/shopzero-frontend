@@ -36,7 +36,7 @@ class Home extends Component {
           </MDBCol>
           {!this.props.isAuthenticated ? (
             <MDBCol md="2">
-              <MDBBtn outline color="success" onClick={this.signupBtnHandler}>
+              <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
                 SIGN UP
               </MDBBtn>
             </MDBCol>

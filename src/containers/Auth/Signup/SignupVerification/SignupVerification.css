@@ -1,16 +1,52 @@
-.VerificationCode {
+.SignupVerification {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.InputElement {
   outline: none;
   border: 1px solid #ccc;
   background-color: white;
   font: inherit;
   padding: 6px 10px;
-  margin-top: 10px;
-  width: 50%;
+  display: block;
+  width: 100%;
   box-sizing: border-box;
-  margin-right: 10px;
 }
 
-.VerificationCode:focus {
+.InputElement:focus {
   outline: none;
   background-color: #ccc;
+}
+
+@media (min-width: 600px) {
+  .SignupVerification {
+    width: 500px;
+  }
+}
+
+.VerificationBtn {
+  background-color: transparent;
+  border: none;
+  color: #5c9210;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.VerificationBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Logo {
+  text-align: center;
 }

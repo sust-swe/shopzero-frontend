@@ -1,2 +1,2 @@
-export { auth, logout, authStateCheck } from "./auth";
+export { auth, logout, authStateCheck, signup } from "./auth";
 export { fetchProducts } from "./products";

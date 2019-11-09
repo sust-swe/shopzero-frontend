@@ -17,18 +17,22 @@ class SearchBar extends Component {
     return (
       <Fragment>
         <div className={classes.center}>
-          <input type="text" className={classes.mainInput} 
-            onfocus="clearText(this)" 
-            onblur="replaceText(this)"
+          <input
             type="text"
-              name="SearchText"
-              placeholder="Search by name, brand or category"
-              value={this.state.value}
-              onChange={this.changeHandler}
-           />
-             <input id={classes.mainSubmit} class="" type="submit" value="Search" />
-            </div>
-
+            className={classes.mainInput}
+            type="text"
+            name="SearchText"
+            placeholder="Search by name, brand or category"
+            value={this.state.value}
+            onChange={this.changeHandler}
+          />
+          <input
+            id={classes.mainSubmit}
+            class=""
+            type="submit"
+            value="Search"
+          />
+        </div>
       </Fragment>
     );
   }

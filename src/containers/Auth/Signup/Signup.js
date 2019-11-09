@@ -3,7 +3,7 @@ import Axios from "axios";
 import Logo from "../../../components/Logo/Logo";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
-import * as actions from "../../../store/actions/actionTypes";
+import { signup } from "../../../store/actions/index";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
@@ -144,6 +144,18 @@ class Signup extends Component {
 
   submitHandler = event => {
     event.preventDefault();
+
+    const signupInfo = {
+      firstname: this.state.controls.firstname.value,
+      lastname: this.state.controls.lastname.value,
+      username: this.state.controls.username.value,
+      password: this.state.controls.password.value,
+      password_confirmation: this.state.controls.passwordConfirmation.value,
+      email: this.state.controls.email.value
+    };
+
+    this.props.onSignup(signupInfo);
+    this.props.history.push("/signupverify");
   };
 
   render() {
@@ -200,4 +212,13 @@ class Signup extends Component {
   }
 }
 
-export default withErrorHandler(Signup, Axios);
+const mapDispatchToProps = dispatch => {
+  return {
+    onSignup: signupInfo => dispatch(signup(signupInfo))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withErrorHandler(Signup, Axios));

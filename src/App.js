@@ -11,6 +11,7 @@ import Products from "./containers/Products/Products";
 import ShowMenu from "./containers/ShowMenu/ShowMenu";
 import Help from "./components/Help/Help";
 import Signup from "./containers/Auth/Signup/Signup";
+import SignupVerification from "./containers/Auth/Signup/SignupVerification/SignupVerification";
 
 class App extends Component {
   state = {};
@@ -24,6 +25,7 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
+            <Route path="/signupverify" component={SignupVerification} />
             <Route path="/showmenu" component={ShowMenu} />
             <Route path="/products" component={Products} />
             <Route path="/signout" component={Logout} />

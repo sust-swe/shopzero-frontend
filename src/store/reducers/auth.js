@@ -52,6 +52,10 @@ const logoutFail = (state, action) => {
   });
 };
 
+const signupFailed = (state, action) => {
+  return updateObject(state, { error: action.error });
+};
+
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };
@@ -75,6 +79,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
+
+    case actionTypes.SIGNUP_FAILED:
+      return signupFailed(state, action);
 
     default:
       return state;

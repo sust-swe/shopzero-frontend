@@ -95,3 +95,22 @@ export const authStateCheck = () => {
     }
   };
 };
+
+export const signup = signupInfo => {
+  return dispatch => {
+    Axios.post("users/signup", signupInfo)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        dispatch(signupFailed(error));
+      });
+  };
+};
+
+export const signupFailed = error => {
+  return {
+    type: actionTypes.SIGNUP_FAILED,
+    error: error
+  };
+};
