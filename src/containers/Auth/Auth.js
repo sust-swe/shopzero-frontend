@@ -20,8 +20,7 @@ class Auth extends Component {
         },
         value: "",
         validation: {
-          required: true,
-          isEmail: true
+          required: true
         },
         valid: false,
         touched: false
@@ -61,11 +60,6 @@ class Auth extends Component {
       isValid = value.length <= rules.maxLength && isValid;
     }
 
-    if (rules.isEmail) {
-      const pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
     if (rules.isNumeric) {
       const pattern = /^\d+$/;
       isValid = pattern.test(value) && isValid;
@@ -88,7 +82,12 @@ class Auth extends Component {
       }
     };
 
-    this.setState({ controls: updatedControls });
+    let formIsValid = true;
+    for (let controlName in updatedControls) {
+      formIsValid = updatedControls[controlName].valid && formIsValid;
+    }
+
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
   };
 
   submitHandler = event => {
@@ -145,7 +144,12 @@ class Auth extends Component {
           {response}
           <form onSubmit={this.submitHandler}>
             {form}
-            <button className={classes.LoginBtn}>SIGN IN</button>
+            <button
+              className={classes.LoginBtn}
+              disabled={!this.state.formIsValid}
+            >
+              SIGN IN
+            </button>
           </form>
         </div>
       </div>

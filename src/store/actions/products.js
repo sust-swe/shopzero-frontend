@@ -34,3 +34,30 @@ export const fetchProductsFail = error => {
     error: error
   };
 };
+
+export const showProduct = id => {
+  return dispatch => {
+    Axios.get("products/" + id + "/show")
+      .then(response => {
+        console.log(response.data);
+        dispatch(showProductSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(showProductFail(error));
+      });
+  };
+};
+
+export const showProductSuccess = productInfo => {
+  return {
+    type: actionTypes.SHOW_PRODUCT_SUCCESS,
+    productInfo: productInfo
+  };
+};
+
+export const showProductFail = error => {
+  return {
+    type: actionTypes.SHOW_PRODUCT_FAIL,
+    error: error
+  };
+};

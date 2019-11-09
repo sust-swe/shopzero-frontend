@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from "./containers/Auth/Auth";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import Home from "./containers/Home/Home";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -12,6 +12,7 @@ import ShowMenu from "./containers/ShowMenu/ShowMenu";
 import Help from "./components/Help/Help";
 import Signup from "./containers/Auth/Signup/Signup";
 import SignupVerification from "./containers/Auth/Signup/SignupVerification/SignupVerification";
+import ProductPage from "./containers/Products/ProductPage/ProductPage";
 
 class App extends Component {
   state = {};
@@ -26,11 +27,12 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/signupverify" component={SignupVerification} />
+            <Route path="/productpage" component={ProductPage} />
             <Route path="/showmenu" component={ShowMenu} />
             <Route path="/products" component={Products} />
             <Route path="/signout" component={Logout} />
-            <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Auth} />
+            <Route path="/signup" component={Signup} />
             <Route path="/help" component={Help} />
             <Route path="/" exact component={Home} />
           </Switch>
@@ -40,13 +42,21 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token != null
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onTryAutoSignup: () => dispatch(actions.authStateCheck)
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
