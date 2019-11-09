@@ -20,10 +20,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className={`Container Home`}>
-        <div className="row">
+      <div>
+        <div className={[classes.Row, `row`].join(" ")}>
           <div className="col-md-2">
-            {" "}
             <Logo className={classes.Logo} />
           </div>
           <div className="col-md-8">

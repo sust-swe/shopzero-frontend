@@ -6,11 +6,11 @@
   left: 0;
   background-color: #272e27;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 90;
+  justify-content: flex-end;
 }
 
 .Toolbar nav {
