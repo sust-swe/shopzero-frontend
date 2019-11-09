@@ -5,8 +5,8 @@ const Product = props => {
   return (
     <div className={classes.Product}>
       <span className={classes.Image}>Image</span>
-      <p>{props.name}</p>
-      <p>{props.price}</p>
+      <p className={classes.Title}>{props.name}</p>
+      <p className={classes.Price}>{"$" + props.price}</p>
     </div>
   );
 };

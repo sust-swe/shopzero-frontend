@@ -18,14 +18,15 @@ class SearchBar extends Component {
       <Fragment>
         <MDBCol md="8">
           <form className="form-inline mt-4 mb-4">
-            <input
-              className={classes.SearchBar}
-              type="text"
+            <input type="text" className={classes.mainInput} 
+            onfocus="clearText(this)" 
+            onblur="replaceText(this)"
+            type="text"
               name="SearchText"
               placeholder="Search by name, brand or category"
               value={this.state.value}
               onChange={this.changeHandler}
-            />
+           />
             <button>Search</button>
           </form>
         </MDBCol>
