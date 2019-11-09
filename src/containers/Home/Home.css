@@ -9,3 +9,15 @@
 .Logo {
   box-shadow: 0 0 black;
 }
+
+.Menu {
+  float: left;
+}
+
+.Products {
+  float: left;
+}
+
+.Signup {
+  float: left;
+}

@@ -1,0 +1,13 @@
+.Menu {
+  position: fixed;
+  width: 280px;
+  max-width: 70%;
+  height: 60%;
+  margin-top: 200px;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  background-color: #573c23;
+  padding: 32px 16px;
+  box-sizing: border-box;
+}

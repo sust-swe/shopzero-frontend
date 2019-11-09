@@ -4,6 +4,9 @@ import classes from "./Home.css";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "./SearchBar/SearchBar";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import Menu from "../../components/Navigation/Menu/Menu";
+import Products from "../Products/Products";
+import Signup from "../Auth/Signup/Signup";
 
 class Home extends Component {
   state = {};
@@ -12,18 +15,17 @@ class Home extends Component {
     return (
       <MDBContainer className={classes.Home}>
         <MDBRow>
-          <MDBCol md="2">
-            <Logo className={classes.Logo} />
-          </MDBCol>
-          <MDBCol md="10">
-            <SearchBar className={classes.SearchBar} />
-          </MDBCol>
+          <Logo className={classes.Logo} />
+          <SearchBar className={classes.SearchBar} />
         </MDBRow>
 
         <MDBRow>
-          <MDBCol md="4">Menu</MDBCol>
-          <MDBCol md="4">Products</MDBCol>
-          <MDBCol md="4">Sign Up / Ad</MDBCol>
+          <MDBCol md="4">
+            <Products className={classes.Products} />
+          </MDBCol>
+          <MDBCol md="4">
+            <Signup className={classes.Signup} />
+          </MDBCol>
         </MDBRow>
       </MDBContainer>
     );

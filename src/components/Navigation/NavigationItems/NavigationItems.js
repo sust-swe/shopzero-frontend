@@ -14,6 +14,8 @@ const NavigationItems = props => (
         Home
       </NavigationItem>
     ) : null}
+    <NavigationItem link="/products">Products</NavigationItem>
+    <NavigationItem link="/showmenu">Menu</NavigationItem>
   </ul>
 );
 

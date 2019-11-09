@@ -1,0 +1,20 @@
+.MenuItem {
+  margin: 10px 0;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.MenuItem a {
+  color: #8f5c2c;
+  text-decoration: none;
+  width: 100%;
+  padding: 16px 10px;
+  display: block;
+}
+
+.MenuItem a:hover,
+.MenuItem a:active,
+.MenuItem a.active {
+  color: #40a4c8;
+}
