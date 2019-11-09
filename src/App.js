@@ -16,9 +16,9 @@ import SignupVerification from "./containers/Auth/Signup/SignupVerification/Sign
 class App extends Component {
   state = {};
 
-  // componentDidMount() {
-  //   this.props.onTryAutoSignup();
-  // }
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+  }
 
   render() {
     return (

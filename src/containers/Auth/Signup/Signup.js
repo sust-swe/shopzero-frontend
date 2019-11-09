@@ -146,12 +146,14 @@ class Signup extends Component {
     event.preventDefault();
 
     const signupInfo = {
-      firstname: this.state.controls.firstname.value,
-      lastname: this.state.controls.lastname.value,
-      username: this.state.controls.username.value,
-      password: this.state.controls.password.value,
-      password_confirmation: this.state.controls.passwordConfirmation.value,
-      email: this.state.controls.email.value
+      user: {
+        firstname: this.state.controls.firstname.value,
+        lastname: this.state.controls.lastname.value,
+        username: this.state.controls.username.value,
+        password: this.state.controls.password.value,
+        password_confirmation: this.state.controls.passwordConfirmation.value,
+        email: this.state.controls.email.value
+      }
     };
 
     this.props.onSignup(signupInfo);

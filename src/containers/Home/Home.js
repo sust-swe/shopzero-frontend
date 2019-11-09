@@ -35,16 +35,16 @@ class Home extends Component {
           <MDBCol md="2">
             <ShowMenu />
           </MDBCol>
-          <MDBCol md="10">
+          <MDBCol md="8">
             <Products className={classes.Products} />
           </MDBCol>
-          {/* {!this.props.isAuthenticated ? (
-            <MDBCol md="1">
+          {!this.props.isAuthenticated ? (
+            <MDBCol md="2">
               <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
                 SIGN UP
               </MDBBtn>
             </MDBCol>
-          ) : null} */}
+          ) : null}
         </MDBRow>
       </div>
     );
