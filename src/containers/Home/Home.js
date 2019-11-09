@@ -22,25 +22,29 @@ class Home extends Component {
     return (
       <div className={`Container Home`}>
         <div className="row">
-          <div className="col-md-2">          <Logo className={classes.Logo} />
-</div>
-          <div className="col-md-10"><SearchBar className={classes.SearchBar} /></div>
+          <div className="col-md-2">
+            {" "}
+            <Logo className={classes.Logo} />
+          </div>
+          <div className="col-md-8">
+            <SearchBar className={classes.SearchBar} />
+          </div>
         </div>
 
         <MDBRow>
           <MDBCol md="2">
             <ShowMenu />
           </MDBCol>
-          <MDBCol md="8">
+          <MDBCol md="10">
             <Products className={classes.Products} />
           </MDBCol>
-          {!this.props.isAuthenticated ? (
-            <MDBCol md="2">
+          {/* {!this.props.isAuthenticated ? (
+            <MDBCol md="1">
               <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
                 SIGN UP
               </MDBBtn>
             </MDBCol>
-          ) : null}
+          ) : null} */}
         </MDBRow>
       </div>
     );

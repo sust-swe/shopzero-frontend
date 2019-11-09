@@ -3,8 +3,13 @@ import classes from "./MenuItems.css";
 import MenuItem from "./MenuItem/MenuItem";
 
 const MenuItems = props => (
-  <ul className={[classes.MenuItems, `list-group`].join(" ")}>
+  <ul className={classes.MenuItems}>
     <MenuItem link="/">Home</MenuItem>
+    <MenuItem link="/help">Help</MenuItem>
+    <MenuItem link="/help">Help</MenuItem>
+    <MenuItem link="/help">Help</MenuItem>
+    <MenuItem link="/help">Help</MenuItem>
+    <MenuItem link="/help">Help</MenuItem>
     <MenuItem link="/help">Help</MenuItem>
   </ul>
 );

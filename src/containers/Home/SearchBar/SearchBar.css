@@ -16,8 +16,8 @@
 }
 .center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20%;
+  margin-right: 10%;
 }
 .mainInput {
   background: rgb(51, 6, 6);

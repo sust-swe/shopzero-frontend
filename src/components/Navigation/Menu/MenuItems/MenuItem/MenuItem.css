@@ -1,20 +1,18 @@
 .MenuItem {
-  margin: 10px 0;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
+  margin: 1px;
+  font-family: cursive;
 }
 
 .MenuItem a {
-  color: #8f5c2c;
+  color: #000000;
   text-decoration: none;
   width: 100%;
-  padding: 16px 10px;
+  padding: 5px;
   display: block;
 }
 
 .MenuItem a:hover,
 .MenuItem a:active,
 .MenuItem a.active {
-  color: #40a4c8;
+  color: #4d4d4d;
 }

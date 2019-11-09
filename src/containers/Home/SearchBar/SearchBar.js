@@ -20,6 +20,8 @@ class SearchBar extends Component {
           <input
             type="text"
             className={classes.mainInput}
+            onfocus="clearText(this)"
+            onblur="replaceText(this)"
             type="text"
             name="SearchText"
             placeholder="Search by name, brand or category"
@@ -28,7 +30,7 @@ class SearchBar extends Component {
           />
           <input
             id={classes.mainSubmit}
-            class=""
+            className=""
             type="submit"
             value="Search"
           />
