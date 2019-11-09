@@ -88,13 +88,13 @@ class Signup extends Component {
         },
         value: "",
         validation: {
-          required: true,
-          isEmail: true
+          required: true
         },
         valid: false,
         touched: false
       }
-    }
+    },
+    formIsValid: false
   };
 
   checkValidity = (value, rules) => {
@@ -110,11 +110,6 @@ class Signup extends Component {
 
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-      isValid = pattern.test(value) && isValid;
     }
 
     if (rules.isNumeric) {
@@ -139,7 +134,12 @@ class Signup extends Component {
       }
     };
 
-    this.setState({ controls: updatedControls });
+    let formIsValid = true;
+    for (let controlName in updatedControls) {
+      formIsValid = updatedControls[controlName].valid && formIsValid;
+    }
+
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
   };
 
   submitHandler = event => {
@@ -206,7 +206,12 @@ class Signup extends Component {
           {response} */}
           <form onSubmit={this.submitHandler}>
             {form}
-            <button className={classes.SignupBtn}>SIGN UP</button>
+            <button
+              className={classes.SignupBtn}
+              disabled={!this.state.formIsValid}
+            >
+              SIGN UP
+            </button>
           </form>
         </div>
       </div>
