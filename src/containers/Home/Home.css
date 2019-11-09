@@ -22,6 +22,8 @@
   float: left;
 }
 
-.Container {
-  padding: 16px;
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
 }
