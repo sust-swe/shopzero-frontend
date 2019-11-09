@@ -2,21 +2,15 @@
   text-align: center;
   position: relative;
   /* border: 1px solid blue; */
-  width: 50vh;
+  width: 100%;
   /* width: 20%; */
   /* max-width: 30%; */
   max-height: min-content;
   /* padding: 16px 16px; */
 }
 
-@media (min-width: 50px) {
+@media (max-width: 500px) {
   .Menu {
-    position: relative;
-    /* border: 1px solid blue; */
-    width: 100%;
-    /* width: 20%; */
-    /* max-width: 30%; */
-    max-height: min-content;
-    padding: 16px 16px;
+    display: none;
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../store/actions/index";
 import Product from "../../components/Product/Product";
+import classes from "./Products.css";
 
 class Products extends Component {
   state = {};
@@ -12,7 +13,7 @@ class Products extends Component {
 
   render() {
     let products = (
-      <div>
+      <div className={[classes.center, "row"].join(" ")}>
         {this.props.products.map(product => (
           <Product
             key={product.id}
