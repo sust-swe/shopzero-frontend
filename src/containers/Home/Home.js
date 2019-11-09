@@ -14,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-      <MDBContainer className={classes.Home}>
+      <div className={`Container Home`}>
         <MDBRow>
           <MDBCol md="4">
             <Logo className={classes.Logo} />
@@ -35,7 +35,7 @@ class Home extends Component {
             <Signup className={classes.Signup} />
           </MDBCol>
         </MDBRow>
-      </MDBContainer>
+      </div>
     );
   }
 }

@@ -6,9 +6,7 @@ class Menu extends Component {
   render() {
     return (
       <div className={classes.Menu}>
-        <nav>
           <MenuItems />
-        </nav>
       </div>
     );
   }
