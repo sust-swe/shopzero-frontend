@@ -14,9 +14,9 @@ import Help from "./components/Help/Help";
 class App extends Component {
   state = {};
 
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
+  // componentDidMount() {
+  //   this.props.onTryAutoSignup();
+  // }
 
   render() {
     return (

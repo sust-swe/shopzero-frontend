@@ -16,22 +16,18 @@ class Home extends Component {
     return (
       <div className={`Container Home`}>
         <MDBRow>
-          <MDBCol md="4">
-            <Logo className={classes.Logo} />
-          </MDBCol>
-          <MDBCol md="8">
-            <SearchBar className={classes.SearchBar} />
-          </MDBCol>
+          <Logo className={classes.Logo} />
+          <SearchBar className={classes.SearchBar} />
         </MDBRow>
 
         <MDBRow>
-          <MDBCol md="4">
+          <MDBCol md="2">
             <ShowMenu />
           </MDBCol>
-          <MDBCol md="4">
+          <MDBCol md="6">
             <Products className={classes.Products} />
           </MDBCol>
-          <MDBCol md="4">
+          <MDBCol md="2">
             <Signup className={classes.Signup} />
           </MDBCol>
         </MDBRow>

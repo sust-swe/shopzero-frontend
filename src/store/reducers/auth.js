@@ -7,7 +7,6 @@ const initialState = {
   error: false,
   loading: false,
   responseMessage: null,
-  signedIn: false,
   authRedirectPath: "/"
 };
 
@@ -15,8 +14,7 @@ const authStart = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: true,
-    responseMessage: null,
-    signedIn: false
+    responseMessage: null
   });
 };
 
@@ -25,8 +23,7 @@ const authSuccess = (state, action) => {
     token: action.authData.auth_token,
     error: null,
     loading: false,
-    responseMessage: action.authData.message,
-    signedIn: true
+    responseMessage: action.authData.message
   });
 };
 
@@ -34,8 +31,7 @@ const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: "Invalid email or password",
-    signedIn: false
+    responseMessage: "Invalid email or password"
   });
 };
 
@@ -44,8 +40,7 @@ const logout = (state, action) => {
     token: null,
     error: false,
     loading: false,
-    responseMessage: null,
-    signedIn: false
+    responseMessage: null
   });
 };
 
@@ -53,8 +48,7 @@ const logoutFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: null,
-    signedIn: true
+    responseMessage: null
   });
 };
 
