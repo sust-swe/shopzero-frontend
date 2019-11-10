@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Product from "../../components/Product/Product";
+import classes from "./Products.css";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
 import { Redirect, withRouter } from "react-router-dom";
@@ -27,7 +28,7 @@ class Products extends Component {
     }
 
     let products = (
-      <div>
+      <div className={[classes.center, "row"].join(" ")}>
         {this.props.products.map(product => (
           <Product
             key={product.id}

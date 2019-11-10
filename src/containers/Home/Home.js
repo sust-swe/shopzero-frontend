@@ -30,21 +30,21 @@ class Home extends Component {
           </div>
         </div>
 
-        <MDBRow>
-          <MDBCol md="2">
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className={["col-md-2"].join(" ")}>
             <ShowMenu />
-          </MDBCol>
-          <MDBCol md="8">
+          </div>
+          <div className={["col-md-8"].join(" ")}>
             <Products className={classes.Products} />
-          </MDBCol>
+          </div>
           {!this.props.isAuthenticated ? (
-            <MDBCol md="2">
+            <div className={["col-md-2"].join(" ")}>
               <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
                 SIGN UP
               </MDBBtn>
-            </MDBCol>
+            </div>
           ) : null}
-        </MDBRow>
+        </div>
       </div>
     );
   }

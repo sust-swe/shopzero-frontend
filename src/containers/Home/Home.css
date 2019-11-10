@@ -22,6 +22,13 @@
   float: left;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
 .Row {
   padding: 10px;
   display: flex;
