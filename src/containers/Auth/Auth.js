@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import Logo from "../../components/Logo/Logo";
+import { MDBBtn } from "mdbreact";
 
 class Auth extends Component {
   state = {
@@ -98,6 +98,11 @@ class Auth extends Component {
     );
   };
 
+  signupBtnHandler = event => {
+    event.preventDefault();
+    this.props.history.push("/signup");
+  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -137,20 +142,29 @@ class Auth extends Component {
     }
 
     return (
-      <div className={classes.Logo}>
-        <Logo />
-        <div className={classes.Auth}>
-          {authRedirect}
-          {response}
-          <form onSubmit={this.submitHandler}>
-            {form}
-            <button
-              className={classes.LoginBtn}
-              disabled={!this.state.formIsValid}
-            >
-              SIGN IN
-            </button>
-          </form>
+      <div>
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className={["col-md-10"].join(" ")}>
+            <div className={classes.Auth}>
+              {authRedirect}
+              {response}
+              <form onSubmit={this.submitHandler}>
+                {form}
+                <button
+                  className={classes.LoginBtn}
+                  disabled={!this.state.formIsValid}
+                >
+                  SIGN IN
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className={["col-md-2"].join(" ")}>
+            <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
+              SIGN UP
+            </MDBBtn>
+          </div>
+          )
         </div>
       </div>
     );

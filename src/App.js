@@ -6,9 +6,6 @@ import Home from "./containers/Home/Home";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
 import { connect } from "react-redux";
-import Menu from "./components/Navigation/Menu/Menu";
-import Products from "./containers/Products/Products";
-import ShowMenu from "./containers/ShowMenu/ShowMenu";
 import Help from "./components/Help/Help";
 import Signup from "./containers/Auth/Signup/Signup";
 import SignupVerification from "./containers/Auth/Signup/SignupVerification/SignupVerification";
@@ -16,6 +13,8 @@ import ProductPage from "./containers/Products/ProductPage/ProductPage";
 import Contact from "./components/Contact/Contact";
 import Feedback from "./containers/Feedback/Feedback";
 import AboutUs from "./components/AboutUs/AboutUs";
+import Profile from "./containers/User/Profile/Profile";
+import Cart from "./containers/User/Cart/Cart";
 
 class App extends Component {
   state = {};
@@ -31,14 +30,14 @@ class App extends Component {
           <Switch>
             <Route path="/signupverify" component={SignupVerification} />
             <Route path="/productpage" component={ProductPage} />
-            <Route path="/showmenu" component={ShowMenu} />
-            <Route path="/products" component={Products} />
             <Route path="/feedback" component={Feedback} />
+            <Route path="/profile" component={Profile} />
             <Route path="/signout" component={Logout} />
             <Route path="/contact" component={Contact} />
             <Route path="/signin" component={Auth} />
             <Route path="/signup" component={Signup} />
             <Route path="/aboutus" component={AboutUs} />
+            <Route path="/cart" component={Cart} />
             <Route path="/help" component={Help} />
             <Route path="/" exact component={Home} />
           </Switch>

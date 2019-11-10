@@ -1,10 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import classes from "./Logo.css";
+import { withRouter } from "react-router-dom";
+class Logo extends Component {
+  state = {};
 
-const Logo = () => (
-  <div className={classes.Logo}>
-    <h1>ShopZero</h1>
-  </div>
-);
+  clickHandler = event => {
+    this.props.history.push("/");
+  };
 
-export default Logo;
+  render() {
+    return (
+      <div className={classes.Logo} onClick={this.clickHandler}>
+        <h1>ShopZero</h1>
+      </div>
+    );
+  }
+}
+
+export default withRouter(Logo);

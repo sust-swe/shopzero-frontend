@@ -198,8 +198,7 @@ class Signup extends Component {
     }
 
     return (
-      <div className={classes.Logo}>
-        <Logo />
+      <div>
         {redirectTo}
         <div className={classes.Signup}>
           {/* {authRedirect}

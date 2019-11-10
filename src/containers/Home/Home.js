@@ -22,19 +22,7 @@ class Home extends Component {
     return (
       <div>
         <div className={[classes.Row, `row`].join(" ")}>
-          <div className="col-md-2">
-            <Logo className={classes.Logo} />
-          </div>
-          <div className="col-md-8">
-            <SearchBar className={classes.SearchBar} />
-          </div>
-        </div>
-
-        <div className={[classes.Row, `row`].join(" ")}>
-          <div className={["col-md-2"].join(" ")}>
-            <ShowMenu />
-          </div>
-          <div className={["col-md-8"].join(" ")}>
+          <div className={["col-md-10"].join(" ")}>
             <Products className={classes.Products} />
           </div>
           {!this.props.isAuthenticated ? (
@@ -46,6 +34,33 @@ class Home extends Component {
           ) : null}
         </div>
       </div>
+
+      // <div>
+      //   <div className={[classes.Row, `row`].join(" ")}>
+      //     <div className="col-md-2">
+      //       <Logo className={classes.Logo} />
+      //     </div>
+      //     <div className="col-md-8">
+      //       <SearchBar className={classes.SearchBar} />
+      //     </div>
+      //   </div>
+
+      //   <div className={[classes.Row, `row`].join(" ")}>
+      //     <div className={["col-md-2"].join(" ")}>
+      //       <ShowMenu />
+      //     </div>
+      //     <div className={["col-md-8"].join(" ")}>
+      //       <Products className={classes.Products} />
+      //     </div>
+      //     {!this.props.isAuthenticated ? (
+      //       <div className={["col-md-2"].join(" ")}>
+      //         <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
+      //           SIGN UP
+      //         </MDBBtn>
+      //       </div>
+      //     ) : null}
+      //   </div>
+      // </div>
     );
   }
 }

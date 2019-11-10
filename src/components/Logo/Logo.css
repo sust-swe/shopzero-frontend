@@ -7,6 +7,10 @@
   border-radius: 5px;
 }
 
+.Logo:hover {
+  color: rgb(1, 42, 1);
+}
+
 .Logo img {
   height: 100%;
 }

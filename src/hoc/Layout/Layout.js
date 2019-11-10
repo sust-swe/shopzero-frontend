@@ -3,6 +3,13 @@ import classes from "./Layout.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import { connect } from "react-redux";
+import ShowMenu from "../../containers/ShowMenu/ShowMenu";
+import Logo from "../../components/Logo/Logo";
+import SearchBar from "../../containers/Home/SearchBar/SearchBar";
+import { MDBBtn, MDBRow, MDBCol } from "mdbreact";
+import Menu from "../../components/Navigation/Menu/Menu";
+import Products from "../../containers/Products/Products";
+import Signup from "../../containers/Auth/Signup/Signup";
 
 class Layout extends Component {
   state = {
@@ -34,7 +41,33 @@ class Layout extends Component {
             authenticated={this.props.isAuthenticated}
           />
         </div>
-        <main className={classes.Main}>{this.props.children}</main>
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className="col-md-2">
+            <Logo className={classes.Logo} />
+          </div>
+          <div className="col-md-8">
+            <SearchBar className={classes.SearchBar} />
+          </div>
+        </div>
+
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className={["col-md-2"].join(" ")}>
+            <ShowMenu />
+          </div>
+          <div className={["col-md-10"].join(" ")}>
+            <main className={classes.Main}>{this.props.children}</main>
+          </div>
+
+          {/* <div className={["col-md-2"].join(" ")}>
+            {!this.props.isAuthenticated ? (
+              <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
+                SIGN UP
+              </MDBBtn>
+            ) : null}
+          </div> */}
+        </div>
+
+        {/* <main className={classes.Main}>{this.props.children}</main> */}
       </div>
     );
   }
