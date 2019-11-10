@@ -101,10 +101,17 @@ export const signup = signupInfo => {
     Axios.post("users/signup", signupInfo)
       .then(response => {
         console.log(response);
+        dispatch(signupSuccess());
       })
       .catch(error => {
         dispatch(signupFailed(error));
       });
+  };
+};
+
+export const signupSuccess = () => {
+  return {
+    type: actionTypes.SIGNUP_SUCCESS
   };
 };
 

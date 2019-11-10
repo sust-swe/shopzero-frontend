@@ -1,2 +1,2 @@
 export { auth, logout, authStateCheck, signup } from "./auth";
-export { fetchProducts, showProduct } from "./products";
+export { fetchProducts, showProduct, setProductInfoToNull } from "./products";

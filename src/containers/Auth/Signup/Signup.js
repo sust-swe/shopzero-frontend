@@ -157,7 +157,6 @@ class Signup extends Component {
     };
 
     this.props.onSignup(signupInfo);
-    this.props.history.push("/signupverify");
   };
 
   render() {
@@ -192,15 +191,16 @@ class Signup extends Component {
     //   response = <p>{this.props.responseMessage}</p>;
     // }
 
-    // let authRedirect = null;
+    let redirectTo = null;
 
-    // if (this.props.isAuthenticated) {
-    //   authRedirect = <Redirect to="/" />;
-    // }
+    if (this.props.signedUp) {
+      redirectTo = <Redirect to="/signupverify" />;
+    }
 
     return (
       <div className={classes.Logo}>
         <Logo />
+        {redirectTo}
         <div className={classes.Signup}>
           {/* {authRedirect}
           {response} */}
@@ -219,6 +219,12 @@ class Signup extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    signedUp: state.auth.signedUp
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onSignup: signupInfo => dispatch(signup(signupInfo))
@@ -226,6 +232,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withErrorHandler(Signup, Axios));

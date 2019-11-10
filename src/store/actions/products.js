@@ -61,3 +61,9 @@ export const showProductFail = error => {
     error: error
   };
 };
+
+export const setProductInfoToNull = () => {
+  return {
+    type: actionTypes.SET_PRODUCT_INFO_TO_NULL
+  };
+};

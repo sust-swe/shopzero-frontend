@@ -5,12 +5,10 @@ import MenuItem from "./MenuItem/MenuItem";
 const MenuItems = props => (
   <ul className={classes.MenuItems}>
     <MenuItem link="/">Home</MenuItem>
+    <MenuItem link="/contact">Contact</MenuItem>
     <MenuItem link="/help">Help</MenuItem>
-    <MenuItem link="/help">Help</MenuItem>
-    <MenuItem link="/help">Help</MenuItem>
-    <MenuItem link="/help">Help</MenuItem>
-    <MenuItem link="/help">Help</MenuItem>
-    <MenuItem link="/help">Help</MenuItem>
+    <MenuItem link="/feedback">Feedback</MenuItem>
+    <MenuItem link="/aboutus">About Us</MenuItem>
   </ul>
 );
 

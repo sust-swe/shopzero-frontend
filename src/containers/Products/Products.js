@@ -4,6 +4,7 @@ import * as actions from "../../store/actions/index";
 import Product from "../../components/Product/Product";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
+import { Redirect, withRouter } from "react-router-dom";
 
 class Products extends Component {
   state = {};
@@ -19,6 +20,12 @@ class Products extends Component {
   };
 
   render() {
+    let redirectTo = null;
+
+    if (this.props.productInfo) {
+      redirectTo = <Redirect to="/productpage" />;
+    }
+
     let products = (
       <div>
         {this.props.products.map(product => (
@@ -32,13 +39,19 @@ class Products extends Component {
       </div>
     );
 
-    return products;
+    return (
+      <div>
+        {redirectTo}
+        {products}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    products: state.products.products
+    products: state.products.products,
+    productInfo: state.products.productInfo
   };
 };
 
@@ -52,4 +65,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(Products, Axios));
+)(withRouter(withErrorHandler(Products, Axios)));

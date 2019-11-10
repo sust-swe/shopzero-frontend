@@ -1,0 +1,14 @@
+.Product {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.Logo {
+  box-shadow: 0 0 black;
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}

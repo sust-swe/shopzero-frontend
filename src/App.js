@@ -13,6 +13,9 @@ import Help from "./components/Help/Help";
 import Signup from "./containers/Auth/Signup/Signup";
 import SignupVerification from "./containers/Auth/Signup/SignupVerification/SignupVerification";
 import ProductPage from "./containers/Products/ProductPage/ProductPage";
+import Contact from "./components/Contact/Contact";
+import Feedback from "./containers/Feedback/Feedback";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 class App extends Component {
   state = {};
@@ -30,9 +33,12 @@ class App extends Component {
             <Route path="/productpage" component={ProductPage} />
             <Route path="/showmenu" component={ShowMenu} />
             <Route path="/products" component={Products} />
+            <Route path="/feedback" component={Feedback} />
             <Route path="/signout" component={Logout} />
+            <Route path="/contact" component={Contact} />
             <Route path="/signin" component={Auth} />
             <Route path="/signup" component={Signup} />
+            <Route path="/aboutus" component={AboutUs} />
             <Route path="/help" component={Help} />
             <Route path="/" exact component={Home} />
           </Switch>

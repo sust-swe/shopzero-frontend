@@ -7,14 +7,16 @@ const initialState = {
   error: false,
   loading: false,
   responseMessage: null,
-  authRedirectPath: "/"
+  authRedirectPath: "/",
+  signedUp: false
 };
 
 const authStart = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: true,
-    responseMessage: null
+    responseMessage: null,
+    signedUp: false
   });
 };
 
@@ -23,7 +25,8 @@ const authSuccess = (state, action) => {
     token: action.authData.auth_token,
     error: null,
     loading: false,
-    responseMessage: action.authData.message
+    responseMessage: action.authData.message,
+    signedUp: false
   });
 };
 
@@ -31,7 +34,8 @@ const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: "Invalid email or password"
+    responseMessage: "Invalid email or password",
+    signedUp: false
   });
 };
 
@@ -40,7 +44,8 @@ const logout = (state, action) => {
     token: null,
     error: false,
     loading: false,
-    responseMessage: null
+    responseMessage: null,
+    signedUp: false
   });
 };
 
@@ -48,16 +53,24 @@ const logoutFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-    responseMessage: null
+    responseMessage: null,
+    signedUp: false
   });
 };
 
+const signupSuccess = (state, action) => {
+  return updateObject(state, { signedUp: true });
+};
+
 const signupFailed = (state, action) => {
-  return updateObject(state, { error: action.error });
+  return updateObject(state, { error: action.error, signedUp: false });
 };
 
 const setAuthRedirectPath = (state, action) => {
-  return updateObject(state, { authRedirectPath: action.path });
+  return updateObject(state, {
+    authRedirectPath: action.path,
+    signedUp: false
+  });
 };
 
 const reducer = (state = initialState, action) => {
@@ -79,6 +92,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
+
+    case actionTypes.SIGNUP_SUCCESS:
+      return signupSuccess(state, action);
 
     case actionTypes.SIGNUP_FAILED:
       return signupFailed(state, action);

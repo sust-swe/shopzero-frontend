@@ -8,7 +8,11 @@ const initialState = {
 };
 
 const fetchProductsSuccess = (state, action) => {
-  return updateObject(state, { products: action.products, error: null });
+  return updateObject(state, {
+    products: action.products,
+    error: null,
+    productInfo: null
+  });
 };
 
 const fetchProductsFail = (state, action) => {
@@ -21,6 +25,10 @@ const showProductSuccess = (state, action) => {
 
 const showProductFail = (state, action) => {
   return updateObject(state, { error: action.error });
+};
+
+const setProductInfoToNull = (state, action) => {
+  return updateObject(state, { productInfo: null });
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +44,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SHOW_PRODUCT_FAIL:
       return showProductFail(state, action);
+
+    case actionTypes.SET_PRODUCT_INFO_TO_NULL:
+      return setProductInfoToNull(state, action);
 
     default:
       return state;
