@@ -14,7 +14,7 @@ const Help = () => {
         <MDBCol md="2">
           <ShowMenu />
         </MDBCol>
-        <MDBCol className={classes.Help}>
+        <MDBCol className={classes.Help} md="8">
           <h1>Help Page</h1>
         </MDBCol>
       </MDBRow>
