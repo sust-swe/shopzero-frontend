@@ -32,7 +32,7 @@ class ProductPage extends Component {
 
   render() {
     let page = (
-      <div>
+      <div className={classes.body}>
         <div className={[classes.Row, `row`].join(" ")}>
           <div className="col-md-2">
             <Logo />
@@ -42,42 +42,54 @@ class ProductPage extends Component {
           </div>
         </div>
 
-        <MDBRow>
-          <MDBCol md="2">
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className="col-md-2">
             <ShowMenu />
-          </MDBCol>
+          </div>
 
           <MDBCol md="10" className={classes.Product}>
-            <MDBRow>
-              <MDBCol>
-                <h3>Image</h3>
-              </MDBCol>
-              <MDBCol>
-                <MDBCol>
+            <div className={[classes.Row, "row"].join(" ")}>
+              <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
+                <div className={classes.Img}>
+                  <h3>Image</h3>
+                </div>
+              </div>
+              <div className={["col-md-6"].join(" ")}>
+                <div>
                   <h3>name</h3>
-                </MDBCol>
-                <MDBCol>
+                </div>
+                <div>
                   <h3>brand</h3>
-                </MDBCol>
-                <MDBCol>
+                </div>
+                <div>
                   <h3>price</h3>
-                </MDBCol>
-                <MDBCol>
-                  <h3>qty</h3>
-                </MDBCol>
-                <MDBCol>
-                  <h3>cart</h3>
-                </MDBCol>
-              </MDBCol>
-            </MDBRow>
-            <MDBCol>
-              <h3>features</h3>
-            </MDBCol>
-            <MDBCol>
-              <h3>description</h3>
-            </MDBCol>
+                </div>
+                <div>
+                  <div className={classes.row}>
+                    <button className={classes.Button}>-</button>
+                    <h6>Quantity: 1</h6>
+                    <button className={classes.Button}>+</button>
+                  </div>
+                </div>
+                <div>
+                  <button className="btn btn-success">Add to Cart</button>
+                </div>
+              </div>
+              <div className={["col-md-12"].join(" ")}>
+                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
+                  <h4>Features</h4>
+                </div>
+              </div>
+              <div className={["col-md-12", classes.flexStart].join(" ")}>
+                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
+                  <h4>description</h4>
+                </div>
+              </div>
+            </div>
+
+            <MDBCol md="2"></MDBCol>
           </MDBCol>
-        </MDBRow>
+        </div>
       </div>
     );
 
