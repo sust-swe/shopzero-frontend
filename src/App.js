@@ -4,8 +4,6 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import Home from "./containers/Home/Home";
 import Logout from "./containers/Auth/Logout/Logout";
-import * as actions from "./store/actions/index";
-import { connect } from "react-redux";
 import Help from "./components/Help/Help";
 import Signup from "./containers/Auth/Signup/Signup";
 import SignupVerification from "./containers/Auth/Signup/SignupVerification/SignupVerification";
@@ -15,19 +13,19 @@ import Feedback from "./containers/Feedback/Feedback";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Profile from "./containers/User/Profile/Profile";
 import Cart from "./containers/User/Cart/Cart";
+import SearchedProducts from "./containers/SearchedProducts/SearchedProducts";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/index";
 
 class App extends Component {
   state = {};
-
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
 
   render() {
     return (
       <div>
         <Layout>
           <Switch>
+            <Route path="/searchedproducts" component={SearchedProducts} />
             <Route path="/signupverify" component={SignupVerification} />
             <Route path="/productpage" component={ProductPage} />
             <Route path="/feedback" component={Feedback} />
@@ -47,21 +45,14 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token != null
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authStateCheck)
+    onFetchBrands: () => dispatch(actions.fetchBrands()),
+    onFetchCategories: () => dispatch(actions.fetchCategories())
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

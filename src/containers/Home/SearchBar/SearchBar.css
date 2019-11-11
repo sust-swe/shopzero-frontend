@@ -85,3 +85,7 @@ footer {
   background-size: 6px 6px;
   cursor: pointer;
 }
+
+.FilterForm {
+  width: 20%;
+}

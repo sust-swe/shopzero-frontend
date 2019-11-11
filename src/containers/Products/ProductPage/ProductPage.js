@@ -47,7 +47,7 @@ class ProductPage extends Component {
                     <h3>{this.state.info[1]}</h3>
                   </div>
                   <div>
-                    <h3>brand</h3>
+                    <h3>{this.state.info[5]["name"]}</h3>
                   </div>
                   <div>
                     <h3>{this.state.info[2]}</h3>

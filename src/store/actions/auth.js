@@ -88,10 +88,10 @@ export const authStateCheck = () => {
   return dispatch => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      dispatch(logout());
-    } else {
+    if (token) {
       dispatch(authSuccess(token));
+    } else {
+      dispatch(logout());
     }
   };
 };

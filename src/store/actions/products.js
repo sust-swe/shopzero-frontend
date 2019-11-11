@@ -67,3 +67,112 @@ export const setProductInfoToNull = () => {
     type: actionTypes.SET_PRODUCT_INFO_TO_NULL
   };
 };
+
+export const fetchSearchedProducts = (name, brand, category) => {
+  let filterBrand = brand;
+  let filterCategory = category;
+  if (filterBrand === "none") {
+    filterBrand = "";
+  }
+  if (filterCategory === "none") {
+    filterCategory = "";
+  }
+
+  return dispatch => {
+    let fetchedSearchedProducts = [];
+
+    Axios.get(
+      "products/search?" + name + "&" + filterBrand + "&" + filterCategory
+    )
+      .then(response => {
+        console.log(response);
+
+        for (let key in response.data) {
+          fetchedSearchedProducts.push({ ...response.data[key] });
+        }
+
+        dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
+      })
+      .catch(error => {
+        dispatch(fetchSearchedProductsFail(error));
+      });
+  };
+};
+
+export const fetchSearchedProductsSuccess = searchedProducts => {
+  return {
+    type: actionTypes.FETCH_SEARCHED_PRODUCTS_SUCCESS,
+    searchedProducts: searchedProducts
+  };
+};
+
+export const fetchSearchedProductsFail = error => {
+  return {
+    type: actionTypes.FETCH_SEARCHED_PRODUCTS_FAIL,
+    error: error
+  };
+};
+
+export const fetchBrands = () => {
+  return dispatch => {
+    let fetchedBrands = [];
+
+    Axios.get("brands")
+      .then(response => {
+        console.log(response);
+
+        for (let key in response.data) {
+          fetchedBrands.push({ ...response.data[key] });
+        }
+
+        dispatch(fetchBrandsSuccess(fetchedBrands));
+      })
+      .catch(error => dispatch(fetchBrandsFail(error)));
+  };
+};
+
+export const fetchBrandsSuccess = brands => {
+  return {
+    type: actionTypes.FETCH_BRANDS_SUCCESS,
+    brands: brands
+  };
+};
+
+export const fetchBrandsFail = error => {
+  return {
+    type: actionTypes.FETCH_BRANDS_FAIL,
+    error: error
+  };
+};
+
+export const fetchCategories = () => {
+  return dispatch => {
+    let fetchedCategories = [];
+
+    Axios.get("categories")
+      .then(response => {
+        console.log(response);
+
+        for (let key in response.data) {
+          fetchedCategories.push({ ...response.data[key] });
+        }
+
+        dispatch(fetchCategoriesSuccess(fetchedCategories));
+      })
+      .catch(error => dispatch(fetchCategoriesFail(error)));
+  };
+};
+
+export const fetchCategoriesSuccess = categories => {
+  return {
+    type: actionTypes.FETCH_CATEGORIES_SUCCESS,
+    categories: categories
+  };
+};
+
+export const fetchCategoriesFail = error => {
+  return {
+    type: actionTypes.FETCH_CATEGORIES_FAIL,
+    error: error
+  };
+};

@@ -4,7 +4,10 @@ import { updateObject } from "../utility";
 const initialState = {
   products: [],
   error: null,
-  productInfo: null
+  productInfo: null,
+  searchedProducts: [],
+  brands: [],
+  categories: []
 };
 
 const fetchProductsSuccess = (state, action) => {
@@ -31,6 +34,30 @@ const setProductInfoToNull = (state, action) => {
   return updateObject(state, { productInfo: null });
 };
 
+const fetchSearchedProductsSuccess = (state, action) => {
+  return updateObject(state, { searchedProducts: action.searchedProducts });
+};
+
+const fetchSearchedProductsFail = (state, action) => {
+  return updateObject(state, { error: action.error });
+};
+
+const fetchBrandsSuccess = (state, action) => {
+  return updateObject(state, { brands: action.brands });
+};
+
+const fetchBrandsFail = (state, action) => {
+  return updateObject(state, { error: action.error });
+};
+
+const fetchCategoriesSuccess = (state, action) => {
+  return updateObject(state, { categories: action.categories });
+};
+
+const fetchCategoriesFail = (state, action) => {
+  return updateObject(state, { error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PRODUCTS_SUCCESS:
@@ -47,6 +74,24 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_PRODUCT_INFO_TO_NULL:
       return setProductInfoToNull(state, action);
+
+    case actionTypes.FETCH_SEARCHED_PRODUCTS_SUCCESS:
+      return fetchSearchedProductsSuccess(state, action);
+
+    case actionTypes.FETCH_SEARCHED_PRODUCTS_FAIL:
+      return fetchSearchedProductsFail(state, action);
+
+    case actionTypes.FETCH_BRANDS_SUCCESS:
+      return fetchBrandsSuccess(state, action);
+
+    case actionTypes.FETCH_BRANDS_FAIL:
+      return fetchBrandsFail(state, action);
+
+    case actionTypes.FETCH_CATEGORIES_SUCCESS:
+      return fetchCategoriesSuccess(state, action);
+
+    case actionTypes.FETCH_CATEGORIES_FAIL:
+      return fetchCategoriesFail(state, action);
 
     default:
       return state;

@@ -12,8 +12,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import * as actionTypes from "./store/actions/actionTypes";
+import * as actions from "./store/actions/index";
 
 Axios.defaults.baseURL = "http://localhost:5000/";
+
+store.dispatch(actions.authStateCheck());
+store.dispatch(actions.fetchCategories());
+store.dispatch(actions.fetchBrands());
 
 Axios.interceptors.request.use(function(config) {
   // const token = store.getState().token;

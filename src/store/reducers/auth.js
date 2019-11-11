@@ -21,6 +21,7 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
+  console.log("state check");
   return updateObject(state, {
     token: action.authData.auth_token,
     error: null,
