@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 export const authStart = () => {
   return {
@@ -35,6 +36,7 @@ export const auth = (email, password) => {
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.auth_token);
+        Cookies.set("token", response.data.auth_token);
         dispatch(authSuccess(response.data));
       })
       .catch(error => {
@@ -69,6 +71,7 @@ export const logout = () => {
       .then(response => {
         console.log(response);
         localStorage.removeItem("token");
+        Cookies.remove("token");
         dispatch(logoutSuccess());
       })
       .catch(error => {

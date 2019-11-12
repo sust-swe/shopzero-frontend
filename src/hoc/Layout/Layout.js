@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ShowMenu from "../../containers/ShowMenu/ShowMenu";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
+import Footer from "../../components/Navigation/NavigationItems/Footer/Footer";
 class Layout extends Component {
   state = {
     showSideDrawer: false
@@ -61,7 +62,9 @@ class Layout extends Component {
             ) : null}
           </div> */}
         </div>
-
+        {/* <div>
+          <Footer />
+        </div> */}
         {/* <main className={classes.Main}>{this.props.children}</main> */}
       </div>
     );
