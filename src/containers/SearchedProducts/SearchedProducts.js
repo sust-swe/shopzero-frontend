@@ -21,17 +21,25 @@ class SearchedProducts extends Component {
     }
 
     let products = (
-      <div className={[classes.center, "row"].join(" ")}>
-        {this.props.products.map(product => (
-          <Product
-            key={product.id}
-            name={product.name}
-            price={product.sales_price}
-            clicked={event => this.showProductHandler(product.id)}
-          />
-        ))}
+      <div>
+        <h1>No Matches Found</h1>
       </div>
     );
+
+    if (this.props.products) {
+      products = (
+        <div className={[classes.center, "row"].join(" ")}>
+          {this.props.products.map(product => (
+            <Product
+              key={product.id}
+              name={product.name}
+              price={product.sales_price}
+              clicked={event => this.showProductHandler(product.id)}
+            />
+          ))}
+        </div>
+      );
+    }
 
     return (
       <div>

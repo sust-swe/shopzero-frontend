@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import Logo from "../../../components/Logo/Logo";
-import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import { signup } from "../../../store/actions/index";
 import { connect } from "react-redux";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol } from "mdbreact";
+import { MDBCol } from "mdbreact";
 import classes from "./ProductPage.css";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
@@ -50,7 +50,7 @@ class ProductPage extends Component {
                     <h3>{this.state.info[5]["name"]}</h3>
                   </div>
                   <div>
-                    <h3>{this.state.info[2]}</h3>
+                    <h3>${this.state.info[2]}</h3>
                   </div>
                   <div>
                     <div className={classes.row}>

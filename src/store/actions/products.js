@@ -7,8 +7,6 @@ export const fetchProducts = () => {
 
     Axios.get("products/index")
       .then(response => {
-        console.log(response);
-
         for (let key in response.data) {
           fetchedProducts.push({ ...response.data[key] });
         }
@@ -68,7 +66,7 @@ export const setProductInfoToNull = () => {
   };
 };
 
-export const fetchSearchedProducts = (name, brand, category) => {
+export const fetchSearchedProducts = (name, category, brand) => {
   let filterBrand = brand;
   let filterCategory = category;
   if (filterBrand === "none") {
@@ -81,21 +79,70 @@ export const fetchSearchedProducts = (name, brand, category) => {
   return dispatch => {
     let fetchedSearchedProducts = [];
 
-    Axios.get(
-      "products/search?" + name + "&" + filterBrand + "&" + filterCategory
-    )
-      .then(response => {
-        console.log(response);
+    if (!filterBrand && !filterCategory) {
+      Axios.get("products/search?name=" + name)
+        .then(response => {
+          console.log(response);
 
-        for (let key in response.data) {
-          fetchedSearchedProducts.push({ ...response.data[key] });
-        }
+          for (let key in response.data) {
+            fetchedSearchedProducts.push({ ...response.data[key] });
+          }
 
-        dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
-      })
-      .catch(error => {
-        dispatch(fetchSearchedProductsFail(error));
-      });
+          dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
+        })
+        .catch(error => {
+          dispatch(fetchSearchedProductsFail(error));
+        });
+    } else if (!filterBrand && filterCategory) {
+      Axios.get("products/search?name=" + name + "&category=" + filterCategory)
+        .then(response => {
+          console.log(response);
+
+          for (let key in response.data) {
+            fetchedSearchedProducts.push({ ...response.data[key] });
+          }
+
+          dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
+        })
+        .catch(error => {
+          dispatch(fetchSearchedProductsFail(error));
+        });
+    } else if (filterBrand && !filterCategory) {
+      Axios.get("products/search?name=" + name + "&brand=" + filterBrand)
+        .then(response => {
+          console.log(response);
+
+          for (let key in response.data) {
+            fetchedSearchedProducts.push({ ...response.data[key] });
+          }
+
+          dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
+        })
+        .catch(error => {
+          dispatch(fetchSearchedProductsFail(error));
+        });
+    } else {
+      Axios.get(
+        "products/search?name=" +
+          name +
+          "&category=" +
+          filterCategory +
+          "&brand=" +
+          filterBrand
+      )
+        .then(response => {
+          console.log(response);
+
+          for (let key in response.data) {
+            fetchedSearchedProducts.push({ ...response.data[key] });
+          }
+
+          dispatch(fetchSearchedProductsSuccess(fetchedSearchedProducts));
+        })
+        .catch(error => {
+          dispatch(fetchSearchedProductsFail(error));
+        });
+    }
   };
 };
 
@@ -115,12 +162,10 @@ export const fetchSearchedProductsFail = error => {
 
 export const fetchBrands = () => {
   return dispatch => {
-    let fetchedBrands = [];
+    let fetchedBrands = [{ name: "none" }];
 
     Axios.get("brands")
       .then(response => {
-        console.log(response);
-
         for (let key in response.data) {
           fetchedBrands.push({ ...response.data[key] });
         }
@@ -147,12 +192,10 @@ export const fetchBrandsFail = error => {
 
 export const fetchCategories = () => {
   return dispatch => {
-    let fetchedCategories = [];
+    let fetchedCategories = [{ name: "none" }];
 
     Axios.get("categories")
       .then(response => {
-        console.log(response);
-
         for (let key in response.data) {
           fetchedCategories.push({ ...response.data[key] });
         }

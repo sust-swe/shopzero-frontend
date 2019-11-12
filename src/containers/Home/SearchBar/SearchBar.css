@@ -15,7 +15,7 @@
   background-color: #ccc;
 }
 .center {
-  display: block;
+  display: flex;
 }
 .mainInput {
   background: rgb(51, 6, 6);
@@ -87,5 +87,9 @@ footer {
 }
 
 .FilterForm {
-  width: 20%;
+  display: block;
+}
+
+.Select {
+  margin-top: 20px;
 }

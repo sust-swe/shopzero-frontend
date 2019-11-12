@@ -6,11 +6,6 @@ import { connect } from "react-redux";
 import ShowMenu from "../../containers/ShowMenu/ShowMenu";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
-import { MDBBtn, MDBRow, MDBCol } from "mdbreact";
-import Menu from "../../components/Navigation/Menu/Menu";
-import Products from "../../containers/Products/Products";
-import Signup from "../../containers/Auth/Signup/Signup";
-
 class Layout extends Component {
   state = {
     showSideDrawer: false

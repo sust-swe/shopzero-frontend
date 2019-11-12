@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from "./containers/Auth/Auth";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import Home from "./containers/Home/Home";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -14,8 +14,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import Profile from "./containers/User/Profile/Profile";
 import Cart from "./containers/User/Cart/Cart";
 import SearchedProducts from "./containers/SearchedProducts/SearchedProducts";
-import { connect } from "react-redux";
-import * as actions from "./store/actions/index";
+import Products from "./containers/Products/Products";
 
 class App extends Component {
   state = {};
@@ -28,6 +27,7 @@ class App extends Component {
             <Route path="/searchedproducts" component={SearchedProducts} />
             <Route path="/signupverify" component={SignupVerification} />
             <Route path="/productpage" component={ProductPage} />
+            <Route path="/products" component={Products} />
             <Route path="/feedback" component={Feedback} />
             <Route path="/profile" component={Profile} />
             <Route path="/signout" component={Logout} />
@@ -45,14 +45,4 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onFetchBrands: () => dispatch(actions.fetchBrands()),
-    onFetchCategories: () => dispatch(actions.fetchCategories())
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default App;

@@ -15,9 +15,7 @@ class Products extends Component {
   }
 
   showProductHandler = id => {
-    console.log(id);
     this.props.onShowProduct(id);
-    // this.props.history.push("/productpage");
   };
 
   render() {

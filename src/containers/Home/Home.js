@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Home.css";
-import Logo from "../../components/Logo/Logo";
-import SearchBar from "./SearchBar/SearchBar";
-import { MDBBtn, MDBRow, MDBCol } from "mdbreact";
-import Menu from "../../components/Navigation/Menu/Menu";
+import { MDBBtn } from "mdbreact";
 import Products from "../Products/Products";
-import Signup from "../Auth/Signup/Signup";
-import ShowMenu from "../ShowMenu/ShowMenu";
-import { Redirect } from "react-router-dom";
-
 class Home extends Component {
   state = {};
 

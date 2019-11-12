@@ -1,83 +1,73 @@
 import React, { Component } from "react";
-import Input from "../../../components/UI/Input/Input";
 import classes from "./SearchBar.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 class SearchBar extends Component {
   state = {
-    value: "",
-    filterForm: {
-      filterByCategory: {
-        elementType: "select",
-        elementConfig: {
-          options: [{ value: "fastest", displayValue: "Fastest" }]
-        },
-        value: "fastest",
-        validation: {},
-        valid: true
-      },
-      filterByBrand: {
-        elementType: "select",
-        elementConfig: {
-          options: [{ value: "fastest", displayValue: "Fastest" }]
-        },
-        value: "fastest",
-        validation: {},
-        valid: true
-      }
-    }
+    nameValue: "",
+    categoryValue: "none",
+    brandValue: "none"
   };
 
-  changeHandler = event => {
+  componentDidMount() {
+    this.props.onFetchCategories();
+    this.props.onFetchBrands();
+  }
+
+  searchBarChangedHandler = event => {
     event.preventDefault();
-    this.setState({ value: event.target.value });
+    this.setState({ nameValue: event.target.value });
+  };
+
+  categoryChangedHandler = event => {
+    event.preventDefault();
+    this.setState({ categoryValue: event.target.value });
+  };
+
+  brandChangedHandler = event => {
+    event.preventDefault();
+    this.setState({ brandValue: event.target.value });
   };
 
   searchHandler = event => {
-    this.props.history.push("/searchedproducts");
-  };
-
-  inputChangedHandler = (event, filterName) => {
-    const updatedFilterForm = {
-      ...this.state.filterForm,
-      [filterName]: {
-        ...this.state.filterForm[filterName],
-        value: event.target.value,
-        valid: true,
-        touched: true
-      }
-    };
-
-    this.setState({ filterForm: updatedFilterForm });
+    if (this.state.nameValue) {
+      this.props.onFetchSearchedProducts(
+        this.state.nameValue,
+        this.state.categoryValue,
+        this.state.brandValue
+      );
+      this.props.history.push("/searchedProducts");
+    }
   };
 
   render() {
-    // const filterElementsArray = [];
-    // for (let key in this.state.filterForm) {
-    //   filterElementsArray.push({
-    //     id: key,
-    //     config: this.state.filterForm[key]
-    //   });
-    // }
-
-    // let filterForm = filterElementsArray.map(filterElement => (
-    //   <Input
-    //     key={filterElement.id}
-    //     elementType={filterElement.config.elementType}
-    //     elementConfig={filterElement.config.elementConfig}
-    //     value={filterElement.config.value}
-    //     invalid={!filterElement.config.valid}
-    //     shouldValidate={filterElement.config.validation}
-    //     touched={filterElement.config.touched}
-    //     changed={event => this.inputChangedHandler(event, filterElement.id)}
-    //   />
-    // ));
-
     let filterForm = (
       <div>
-        <div>let categoryOptions = this.props.categories;</div>
-        <div></div>
+        <div>
+          <select
+            className={classes.Select}
+            onChange={this.categoryChangedHandler}
+          >
+            {this.props.categories.map(option => (
+              <option key={option.name} value={option.name}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <select
+            className={classes.Select}
+            onChange={this.brandChangedHandler}
+          >
+            {this.props.brands.map(option => (
+              <option key={option.name} value={option.name}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     );
 
@@ -85,23 +75,23 @@ class SearchBar extends Component {
       <div>
         <div className={classes.center}>
           <input
-            type="text"
             className={classes.mainInput}
             type="text"
             name="SearchText"
             placeholder="Search"
             value={this.state.value}
-            onChange={this.changeHandler}
+            onChange={this.searchBarChangedHandler}
           />
           <input
             id={classes.mainSubmit}
             className=""
             type="submit"
             value="Search"
-            // onClick={this.searchHandler}
+            onClick={this.searchHandler}
           />
         </div>
-        {/* <div className={classes.FilterForm}>{filterForm}</div> */}
+
+        <div className={classes.FilterForm}>{filterForm}</div>
       </div>
     );
   }
@@ -114,4 +104,16 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(SearchBar));
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchBrands: () => dispatch(actions.fetchBrands()),
+    onFetchCategories: () => dispatch(actions.fetchCategories()),
+    onFetchSearchedProducts: (name, category, brand) =>
+      dispatch(actions.fetchSearchedProducts(name, category, brand))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SearchBar));
