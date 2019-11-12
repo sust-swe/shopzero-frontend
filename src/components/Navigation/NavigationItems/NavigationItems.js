@@ -8,8 +8,6 @@ const NavigationItems = props => (
       <NavigationItem link="/profile">Profile</NavigationItem>
     ) : null}
 
-    {props.isAuth ? <NavigationItem link="/cart">Cart</NavigationItem> : null}
-
     {props.isAuth ? (
       <NavigationItem link="/signout">Sign Out</NavigationItem>
     ) : (

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
+import CartLogo from "../../../assets/images/shopping-cart.png";
 import classes from "./Cart.css";
 
-const Cart = () => {
-  return (
-    <div className={classes.Cart}>
-      <h1>Cart Page</h1>
-    </div>
-  );
-};
+class Cart extends Component {
+  state = {};
+  render() {
+    return (
+      <div className={[classes.Row, `row`].join(" ")}>
+        <img src={CartLogo} alt="MyCart" />
+        <p>1</p>
+      </div>
+    );
+  }
+}
 
 export default Cart;

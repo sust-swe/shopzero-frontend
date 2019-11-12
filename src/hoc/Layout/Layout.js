@@ -7,6 +7,7 @@ import ShowMenu from "../../containers/ShowMenu/ShowMenu";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
 import Footer from "../../components/Navigation/NavigationItems/Footer/Footer";
+import Cart from "../../containers/User/Cart/Cart";
 class Layout extends Component {
   state = {
     showSideDrawer: false
@@ -23,6 +24,33 @@ class Layout extends Component {
   };
 
   render() {
+    let header = (
+      <div className={[classes.Row, `row`].join(" ")}>
+        <div className="col-md-2">
+          <Logo className={classes.Logo} />
+        </div>
+        <div className="col-md-8">
+          <SearchBar className={classes.SearchBar} />
+        </div>
+      </div>
+    );
+
+    if (this.props.isAuthenticated) {
+      header = (
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className="col-md-2">
+            <Logo className={classes.Logo} />
+          </div>
+          <div className="col-md-8">
+            <SearchBar className={classes.SearchBar} />
+          </div>
+          <div className="col-md-1">
+            <Cart className={classes.Cart} />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className={classes.Content}>
@@ -37,14 +65,7 @@ class Layout extends Component {
             authenticated={this.props.isAuthenticated}
           />
         </div>
-        <div className={[classes.Row, `row`].join(" ")}>
-          <div className="col-md-2">
-            <Logo className={classes.Logo} />
-          </div>
-          <div className="col-md-8">
-            <SearchBar className={classes.SearchBar} />
-          </div>
-        </div>
+        {header}
 
         <div className={[classes.Row, `row`].join(" ")}>
           <div className={["col-md-2"].join(" ")}>

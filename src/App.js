@@ -12,9 +12,9 @@ import Contact from "./components/Contact/Contact";
 import Feedback from "./containers/Feedback/Feedback";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Profile from "./containers/User/Profile/Profile";
-import Cart from "./containers/User/Cart/Cart";
 import SearchedProducts from "./containers/SearchedProducts/SearchedProducts";
 import Products from "./containers/Products/Products";
+import CartPage from "./containers/User/Cart/CartPage/CartPage";
 
 class App extends Component {
   state = {};
@@ -35,7 +35,7 @@ class App extends Component {
             <Route path="/signin" component={Auth} />
             <Route path="/signup" component={Signup} />
             <Route path="/aboutus" component={AboutUs} />
-            <Route path="/cart" component={Cart} />
+            <Route path="/cartpage" component={CartPage} />
             <Route path="/help" component={Help} />
             <Route path="/" exact component={Home} />
           </Switch>
