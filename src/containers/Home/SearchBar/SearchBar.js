@@ -3,11 +3,17 @@ import classes from "./SearchBar.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
+
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 class SearchBar extends Component {
   state = {
     nameValue: "",
-    categoryValue: "none",
-    brandValue: "none"
+    categoryValue: "",
+    brandValue: ""
   };
 
   componentDidMount() {
@@ -43,30 +49,38 @@ class SearchBar extends Component {
 
   render() {
     let filterForm = (
-      <div>
+      <div className={classes.filterMenu}>
         <div>
-          <select
-            className={classes.Select}
-            onChange={this.categoryChangedHandler}
-          >
-            {this.props.categories.map(option => (
-              <option key={option.name} value={option.name}>
-                {option.name}
-              </option>
-            ))}
-          </select>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <Select
+              id="demo-simple-select"
+              onChange={this.categoryChangedHandler}
+              value={this.state.categoryValue}
+            >
+              {this.props.categories.map(option => (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <div>
-          <select
-            className={classes.Select}
-            onChange={this.brandChangedHandler}
-          >
-            {this.props.brands.map(option => (
-              <option key={option.name} value={option.name}>
-                {option.name}
-              </option>
-            ))}
-          </select>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Brand</InputLabel>
+            <Select
+              id="demo-simple-select"
+              onChange={this.brandChangedHandler}
+              value={this.state.brandValue}
+            >
+              {this.props.brands.map(option => (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
       </div>
     );

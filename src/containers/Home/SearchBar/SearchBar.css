@@ -93,3 +93,20 @@ footer {
 .Select {
   margin-top: 20px;
 }
+
+.formControl {
+  margin: 5px;
+  width: 180pt;
+}
+
+.filterMenu {
+  display: flex;
+  justify-content: start;
+}
+
+@media (min-width: 300px) and (max-width: 500px) {
+  .filterMenu {
+    display: block;
+    text-align: center;
+  }
+}
