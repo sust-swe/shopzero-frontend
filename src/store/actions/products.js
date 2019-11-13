@@ -66,8 +66,9 @@ export const setProductInfoToNull = () => {
 };
 
 export const fetchSearchedProducts = (name, category, brand) => {
-  let filterBrand = brand;
-  let filterCategory = category;
+  let filterBrand = encodeURIComponent(brand);
+  let filterCategory = encodeURIComponent(category);
+  let filterName = encodeURIComponent(name);
   if (filterBrand === "none") {
     filterBrand = "";
   }
@@ -79,7 +80,7 @@ export const fetchSearchedProducts = (name, category, brand) => {
     let fetchedSearchedProducts = [];
 
     if (!filterBrand && !filterCategory) {
-      Axios.get(encodeURI("products/search?name=" + name))
+      Axios.get("products/search?name=" + filterName)
         .then(response => {
           console.log(response);
 
@@ -94,9 +95,7 @@ export const fetchSearchedProducts = (name, category, brand) => {
         });
     } else if (!filterBrand && filterCategory) {
       Axios.get(
-        encodeURI(
-          "products/search?name=" + name + "&category=" + filterCategory
-        )
+        "products/search?name=" + filterName + "&category=" + filterCategory
       )
         .then(response => {
           console.log(response);
@@ -111,9 +110,7 @@ export const fetchSearchedProducts = (name, category, brand) => {
           dispatch(fetchSearchedProductsFail(error));
         });
     } else if (filterBrand && !filterCategory) {
-      Axios.get(
-        encodeURI("products/search?name=" + name + "&brand=" + filterBrand)
-      )
+      Axios.get("products/search?name=" + filterName + "&brand=" + filterBrand)
         .then(response => {
           console.log(response);
 
@@ -128,14 +125,12 @@ export const fetchSearchedProducts = (name, category, brand) => {
         });
     } else {
       Axios.get(
-        encodeURI(
-          "products/search?name=" +
-            name +
-            "&category=" +
-            filterCategory +
-            "&brand=" +
-            filterBrand
-        )
+        "products/search?name=" +
+          filterName +
+          "&category=" +
+          filterCategory +
+          "&brand=" +
+          filterBrand
       )
         .then(response => {
           console.log(response);
