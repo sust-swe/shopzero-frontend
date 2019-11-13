@@ -4,22 +4,42 @@ import classes from "./ProductPage.css";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Redirect } from "react-router-dom";
-
 class ProductPage extends Component {
   state = {
-    info: []
+    productName: null,
+    productPrice: null,
+    productCategory: null,
+    productBrand: null,
+    productDescription: null,
+    productFeatures: null,
+    productImage: null,
+    productStock: null
   };
 
   constructor(props) {
     super(props);
-
-    if (props.productInfo) {
-      const info = props.productInfo;
-      const result = Object.keys(info).map(key => info[key]);
-
-      this.state = { info: result };
+    if (props.productName) {
+      this.state = {
+        productName: props.productName,
+        productPrice: props.productPrice,
+        productCategory: props.productCategory,
+        productBrand: props.productBrand,
+        productDescription: props.productDescription,
+        productFeatures: props.productFeatures,
+        productImage: props.productImage,
+        productStock: props.productStock
+      };
     } else {
-      this.state = { info: null };
+      this.state = {
+        productName: null,
+        productPrice: null,
+        productCategory: null,
+        productBrand: null,
+        productDescription: null,
+        productFeatures: null,
+        productImage: null,
+        productStock: null
+      };
     }
   }
 
@@ -31,7 +51,7 @@ class ProductPage extends Component {
   render() {
     let page = null;
 
-    if (this.state.info) {
+    if (this.state.productName) {
       page = (
         <div className={classes.body}>
           <div className={[classes.Row, `row`].join(" ")}>
@@ -44,13 +64,13 @@ class ProductPage extends Component {
                 </div>
                 <div className={["col-md-6"].join(" ")}>
                   <div>
-                    <h3>{this.state.info[1]}</h3>
+                    <h3>{this.state.productName}</h3>
                   </div>
                   <div>
-                    <h3>{this.state.info[5]["name"]}</h3>
+                    <h3>{this.state.productBrand}</h3>
                   </div>
                   <div>
-                    <h3>${this.state.info[2]}</h3>
+                    <h3>${this.state.productPrice}</h3>
                   </div>
                   <div>
                     <div className={classes.row}>
@@ -99,7 +119,14 @@ class ProductPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    productInfo: state.products.productInfo
+    productName: state.products.productName,
+    productPrice: state.products.productPrice,
+    productCategory: state.products.productCategory,
+    productBrand: state.products.productBrand,
+    productDescription: state.products.productDescription,
+    productFeatures: state.products.productFeatures,
+    productImage: state.products.productImage,
+    productStock: state.products.productStock
   };
 };
 
@@ -109,7 +136,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

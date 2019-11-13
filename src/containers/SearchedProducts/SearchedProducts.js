@@ -16,7 +16,7 @@ class SearchedProducts extends Component {
   render() {
     let redirectTo = null;
 
-    if (this.props.productInfo) {
+    if (this.props.productName) {
       redirectTo = <Redirect to="/productpage" />;
     }
 
@@ -53,7 +53,7 @@ class SearchedProducts extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.searchedProducts,
-    productInfo: state.products.productInfo
+    productName: state.products.productName
   };
 };
 
@@ -63,7 +63,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchedProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchedProducts);

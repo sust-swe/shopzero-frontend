@@ -10,7 +10,6 @@ export const fetchProducts = () => {
         for (let key in response.data) {
           fetchedProducts.push({ ...response.data[key] });
         }
-
         dispatch(fetchProductsSuccess(fetchedProducts));
       })
       .catch(error => {
@@ -80,7 +79,7 @@ export const fetchSearchedProducts = (name, category, brand) => {
     let fetchedSearchedProducts = [];
 
     if (!filterBrand && !filterCategory) {
-      Axios.get("products/search?name=" + name)
+      Axios.get(encodeURI("products/search?name=" + name))
         .then(response => {
           console.log(response);
 
@@ -94,7 +93,11 @@ export const fetchSearchedProducts = (name, category, brand) => {
           dispatch(fetchSearchedProductsFail(error));
         });
     } else if (!filterBrand && filterCategory) {
-      Axios.get("products/search?name=" + name + "&category=" + filterCategory)
+      Axios.get(
+        encodeURI(
+          "products/search?name=" + name + "&category=" + filterCategory
+        )
+      )
         .then(response => {
           console.log(response);
 
@@ -108,7 +111,9 @@ export const fetchSearchedProducts = (name, category, brand) => {
           dispatch(fetchSearchedProductsFail(error));
         });
     } else if (filterBrand && !filterCategory) {
-      Axios.get("products/search?name=" + name + "&brand=" + filterBrand)
+      Axios.get(
+        encodeURI("products/search?name=" + name + "&brand=" + filterBrand)
+      )
         .then(response => {
           console.log(response);
 
@@ -123,12 +128,14 @@ export const fetchSearchedProducts = (name, category, brand) => {
         });
     } else {
       Axios.get(
-        "products/search?name=" +
-          name +
-          "&category=" +
-          filterCategory +
-          "&brand=" +
-          filterBrand
+        encodeURI(
+          "products/search?name=" +
+            name +
+            "&category=" +
+            filterCategory +
+            "&brand=" +
+            filterBrand
+        )
       )
         .then(response => {
           console.log(response);

@@ -21,7 +21,7 @@ class Products extends Component {
   render() {
     let redirectTo = null;
 
-    if (this.props.productInfo) {
+    if (this.props.productName) {
       redirectTo = <Redirect to="/productpage" />;
     }
 
@@ -50,7 +50,7 @@ class Products extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    productInfo: state.products.productInfo
+    productName: state.products.productName
   };
 };
 

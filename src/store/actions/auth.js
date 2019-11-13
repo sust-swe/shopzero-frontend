@@ -124,3 +124,7 @@ export const signupFailed = error => {
     error: error
   };
 };
+
+export const startActionCableConnection = () => {
+  return dispatch => {};
+};
