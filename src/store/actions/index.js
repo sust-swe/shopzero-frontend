@@ -5,5 +5,6 @@ export {
   setProductInfoToNull,
   fetchSearchedProducts,
   fetchBrands,
-  fetchCategories
+  fetchCategories,
+  saveCartSize
 } from "./products";

@@ -1,4 +1,4 @@
-.Cart {
+.CartItemDisplay {
   display: inline;
 }
 
@@ -15,4 +15,25 @@
   padding: 10px;
   margin: 10px auto;
   box-sizing: border-box;
+}
+
+.Image {
+  display: inline-block;
+  width: 100%;
+  height: 80%;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.Title {
+  text-align: left;
+  font-family: cursive;
+  font-style: bold;
+  margin: 2px;
+}
+
+.Price {
+  text-align: left;
+  font-family: cursive;
+  font-style: bold;
 }

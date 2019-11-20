@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
 class CustomWebSocket extends Component {
   state = {
@@ -7,6 +8,7 @@ class CustomWebSocket extends Component {
   };
   constructor(props) {
     super(props);
+    this.webSocket = new WebSocket("ws://localhost:5000/cable");
 
     this.state = {
       webSocket: null
@@ -15,8 +17,12 @@ class CustomWebSocket extends Component {
 
   // single websocket instance for the own application and constantly trying to reconnect.
 
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.connect();
+  }
+
+  componentWillUnmount() {
+    this.webSocket.close();
   }
 
   timeout = 250; // Initial timeout duration as a class variable
@@ -26,41 +32,44 @@ class CustomWebSocket extends Component {
    * This function establishes the connect with the websocket and also ensures constant reconnection if connection closes
    */
   connect = () => {
-    let webSocket = new WebSocket("ws://localhost:5000/cable");
     let that = this; // cache the this
     let connectInterval;
 
     // websocket onopen event listener
-    webSocket.onopen = () => {
+    this.webSocket.onopen = () => {
       const msg = {
         command: "subscribe",
         identifier: JSON.stringify({
           channel: "CartItemsChannel"
         })
       };
-      webSocket.send(JSON.stringify(msg));
+      this.webSocket.send(JSON.stringify(msg));
 
       this.setState({ connection: "Created" });
 
       console.log("connected websocket main component");
 
-      this.setState({ webSocket: webSocket });
+      this.setState({ webSocket: this.webSocket });
 
       that.timeout = 250; // reset timer to 250 on open of websocket connection
       clearTimeout(connectInterval); // clear Interval on on open of websocket connection
     };
 
-    webSocket.bufferType = "arraybuffer";
-    webSocket.onmessage = event => {
+    this.webSocket.bufferType = "arraybuffer";
+    this.webSocket.onmessage = event => {
       // listen to data sent from the websocket server
+
       const message = JSON.parse(event.data);
 
-      this.setState({ dataFromServer: message });
-      console.log(message);
+      if (typeof message.type === "undefined") {
+        this.setState({ dataFromServer: message });
+        console.log(message.message.data.length);
+        this.props.onSaveCartSize(message.message.data.length);
+      }
     };
 
     // websocket onclose event listener
-    webSocket.onclose = e => {
+    this.webSocket.onclose = e => {
       this.setState({ connection: "closed" });
       console.log(
         `Socket is closed. Reconnect will be attempted in ${Math.min(
@@ -71,11 +80,12 @@ class CustomWebSocket extends Component {
       );
 
       that.timeout = that.timeout + that.timeout; //increment retry interval
-      connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
+      connectInterval = setTimeout(this.check, Math.min(10000, that.timeout));
+      //call check function after timeout
     };
 
     // websocket onerror event listener
-    webSocket.onerror = err => {
+    this.webSocket.onerror = err => {
       this.setState({ connection: "Error" });
       console.error(
         "Socket encountered error: ",
@@ -83,7 +93,7 @@ class CustomWebSocket extends Component {
         "Closing socket"
       );
 
-      webSocket.close();
+      this.webSocket.close();
     };
   };
 
@@ -110,4 +120,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CustomWebSocket);
+const mapDispatchToProps = dispatch => {
+  return {
+    onSaveCartSize: size => dispatch(actions.saveCartSize(size))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomWebSocket);

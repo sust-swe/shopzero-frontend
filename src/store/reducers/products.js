@@ -7,7 +7,8 @@ const initialState = {
   productInfo: null,
   searchedProducts: [],
   brands: [],
-  categories: []
+  categories: [],
+  cartSize: null
 };
 
 const fetchProductsSuccess = (state, action) => {
@@ -63,6 +64,10 @@ const fetchCategoriesFail = (state, action) => {
   return updateObject(state, { error: action.error });
 };
 
+const saveCartSize = (state, action) => {
+  return updateObject(state, { cartSize: action.size });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PRODUCTS_SUCCESS:
@@ -97,6 +102,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.FETCH_CATEGORIES_FAIL:
       return fetchCategoriesFail(state, action);
+
+    case actionTypes.SAVE_CART_SIZE:
+      return saveCartSize(state, action);
 
     default:
       return state;

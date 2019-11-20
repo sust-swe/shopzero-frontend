@@ -50,6 +50,7 @@ class App extends Component {
         <Route path="/" exact component={Home} />
       </Switch>
     );
+
     if (this.props.isAuthenticated) {
       app = (
         <div>

@@ -221,3 +221,10 @@ export const fetchCategoriesFail = error => {
     error: error
   };
 };
+
+export const saveCartSize = size => {
+  return {
+    type: actionTypes.SAVE_CART_SIZE,
+    size: size
+  };
+};
