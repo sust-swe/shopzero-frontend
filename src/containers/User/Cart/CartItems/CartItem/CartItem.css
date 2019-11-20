@@ -1,5 +1,11 @@
-.CartPage {
-  text-align: center;
+.Cart {
+  display: inline;
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .CartItem {
@@ -9,11 +15,4 @@
   padding: 10px;
   margin: 10px auto;
   box-sizing: border-box;
-}
-
-.span {
-  display: inline-block;
-  margin: 0 8px;
-  border: 1px solid #ccc;
-  padding: 5px;
 }

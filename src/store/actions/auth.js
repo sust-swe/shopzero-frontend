@@ -92,9 +92,12 @@ export const authStateCheck = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
+      console.log("success");
       dispatch(authSuccess(token));
+      return true;
     } else {
       dispatch(logout());
+      return false;
     }
   };
 };
@@ -125,6 +128,10 @@ export const signupFailed = error => {
   };
 };
 
-export const startActionCableConnection = () => {
-  return dispatch => {};
-};
+// export const startActionCableConnection = () => {
+//   return dispatch => {
+//     const actionCableConnection = {};
+
+//     actionCableConnection.cable
+//   };
+// };

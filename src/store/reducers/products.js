@@ -4,14 +4,7 @@ import { updateObject } from "../utility";
 const initialState = {
   products: [],
   error: null,
-  productName: null,
-  productCategory: null,
-  productBrand: null,
-  productStock: null,
-  productPrice: null,
-  productFeatures: null,
-  productDescription: null,
-  productImage: null,
+  productInfo: null,
   searchedProducts: [],
   brands: [],
   categories: []
@@ -31,14 +24,7 @@ const fetchProductsFail = (state, action) => {
 
 const showProductSuccess = (state, action) => {
   return updateObject(state, {
-    productName: action.productInfo.name,
-    productPrice: action.productInfo.sales_price,
-    productCategory: action.productInfo.category,
-    productBrand: action.productInfo.brand.name,
-    productDescription: action.productInfo.description,
-    productFeatures: action.productInfo.features,
-    productImage: action.productInfo.picture.url,
-    productStock: action.productInfo.stock,
+    productInfo: action.productInfo,
     error: null
   });
 };
@@ -49,14 +35,7 @@ const showProductFail = (state, action) => {
 
 const setProductInfoToNull = (state, action) => {
   return updateObject(state, {
-    productName: null,
-    productPrice: null,
-    productCategory: null,
-    productBrand: null,
-    productDescription: null,
-    productFeatures: null,
-    productImage: null,
-    productStock: null
+    productInfo: null
   });
 };
 

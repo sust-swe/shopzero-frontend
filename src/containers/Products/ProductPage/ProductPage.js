@@ -18,16 +18,16 @@ class ProductPage extends Component {
 
   constructor(props) {
     super(props);
-    if (props.productName) {
+    if (props.productInfo) {
       this.state = {
-        productName: props.productName,
-        productPrice: props.productPrice,
-        productCategory: props.productCategory,
-        productBrand: props.productBrand,
-        productDescription: props.productDescription,
-        productFeatures: props.productFeatures,
-        productImage: props.productImage,
-        productStock: props.productStock
+        productName: props.productInfo.name,
+        productPrice: props.productInfo.sales_price,
+        productCategory: props.productInfo.category.name,
+        productBrand: props.productInfo.brand.name,
+        productDescription: props.productInfo.description,
+        productFeatures: props.productInfo.features,
+        productImage: props.productInfo.picture.url,
+        productStock: props.productInfo.stock
       };
     } else {
       this.state = {
@@ -119,14 +119,7 @@ class ProductPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    productName: state.products.productName,
-    productPrice: state.products.productPrice,
-    productCategory: state.products.productCategory,
-    productBrand: state.products.productBrand,
-    productDescription: state.products.productDescription,
-    productFeatures: state.products.productFeatures,
-    productImage: state.products.productImage,
-    productStock: state.products.productStock
+    productInfo: state.products.productInfo
   };
 };
 

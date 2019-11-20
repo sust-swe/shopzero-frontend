@@ -12,10 +12,19 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import * as actions from "./store/actions/index";
+import ActionCable from "actioncable";
 
 Axios.defaults.baseURL = "http://localhost:5000/";
 
 store.dispatch(actions.authStateCheck());
+
+let app = (
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
 
 Axios.interceptors.request.use(function(config) {
   // const token = store.getState().token;
@@ -24,14 +33,6 @@ Axios.interceptors.request.use(function(config) {
 
   return config;
 });
-
-const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-);
 
 ReactDOM.render(app, document.getElementById("root"));
 
