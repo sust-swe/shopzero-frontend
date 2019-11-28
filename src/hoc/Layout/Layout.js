@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import ShowMenu from "../../containers/ShowMenu/ShowMenu";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
-import Footer from "../../components/Navigation/NavigationItems/Footer/Footer";
 import Cart from "../../containers/User/Cart/Cart";
 class Layout extends Component {
   state = {

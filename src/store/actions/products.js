@@ -36,7 +36,6 @@ export const showProduct = id => {
   return dispatch => {
     Axios.get("products/" + id + "/show")
       .then(response => {
-        console.log(response.data);
         dispatch(showProductSuccess(response.data));
       })
       .catch(error => {
@@ -219,12 +218,5 @@ export const fetchCategoriesFail = error => {
   return {
     type: actionTypes.FETCH_CATEGORIES_FAIL,
     error: error
-  };
-};
-
-export const saveCartSize = size => {
-  return {
-    type: actionTypes.SAVE_CART_SIZE,
-    size: size
   };
 };

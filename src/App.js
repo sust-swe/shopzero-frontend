@@ -15,13 +15,9 @@ import Profile from "./containers/User/Profile/Profile";
 import SearchedProducts from "./containers/SearchedProducts/SearchedProducts";
 import Products from "./containers/Products/Products";
 import CartPage from "./containers/User/Cart/CartPage/CartPage";
-import {
-  ActionCableConsumer,
-  ActionCableProvider
-} from "react-actioncable-provider";
 import { connect } from "react-redux";
-import ActionCable from "actioncable";
 import CustomWebSocket from "./containers/WebSocket/CustomWebSocket";
+import CartItems from "./containers/User/Cart/CartItems/CartItems";
 
 class App extends Component {
   state = {};
@@ -37,6 +33,7 @@ class App extends Component {
         <Route path="/searchedproducts" component={SearchedProducts} />
         <Route path="/signupverify" component={SignupVerification} />
         <Route path="/productpage" component={ProductPage} />
+        <Route path="/cartItems" component={CartItems}></Route>
         <Route path="/products" component={Products} />
         <Route path="/cartpage" component={CartPage} />
         <Route path="/feedback" component={Feedback} />

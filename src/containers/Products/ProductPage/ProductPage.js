@@ -13,13 +13,16 @@ class ProductPage extends Component {
     productDescription: null,
     productFeatures: null,
     productImage: null,
-    productStock: null
+    productStock: null,
+    productId: null,
+    quantity: 1
   };
 
   constructor(props) {
     super(props);
     if (props.productInfo) {
       this.state = {
+        productId: props.productInfo.id,
         productName: props.productInfo.name,
         productPrice: props.productInfo.sales_price,
         productCategory: props.productInfo.category.name,
@@ -27,26 +30,44 @@ class ProductPage extends Component {
         productDescription: props.productInfo.description,
         productFeatures: props.productInfo.features,
         productImage: props.productInfo.picture.url,
-        productStock: props.productInfo.stock
-      };
-    } else {
-      this.state = {
-        productName: null,
-        productPrice: null,
-        productCategory: null,
-        productBrand: null,
-        productDescription: null,
-        productFeatures: null,
-        productImage: null,
-        productStock: null
+        productStock: props.productInfo.stock,
+        quantity: 1
       };
     }
+    // } else {
+    //   this.state = {
+    //     productName: null,
+    //     productPrice: null,
+    //     productCategory: null,
+    //     productBrand: null,
+    //     productDescription: null,
+    //     productFeatures: null,
+    //     productImage: null,
+    //     productStock: null,
+    //     productId: null
+    //   };
+    // }
   }
 
   componentDidMount() {
     console.log(this.state.info);
     this.props.onSetProductInfoToNull();
   }
+
+  addToCartHandler = event => {
+    event.preventDefault();
+    this.props.onAddToCart(this.state.productId, this.state.quantity);
+  };
+
+  increaseQuantityHandler = event => {
+    event.preventDefault();
+    this.setState({ quantity: this.state.quantity + 1 });
+  };
+
+  decreaseQuantityHandler = event => {
+    event.preventDefault();
+    this.setState({ quantity: this.state.quantity - 1 });
+  };
 
   render() {
     let page = null;
@@ -74,13 +95,29 @@ class ProductPage extends Component {
                   </div>
                   <div>
                     <div className={classes.row}>
-                      <button className={classes.Button}>-</button>
-                      <h6>Quantity: 1</h6>
-                      <button className={classes.Button}>+</button>
+                      <button
+                        className={classes.Button}
+                        onClick={this.decreaseQuantityHandler}
+                        disabled={this.state.quantity === 0}
+                      >
+                        -
+                      </button>
+                      <h6>Quantity: {this.state.quantity}</h6>
+                      <button
+                        className={classes.Button}
+                        onClick={this.increaseQuantityHandler}
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                   <div>
-                    <button className="btn btn-success">Add to Cart</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={this.addToCartHandler}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
                 <div className={["col-md-12"].join(" ")}>
@@ -125,7 +162,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSetProductInfoToNull: () => dispatch(actions.setProductInfoToNull())
+    onSetProductInfoToNull: () => dispatch(actions.setProductInfoToNull()),
+    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity)),
+    onUpdateCart: (id, quantity) => dispatch(actions.updateCart(id, quantity))
   };
 };
 

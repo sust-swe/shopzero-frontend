@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
+import { saveCart } from "../../store/actions/index";
 
 class CustomWebSocket extends Component {
   state = {
@@ -64,7 +64,7 @@ class CustomWebSocket extends Component {
       if (typeof message.type === "undefined") {
         this.setState({ dataFromServer: message });
         console.log(message.message.data.length);
-        this.props.onSaveCartSize(message.message.data.length);
+        this.props.onSaveCartSize(message.message.data);
       }
     };
 
@@ -122,7 +122,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSaveCartSize: size => dispatch(actions.saveCartSize(size))
+    onSaveCartSize: cart => dispatch(saveCart(cart))
   };
 };
 
