@@ -24,7 +24,7 @@ class CartItem extends Component {
               <p>Category</p>
             </div>
             <div>
-              <p>{this.props.price * this.props.quantity}</p>
+              <p>{(this.props.price * this.props.quantity).toFixed(2)}</p>
               <p>{this.props.quantity}</p>
             </div>
           </div>

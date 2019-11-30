@@ -5,7 +5,8 @@ const initialState = {
   cart: null,
   cartSize: null,
   products: [],
-  error: null
+  error: null,
+  totalPrice: null
 };
 
 const saveCart = (state, action) => {
@@ -25,6 +26,10 @@ const saveCartProductFail = (state, action) => {
   return updateObject(state, { error: action.error });
 };
 
+const saveTotalCartPrice = (state, action) => {
+  return updateObject(state, { totalPrice: action.totalPrice });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_CART:
@@ -35,6 +40,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SAVE_CART_PRODUCT_FAIL:
       return saveCartProductFail(state, action);
+
+    case actionTypes.SAVE_TOTAL_CART_PRICE:
+      return saveTotalCartPrice(state, action);
 
     default:
       return state;

@@ -18,6 +18,7 @@ import CartPage from "./containers/User/Cart/CartPage/CartPage";
 import { connect } from "react-redux";
 import CustomWebSocket from "./containers/WebSocket/CustomWebSocket";
 import CartItems from "./containers/User/Cart/CartItems/CartItems";
+import ProfileUpdate from "./containers/User/Profile/ProfileUpdate/ProfileUpdate";
 
 class App extends Component {
   state = {};
@@ -31,6 +32,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/searchedproducts" component={SearchedProducts} />
+        <Route path="/updateprofile" component={ProfileUpdate} />
         <Route path="/signupverify" component={SignupVerification} />
         <Route path="/productpage" component={ProductPage} />
         <Route path="/cartItems" component={CartItems}></Route>

@@ -8,10 +8,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = authData => {
+export const authSuccess = (authData, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData: authData
+    authData: authData,
+    userId: userId
   };
 };
 
@@ -36,8 +37,11 @@ export const auth = (email, password) => {
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.auth_token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("userId", response.data.user.id);
         Cookies.set("token", response.data.auth_token);
-        dispatch(authSuccess(response.data));
+        dispatch(authSuccess(response.data, response.data.user.id));
+        console.log(response.data.user);
       })
       .catch(error => {
         dispatch(authFail(error));
@@ -45,10 +49,12 @@ export const auth = (email, password) => {
   };
 };
 
-export const authenticated = () => {
+export const authenticated = (token, user) => {
   console.log("authenticated");
   return {
-    type: actionTypes.AUTHENTICATED
+    type: actionTypes.AUTHENTICATED,
+    token: token,
+    user: JSON.parse(user)
   };
 };
 
@@ -71,6 +77,8 @@ export const logout = () => {
       .then(response => {
         console.log(response);
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("userId");
         Cookies.remove("token");
         dispatch(logoutSuccess());
       })
@@ -90,10 +98,11 @@ export const setAuthRedirectPath = path => {
 export const authStateCheck = () => {
   return dispatch => {
     const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
 
     if (token) {
       console.log("success");
-      dispatch(authSuccess(token));
+      dispatch(authenticated(token, user));
       return true;
     } else {
       dispatch(logout());
@@ -128,10 +137,30 @@ export const signupFailed = error => {
   };
 };
 
-// export const startActionCableConnection = () => {
-//   return dispatch => {
-//     const actionCableConnection = {};
+export const updateUserSuccess = updateInfo => {
+  return {
+    type: actionTypes.UPDATE_USER_SUCCESS,
+    updateInfo: updateInfo
+  };
+};
 
-//     actionCableConnection.cable
-//   };
-// };
+export const updateUserFail = error => {
+  return {
+    type: actionTypes.UPDATE_USER_FAIL,
+    error: error
+  };
+};
+
+export const updateUser = (username, updateInfo) => {
+  return dispatch => {
+    Axios.post("users/" + username + "/update", updateInfo)
+      .then(response => {
+        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(response.data));
+        dispatch(updateUserSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(updateUserFail(error));
+      });
+  };
+};

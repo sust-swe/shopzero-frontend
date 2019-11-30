@@ -34,19 +34,6 @@ class ProductPage extends Component {
         quantity: 1
       };
     }
-    // } else {
-    //   this.state = {
-    //     productName: null,
-    //     productPrice: null,
-    //     productCategory: null,
-    //     productBrand: null,
-    //     productDescription: null,
-    //     productFeatures: null,
-    //     productImage: null,
-    //     productStock: null,
-    //     productId: null
-    //   };
-    // }
   }
 
   componentDidMount() {
@@ -163,8 +150,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSetProductInfoToNull: () => dispatch(actions.setProductInfoToNull()),
-    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity)),
-    onUpdateCart: (id, quantity) => dispatch(actions.updateCart(id, quantity))
+    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity))
   };
 };
 

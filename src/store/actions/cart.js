@@ -83,3 +83,10 @@ export const deleteFromCart = id => {
       });
   };
 };
+
+export const saveTotalCartPrice = totalPrice => {
+  return {
+    type: actionTypes.SAVE_TOTAL_CART_PRICE,
+    totalPrice: totalPrice
+  };
+};

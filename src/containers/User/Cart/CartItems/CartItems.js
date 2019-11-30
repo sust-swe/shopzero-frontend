@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 
 class CartItems extends Component {
   render() {
-    let cartItems = <Redirect to="/" />;
+    let cartItems = <p>There are no items in your cart</p>;
 
     if (this.props.cartItems) {
       cartItems = (

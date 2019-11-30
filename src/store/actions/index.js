@@ -1,4 +1,4 @@
-export { auth, logout, authStateCheck, signup } from "./auth";
+export { auth, logout, authStateCheck, signup, updateUser } from "./auth";
 export {
   fetchProducts,
   showProduct,
@@ -8,4 +8,10 @@ export {
   fetchCategories
 } from "./products";
 
-export { saveCart, addToCart, updateCart, deleteFromCart } from "./cart";
+export {
+  saveCart,
+  addToCart,
+  updateCart,
+  deleteFromCart,
+  saveTotalCartPrice
+} from "./cart";

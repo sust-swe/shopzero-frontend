@@ -8,15 +8,14 @@ const initialState = {
   loading: false,
   responseMessage: null,
   authRedirectPath: "/",
-  signedUp: false
+  signedUp: false,
+  user: null
 };
 
 const authStart = (state, action) => {
   return updateObject(state, {
     error: null,
-    loading: true,
-    responseMessage: null,
-    signedUp: false
+    loading: true
   });
 };
 
@@ -27,17 +26,16 @@ const authSuccess = (state, action) => {
     token: action.authData.auth_token,
     error: null,
     loading: false,
-    responseMessage: action.authData.message,
-    signedUp: false
+    signedUp: false,
+    user: action.authData.user,
+    userId: action.userId
   });
 };
 
 const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false,
-    responseMessage: "Invalid email or password",
-    signedUp: false
+    loading: false
   });
 };
 
@@ -46,17 +44,15 @@ const logout = (state, action) => {
     token: null,
     error: false,
     loading: false,
-    responseMessage: null,
-    signedUp: false
+    user: null,
+    userId: null
   });
 };
 
 const logoutFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false,
-    responseMessage: null,
-    signedUp: false
+    loading: false
   });
 };
 
@@ -73,6 +69,23 @@ const setAuthRedirectPath = (state, action) => {
     authRedirectPath: action.path,
     signedUp: false
   });
+};
+
+const authenticated = (state, action) => {
+  return updateObject(state, {
+    token: action.token,
+    error: null,
+    loading: false,
+    user: action.user
+  });
+};
+
+const updateUserSuccess = (state, action) => {
+  return updateObject(state, { user: action.updateInfo });
+};
+
+const updateUserFail = (state, action) => {
+  return updateObject(state, { error: action.error });
 };
 
 const reducer = (state = initialState, action) => {
@@ -100,6 +113,15 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SIGNUP_FAILED:
       return signupFailed(state, action);
+
+    case actionTypes.AUTHENTICATED:
+      return authenticated(state, action);
+
+    case actionTypes.UPDATE_USER_SUCCESS:
+      return updateUserSuccess(state, action);
+
+    case actionTypes.UPDATE_USER_FAIL:
+      return updateUserFail(state, action);
 
     default:
       return state;
