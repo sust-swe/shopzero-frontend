@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./CartPage.css";
 import { MDBRow, MDBCol } from "mdbreact";
 import CartItems from "../CartItems/CartItems";
-import CartSummary from "../../../CartSummary/CartSummary";
+import CartSummary from "../CartSummary/CartSummary";
 
 const CartPage = () => {
   return (

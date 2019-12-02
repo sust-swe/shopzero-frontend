@@ -1,0 +1,43 @@
+.Checkout {
+  text-align: center;
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.row {
+  padding: 10px;
+  display: inline-flex;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Img {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.Button {
+  font-size: 3vmin;
+  background-color: transparent;
+  border: 1px solid;
+  color: #5c9210;
+  outline: none;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Input {
+  display: block;
+}

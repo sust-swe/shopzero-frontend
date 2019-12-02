@@ -67,7 +67,10 @@ class ProductPage extends Component {
               <div className={[classes.Row, "row"].join(" ")}>
                 <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
                   <div className={classes.Img}>
-                    <h3>Image</h3>
+                    <img
+                      className={classes.Img}
+                      src={"http://localhost:5000" + this.state.productImage}
+                    ></img>
                   </div>
                 </div>
                 <div className={["col-md-6"].join(" ")}>

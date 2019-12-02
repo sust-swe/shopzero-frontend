@@ -3,6 +3,7 @@ import Input from "../../../../components/UI/Input/Input";
 import classes from "./ProfileUpdate.css";
 import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
+import { withRouter } from "react-router-dom";
 
 class ProfileUpdate extends Component {
   state = {
@@ -268,6 +269,7 @@ class ProfileUpdate extends Component {
     };
 
     this.props.onUpdateProfile(this.state.username, updateInfo);
+    this.props.history.push("/profile");
   };
 
   render() {
@@ -318,4 +320,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ProfileUpdate));

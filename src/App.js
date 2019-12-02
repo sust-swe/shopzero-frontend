@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import CustomWebSocket from "./containers/WebSocket/CustomWebSocket";
 import CartItems from "./containers/User/Cart/CartItems/CartItems";
 import ProfileUpdate from "./containers/User/Profile/ProfileUpdate/ProfileUpdate";
+import Checkout from "./containers/Checkout/Checkout";
 
 class App extends Component {
   state = {};
@@ -38,6 +39,7 @@ class App extends Component {
         <Route path="/cartItems" component={CartItems}></Route>
         <Route path="/products" component={Products} />
         <Route path="/cartpage" component={CartPage} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/feedback" component={Feedback} />
         <Route path="/profile" component={Profile} />
         <Route path="/signout" component={Logout} />

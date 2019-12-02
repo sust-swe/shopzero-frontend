@@ -73,18 +73,11 @@ export const logoutFail = error => {
 
 export const logout = () => {
   return dispatch => {
-    Axios.delete("sessions/logout")
-      .then(response => {
-        console.log(response);
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        localStorage.removeItem("userId");
-        Cookies.remove("token");
-        dispatch(logoutSuccess());
-      })
-      .catch(error => {
-        dispatch(logoutFail(error));
-      });
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+
+    dispatch(logoutSuccess());
   };
 };
 

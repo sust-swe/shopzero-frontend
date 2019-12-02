@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./CartSummary.css";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
+import * as actions from "../../../../store/actions/index";
 
 class CartSummary extends Component {
   state = {
