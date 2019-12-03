@@ -14,5 +14,13 @@ export const placeOrder = address => {
 };
 
 export const fetchOrders = () => {
-  return dispatch => {};
+  return dispatch => {
+    Axios.get("orders/orders")
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 };

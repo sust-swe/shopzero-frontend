@@ -13,6 +13,10 @@ const NavigationItems = props => (
     ) : (
       <NavigationItem link="/signin">Sign In</NavigationItem>
     )}
+
+    {props.isAuth ? (
+      <NavigationItem link="/orders">Orders</NavigationItem>
+    ) : null}
   </ul>
 );
 

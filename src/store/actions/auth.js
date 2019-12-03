@@ -76,6 +76,7 @@ export const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("userId");
+    Cookies.remove("token");
 
     dispatch(logoutSuccess());
   };

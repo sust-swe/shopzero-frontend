@@ -20,6 +20,7 @@ import CustomWebSocket from "./containers/WebSocket/CustomWebSocket";
 import CartItems from "./containers/User/Cart/CartItems/CartItems";
 import ProfileUpdate from "./containers/User/Profile/ProfileUpdate/ProfileUpdate";
 import Checkout from "./containers/Checkout/Checkout";
+import Orders from "./containers/User/Orders/Orders";
 
 class App extends Component {
   state = {};
@@ -47,6 +48,7 @@ class App extends Component {
         <Route path="/contact" component={Contact} />
         <Route path="/signin" component={Auth} />
         <Route path="/signup" component={Signup} />
+        <Route path="/orders" component={Orders} />
         <Route path="/help" component={Help} />
         <Route path="/" exact component={Home} />
       </Switch>
