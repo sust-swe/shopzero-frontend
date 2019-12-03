@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./CartSummary.css";
 import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
+import { withRouter } from "react-router-dom";
 
 class CartSummary extends Component {
   state = {
@@ -17,11 +18,28 @@ class CartSummary extends Component {
       });
     }
 
-    // this.props.onSaveTotalCartPrice(totalPrice.toFixed(2));
     this.setState({ totalPrice: totalPrice.toFixed(2) });
   }
 
+  checkoutOutHandler = event => {
+    event.preventDefault();
+    this.props.history.push("/checkout");
+  };
+
   render() {
+    let button = null;
+
+    if (this.props.location.pathname === "/cartpage") {
+      button = (
+        <button
+          disabled={this.props.cartSize === 0}
+          onClick={this.checkoutOutHandler}
+        >
+          Checkout
+        </button>
+      );
+    }
+
     return (
       <div className={classes.CartSummary}>
         <div>
@@ -34,7 +52,7 @@ class CartSummary extends Component {
           <h3>TOTAL: {this.props.totalPrice}</h3>
         </div>
         <p>Payment Method: Cash on Delivery</p>
-        <button>Checkout</button>
+        {button}
       </div>
     );
   }
@@ -44,7 +62,8 @@ const mapStateToProps = state => {
   return {
     cartSize: state.cart.cartSize,
     cart: state.cart.cart,
-    totalPrice: state.cart.totalPrice
+    totalPrice: state.cart.totalPrice,
+    checkout: state.cart.checkout
   };
 };
 
@@ -55,4 +74,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartSummary);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(CartSummary));

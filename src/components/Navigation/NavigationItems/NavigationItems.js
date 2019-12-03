@@ -13,8 +13,6 @@ const NavigationItems = props => (
     ) : (
       <NavigationItem link="/signin">Sign In</NavigationItem>
     )}
-
-    <NavigationItem link="/checkout">Checkout</NavigationItem>
   </ul>
 );
 

@@ -88,17 +88,6 @@ class ProfileUpdate extends Component {
         valid: false,
         touched: false
       },
-      block: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "block"
-        },
-        value: "",
-        validation: {},
-        valid: false,
-        touched: false
-      },
       area: {
         elementType: "input",
         elementConfig: {
@@ -107,19 +96,6 @@ class ProfileUpdate extends Component {
         },
         value: "",
         validation: {},
-        valid: false,
-        touched: false
-      },
-      postcode: {
-        elementType: "input",
-        elementConfig: {
-          type: "number",
-          placeholder: "postcode"
-        },
-        value: "",
-        validation: {
-          isNumeric: true
-        },
         valid: false,
         touched: false
       },
@@ -180,17 +156,9 @@ class ProfileUpdate extends Component {
           ...prevstate.controls.roadNo,
           value: this.props.user.road
         },
-        block: {
-          ...prevstate.controls.block,
-          value: this.props.user.block_no
-        },
         area: {
           ...prevstate.controls.area,
           value: this.props.user.area
-        },
-        postcode: {
-          ...prevstate.controls.postcode,
-          value: this.props.user.postcode
         },
         city: {
           ...prevstate.controls.city,
@@ -260,9 +228,7 @@ class ProfileUpdate extends Component {
         phone_no: this.state.controls.phoneNo.value,
         house_no: this.state.controls.houseNo.value,
         road: this.state.controls.roadNo.value,
-        block_no: this.state.controls.block.value,
         area: this.state.controls.area.value,
-        postcode: this.state.controls.postcode.value,
         city: this.state.controls.city.value,
         country: this.state.controls.country.value
       }

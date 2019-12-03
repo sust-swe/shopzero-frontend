@@ -27,16 +27,16 @@ class CartItem extends Component {
               <p className={classes.Brand}>Brand</p>
             </div>
             <div>
-              <p className={classes.Price}>
+              <div className={classes.Price}>
                 Price:{" "}
                 <p>
                   {" "}
                   {"$" +
                     (this.props.price * this.props.quantity).toFixed(2)}{" "}
                 </p>
-              </p>
+              </div>
 
-              <p className={classes.Quantity}>
+              <div className={classes.Quantity}>
                 <p>Quantity</p>
                 <div className={classes.Row}>
                   <button className={classes.AddRemoveBtn}>-</button>
@@ -45,7 +45,7 @@ class CartItem extends Component {
                   </p>
                   <button className={classes.AddRemoveBtn}>+</button>
                 </div>
-              </p>
+              </div>
             </div>
             <div className={classes.Row}>
               <button

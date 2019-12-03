@@ -38,12 +38,6 @@ class Profile extends Component {
             <strong>Area:</strong> {this.props.user.area}
           </h3>
           <h3>
-            <strong>Block:</strong> {this.props.user.block_no}
-          </h3>
-          <h3>
-            <strong>Postcode:</strong> {this.props.user.postcode}
-          </h3>
-          <h3>
             <strong>City:</strong> {this.props.user.city}
           </h3>
           <h3>

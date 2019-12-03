@@ -15,3 +15,5 @@ export {
   deleteFromCart,
   saveTotalCartPrice
 } from "./cart";
+
+export { placeOrder, fetchOrders } from "./order";

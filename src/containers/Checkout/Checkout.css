@@ -25,11 +25,14 @@
 }
 
 .Button {
-  font-size: 3vmin;
   background-color: transparent;
-  border: 1px solid;
+  border: none;
   color: #5c9210;
   outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
   font-weight: bold;
 }
 
@@ -40,4 +43,14 @@
 
 .Input {
   display: block;
+}
+
+.Form {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
 }
