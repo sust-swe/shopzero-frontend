@@ -16,20 +16,47 @@ class CartItem extends Component {
     return (
       <div className={classes.Row}>
         <div className={classes.CartItem}>
-          <div className={[classes.Row, `row`].join(" ")}>
-            <p>Image</p>
+          <div className={classes.Row}>
+            <img
+              className={classes.Image}
+              src={"http://localhost:5000" + this.props.image}
+            />
             <div>
-              <p>Brand</p>
-              <p>{this.props.name}</p>
-              <p>Category</p>
+              <p className={classes.Title}>{this.props.name}</p>
+              <em>by</em>
+              <p className={classes.Brand}>Brand</p>
             </div>
             <div>
-              <p>{(this.props.price * this.props.quantity).toFixed(2)}</p>
-              <p>{this.props.quantity}</p>
+              <p className={classes.Price}>
+                Price:{" "}
+                <p>
+                  {" "}
+                  {"$" +
+                    (this.props.price * this.props.quantity).toFixed(2)}{" "}
+                </p>
+              </p>
+
+              <p className={classes.Quantity}>
+                <p>Quantity</p>
+                <div className={classes.Row}>
+                  <button className={classes.AddRemoveBtn}>-</button>
+                  <p className={classes.AddRemoveNumber}>
+                    {this.props.quantity}
+                  </p>
+                  <button className={classes.AddRemoveBtn}>+</button>
+                </div>
+              </p>
+            </div>
+            <div className={classes.Row}>
+              <button
+                className={classes.Remove}
+                onClick={this.deleteFromCartHandler}
+              >
+                Remove
+              </button>
             </div>
           </div>
         </div>
-        <button onClick={this.deleteFromCartHandler}>Remove</button>
       </div>
     );
   }
