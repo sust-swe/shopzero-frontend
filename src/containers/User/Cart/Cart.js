@@ -13,12 +13,11 @@ class Cart extends Component {
 
   render() {
     return (
-      <div
-        className={[classes.Row, `row`].join(" ")}
-        onClick={this.clickHandler}
-      >
-        <img src={CartLogo} alt="MyCart" />
-        <p>{this.props.cartSize}</p>
+      <div className={classes.Row}>
+        <div className={classes.item} onClick={this.clickHandler}>
+          <img className={classes.icon} src={CartLogo} alt="MyCart" />
+          <p className={classes.notify_badge}>{this.props.cartSize}</p>
+        </div>
       </div>
     );
   }

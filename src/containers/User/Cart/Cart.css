@@ -7,3 +7,38 @@
   display: flex;
   justify-content: space-evenly;
 }
+.icon {
+  height: 70px;
+  cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+  .icon {
+  }
+}
+.icon:hover + .notify_badge {
+  position: absolute;
+  right: 1px;
+  top: 15px;
+  font-family: Comic Sans Ms;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.item {
+  position: relative;
+  padding-top: 20px;
+  display: inline-block;
+}
+.notify_badge {
+  position: absolute;
+  right: 1px;
+  top: 15px;
+  font-family: Comic Sans Ms;
+  text-align: center;
+  color: black;
+  padding: 5px 10px;
+  font-size: 20px;
+}
