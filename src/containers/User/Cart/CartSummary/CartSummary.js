@@ -42,13 +42,13 @@ class CartSummary extends Component {
         </div>
       );
       button = (
-        <a
+        <button
           className={classes.button}
           disabled={this.props.cartSize === 0}
           onClick={this.checkoutOutHandler}
         >
           Checkout
-        </a>
+        </button>
       );
     }
 

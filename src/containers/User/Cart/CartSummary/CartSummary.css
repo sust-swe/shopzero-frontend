@@ -62,7 +62,7 @@ body {
   opacity: 1 !important;
   visibility: visible !important;
 }
-.pricing_table .pricing_option:hover .back a.button {
+.pricing_table .pricing_option:hover .back button.button {
   transform: translateY(0px) !important;
 }
 .pricing_table .pricing_option hr {
@@ -106,7 +106,7 @@ body {
   opacity: 0;
   visibility: hidden;
 }
-.pricing_table .pricing_option .price .back a.button {
+.pricing_table .pricing_option .price .back button.button {
   padding: 5px;
   border: none;
   border: 0.5px solid #bfbfbf;
@@ -116,9 +116,14 @@ body {
   font-family: Comic Sans MS;
   background: transparent;
 }
-.pricing_table .pricing_option .price .back a.button:hover {
+.pricing_table .pricing_option .price .back button.button:hover {
   color: red;
 }
+
+.pricing_table .pricing_option .price .back button.button:disabled {
+  color: grey;
+}
+
 @media screen and (max-width: 600px) {
   .pricing_table .pricing_option {
     padding: 5%;

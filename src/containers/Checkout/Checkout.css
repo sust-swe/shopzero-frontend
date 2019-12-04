@@ -8,6 +8,12 @@
   justify-content: space-evenly;
 }
 
+@media screen and (max-width: 600px) {
+  .Row {
+    display: inline;
+  }
+}
+
 .row {
   padding: 10px;
   display: inline-flex;
