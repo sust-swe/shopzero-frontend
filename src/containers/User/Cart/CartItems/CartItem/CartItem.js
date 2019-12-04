@@ -12,6 +12,16 @@ class CartItem extends Component {
     console.log(this.props.id);
   };
 
+  increaseQuantityHandler = event => {
+    event.preventDefault();
+    this.props.onUpdateCart(this.props.id, this.props.quantity + 1);
+  };
+
+  decreaseQuantityHandler = event => {
+    event.preventDefault();
+    this.props.onUpdateCart(this.props.id, this.props.quantity - 1);
+  };
+
   render() {
     return (
       <div className={classes.Row}>
@@ -39,11 +49,22 @@ class CartItem extends Component {
               <div className={classes.Quantity}>
                 <p>Quantity</p>
                 <div className={classes.Row}>
-                  <button className={classes.AddRemoveBtn}>-</button>
+                  <button
+                    className={classes.AddRemoveBtn}
+                    onClick={this.decreaseQuantityHandler}
+                    disabled={this.props.quantity === 1}
+                  >
+                    -
+                  </button>
                   <p className={classes.AddRemoveNumber}>
                     {this.props.quantity}
                   </p>
-                  <button className={classes.AddRemoveBtn}>+</button>
+                  <button
+                    className={classes.AddRemoveBtn}
+                    onClick={this.increaseQuantityHandler}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
@@ -64,7 +85,8 @@ class CartItem extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteFromCart: id => dispatch(actions.deleteFromCart(id))
+    onDeleteFromCart: id => dispatch(actions.deleteFromCart(id)),
+    onUpdateCart: (id, quantity) => dispatch(actions.updateCart(id, quantity))
   };
 };
 

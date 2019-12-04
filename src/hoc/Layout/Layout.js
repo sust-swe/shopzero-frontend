@@ -7,6 +7,7 @@ import ShowMenu from "../../containers/ShowMenu/ShowMenu";
 import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
 import Cart from "../../containers/User/Cart/Cart";
+import { withRouter } from "react-router-dom";
 class Layout extends Component {
   state = {
     showSideDrawer: false
@@ -28,13 +29,43 @@ class Layout extends Component {
         <div className="col-md-2">
           <Logo className={classes.Logo} />
         </div>
-        <div className="col-md-8">
-          <SearchBar className={classes.SearchBar} />
-        </div>
       </div>
     );
 
+    if (
+      this.props.location.pathname === "/" ||
+      this.props.location.pathname === "/productpage"
+    ) {
+      header = (
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className="col-md-2">
+            <Logo className={classes.Logo} />
+          </div>
+          <div className="col-md-8">
+            <SearchBar className={classes.SearchBar} />
+          </div>
+        </div>
+      );
+    }
+
     if (this.props.isAuthenticated) {
+      header = (
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className="col-md-11">
+            <Logo className={classes.Logo} />
+          </div>
+
+          <div className="col-md-1">
+            <Cart className={classes.Cart} />
+          </div>
+        </div>
+      );
+    }
+
+    if (
+      (this.props.isAuthenticated && this.props.location.pathname === "/") ||
+      this.props.location.pathname === "/productpage"
+    ) {
       header = (
         <div className={[classes.Row, `row`].join(" ")}>
           <div className="col-md-2">
@@ -73,19 +104,7 @@ class Layout extends Component {
           <div className={["col-md-10"].join(" ")}>
             <main className={classes.Main}>{this.props.children}</main>
           </div>
-
-          {/* <div className={["col-md-2"].join(" ")}>
-            {!this.props.isAuthenticated ? (
-              <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
-                SIGN UP
-              </MDBBtn>
-            ) : null}
-          </div> */}
         </div>
-        {/* <div>
-          <Footer />
-        </div> */}
-        {/* <main className={classes.Main}>{this.props.children}</main> */}
       </div>
     );
   }
@@ -97,4 +116,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps)(withRouter(Layout));
