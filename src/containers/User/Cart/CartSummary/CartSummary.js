@@ -28,31 +28,66 @@ class CartSummary extends Component {
 
   render() {
     let button = null;
-
+    let totalprice = null;
+    let priceclass = classes.price;
     if (this.props.location.pathname === "/cartpage") {
+      priceclass = classes.hidden;
+      totalprice = (
+        <div>
+          <p>
+            <strong>Sub-Total:</strong>{" "}
+            <em>{parseInt(this.props.totalPrice) + 40}</em>
+          </p>
+          <hr />
+        </div>
+      );
       button = (
-        <button
+        <a
+          className={classes.button}
           disabled={this.props.cartSize === 0}
           onClick={this.checkoutOutHandler}
         >
           Checkout
-        </button>
+        </a>
       );
     }
 
     return (
-      <div className={classes.CartSummary}>
-        <div>
-          <h1>Total</h1>
-          <h3>Items: {this.props.cartSize}</h3>
-          <h3>Price: {this.props.totalPrice}</h3>
-          <h3>Delivery Charge:</h3>
-          <h3>VAT:</h3>
-          <hr />
-          <h3>TOTAL: {this.props.totalPrice}</h3>
+      <div>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <div className={classes.pricing_table}>
+          <div className={classes.pricing_option}>
+            <h1 className={classes.demo_title}>CartSummary</h1>
+            <hr />
+            <div className={classes.item_text}>
+              <p>
+                <strong>Items:</strong> <em>{this.props.cartSize}</em>
+              </p>
+              <p>
+                <strong>Price:</strong> <em>{this.props.totalPrice}</em>
+              </p>
+              <p>
+                <strong>Delivery Charge:</strong> <em>40$</em>
+              </p>
+              <hr />
+              {totalprice}
+              <p>
+                <strong>Payment Method:</strong> Cash on Delivery
+              </p>
+            </div>
+            <div className={classes.price}>
+              <div className={classes.front}>
+                <span className={classes.price}>
+                  Total {parseInt(this.props.totalPrice) + 40} <b>$</b>
+                </span>
+              </div>
+              <div className={classes.back}>{button}</div>
+            </div>
+          </div>
         </div>
-        <p>Payment Method: Cash on Delivery</p>
-        {button}
       </div>
     );
   }
