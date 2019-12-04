@@ -11,14 +11,34 @@ class Orders extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Order />
-        <Order />
-      </div>
-    );
+    let orders = <p>There are no orders</p>;
+
+    if (this.props.orders) {
+      orders = (
+        <div>
+          {this.props.orders.map(order => (
+            <Order
+              key={order.id}
+              name={order.product.name}
+              brand={order.product.brand_id}
+              price={order.price}
+              quantity={order.count}
+              picture={order.product.picture.url}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    return <div>{orders}</div>;
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    orders: state.order.orders
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -26,4 +46,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

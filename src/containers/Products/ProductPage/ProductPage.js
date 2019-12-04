@@ -3,7 +3,7 @@ import { MDBCol } from "mdbreact";
 import classes from "./ProductPage.css";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 class ProductPage extends Component {
   state = {
     productName: null,
@@ -43,7 +43,12 @@ class ProductPage extends Component {
 
   addToCartHandler = event => {
     event.preventDefault();
-    this.props.onAddToCart(this.state.productId, this.state.quantity);
+
+    if (this.props.authenticated) {
+      this.props.onAddToCart(this.state.productId, this.state.quantity);
+    } else {
+      this.props.history.push("/signin");
+    }
   };
 
   increaseQuantityHandler = event => {
@@ -146,7 +151,8 @@ class ProductPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    productInfo: state.products.productInfo
+    productInfo: state.products.productInfo,
+    authenticated: state.auth.token !== null
   };
 };
 
@@ -157,4 +163,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ProductPage));

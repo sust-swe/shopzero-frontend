@@ -13,7 +13,8 @@ export {
   addToCart,
   updateCart,
   deleteFromCart,
-  saveTotalCartPrice
+  saveTotalCartPrice,
+  deleteCart
 } from "./cart";
 
-export { placeOrder, fetchOrders } from "./order";
+export { placeOrder, fetchOrders, deleteOrders } from "./order";

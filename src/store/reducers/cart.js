@@ -30,6 +30,10 @@ const saveTotalCartPrice = (state, action) => {
   return updateObject(state, { totalPrice: action.totalPrice });
 };
 
+const deleteCart = (state, action) => {
+  return updateObject(state, { cart: null, cartSize: null });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_CART:
@@ -43,6 +47,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SAVE_TOTAL_CART_PRICE:
       return saveTotalCartPrice(state, action);
+
+    case actionTypes.DELETE_CART:
+      return deleteCart(state, action);
 
     default:
       return state;

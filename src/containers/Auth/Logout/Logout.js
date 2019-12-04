@@ -8,20 +8,21 @@ class Logout extends Component {
 
   componentDidMount() {
     this.props.onLogout();
+    this.props.onDeleteCart();
+    this.props.onDeleteOrders();
   }
 
   render() {
-    return <Redirect to="/signin" />;
+    return <Redirect to="/" />;
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch(actions.logout())
+    onLogout: () => dispatch(actions.logout()),
+    onDeleteCart: () => dispatch(actions.deleteCart()),
+    onDeleteOrders: () => dispatch(actions.deleteOrders())
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

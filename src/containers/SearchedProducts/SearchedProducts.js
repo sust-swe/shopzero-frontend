@@ -34,6 +34,7 @@ class SearchedProducts extends Component {
               key={product.id}
               name={product.name}
               price={product.sales_price}
+              picture={product.picture.url}
               clicked={event => this.showProductHandler(product.id)}
             />
           ))}

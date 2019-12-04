@@ -90,3 +90,9 @@ export const saveTotalCartPrice = totalPrice => {
     totalPrice: totalPrice
   };
 };
+
+export const deleteCart = () => {
+  return {
+    type: actionTypes.DELETE_CART
+  };
+};

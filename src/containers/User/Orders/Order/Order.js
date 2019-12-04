@@ -1,7 +1,36 @@
 import React from "react";
+import classes from "./Order.css";
 
-const Order = () => {
-  return <h1>hi</h1>;
+const Order = props => {
+  return (
+    // <div>
+    //   <h1>hi</h1>
+    // </div>
+    <div className={classes.Row}>
+      <div className={classes.Order}>
+        <div className={classes.Row}>
+          <img
+            className={classes.Image}
+            src={"http://localhost:5000" + props.picture}
+          />
+          <div>
+            <p className={classes.Title}>{props.name}</p>
+            <em>by</em>
+            <p className={classes.Brand}>Brand</p>
+          </div>
+          <div>
+            <div className={classes.Price}>
+              Price: <p> {"$" + (props.price * props.quantity).toFixed(2)} </p>
+            </div>
+
+            <div className={classes.Quantity}>
+              <p>Quantity: {props.quantity}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Order;

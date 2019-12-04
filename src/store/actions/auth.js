@@ -39,7 +39,10 @@ export const auth = (email, password) => {
         localStorage.setItem("token", response.data.auth_token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("userId", response.data.user.id);
-        Cookies.set("token", response.data.auth_token);
+        Cookies.set("token", response.data.auth_token, {
+          expires: 365,
+          path: "/"
+        });
         dispatch(authSuccess(response.data, response.data.user.id));
         console.log(response.data.user);
       })
