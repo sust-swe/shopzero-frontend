@@ -80,7 +80,7 @@ class CartSummary extends Component {
             </div>
             <div className={classes.price}>
               <div className={classes.front}>
-                <span className={classes.price}>
+                <span className={priceclass}>
                   Total {parseInt(this.props.totalPrice) + 40} <b>$</b>
                 </span>
               </div>
