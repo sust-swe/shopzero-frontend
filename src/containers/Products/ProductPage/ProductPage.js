@@ -75,6 +75,7 @@ class ProductPage extends Component {
                     <img
                       className={classes.Img}
                       src={"http://localhost:5000" + this.state.productImage}
+                      alt={this.props.productId}
                     ></img>
                   </div>
                 </div>
@@ -110,6 +111,7 @@ class ProductPage extends Component {
                     <button
                       className="btn btn-success"
                       onClick={this.addToCartHandler}
+                      disabled={this.state.productStock < 1}
                     >
                       Add to Cart
                     </button>

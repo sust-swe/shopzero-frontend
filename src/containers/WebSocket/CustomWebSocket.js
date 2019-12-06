@@ -70,7 +70,7 @@ class CustomWebSocket extends Component {
         let totalPrice = 0;
 
         cart.map(item => {
-          totalPrice += item.count * item.product.sales_price;
+          return (totalPrice += item.count * item.product.sales_price);
         });
 
         this.props.onSaveTotalCartPrice(totalPrice.toFixed(2));

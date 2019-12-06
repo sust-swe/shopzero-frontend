@@ -135,19 +135,61 @@ class Checkout extends Component {
     };
 
     this.props.onPlaceOrder(address);
-    this.onShowAlert();
+    let message = "Your orders has been placed!";
+    this.onShowAlert(message);
   };
 
-  onShowAlert = () => {
-    this.setState(
-      { message: "Your orders has been placed!", visible: true },
-      () => {
-        window.setTimeout(() => {
-          this.setState({ visible: false });
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+        if (message === "Your order has been placed!") {
           this.props.history.push("/orders");
-        }, 2000);
-      }
-    );
+        }
+      }, 2000);
+    });
+  };
+
+  useProfileInfoHandler = () => {
+    if (
+      this.props.profileInfo.city !== null ||
+      this.props.profileInfo.house_no !== null ||
+      this.props.profileInfo.road !== null ||
+      this.props.profileInfo.area !== null ||
+      this.props.profileInfo.phone_no !== null
+    ) {
+      this.setState(prevstate => ({
+        ...prevstate,
+        message: null,
+        controls: {
+          ...prevstate.controls,
+          city: {
+            ...prevstate.controls.city,
+            value: this.props.profileInfo.city
+          },
+          house: {
+            ...prevstate.controls.house,
+            value: this.props.profileInfo.house_no
+          },
+          road: {
+            ...prevstate.controls.road,
+            value: this.props.profileInfo.road
+          },
+          area: {
+            ...prevstate.controls.area,
+            value: this.props.profileInfo.area
+          },
+          phoneNo: {
+            ...prevstate.controls.phoneNo,
+            value: this.props.profileInfo.phone_no
+          }
+        }
+      }));
+    } else {
+      let message =
+        "Update your profile with these infos first or just fill up the form";
+      this.onShowAlert(message);
+    }
   };
 
   render() {
@@ -178,7 +220,12 @@ class Checkout extends Component {
           {this.state.message}
         </Alert>
         <div>
-          <button className={classes.ProfileInfoBtn}>Use profile info</button>
+          <button
+            className={classes.ProfileInfoBtn}
+            onClick={this.useProfileInfoHandler}
+          >
+            Use profile info
+          </button>
         </div>
         <div className={classes.Row}>
           <MDBCol md="6">

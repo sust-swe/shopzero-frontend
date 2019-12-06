@@ -30,6 +30,7 @@ class CartItem extends Component {
             <img
               className={classes.Image}
               src={"http://localhost:5000" + this.props.image}
+              alt={this.props.image}
             />
             <div>
               <p className={classes.Title}>{this.props.name}</p>

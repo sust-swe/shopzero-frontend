@@ -9,6 +9,7 @@ const Order = props => {
           <img
             className={classes.Image}
             src={"http://localhost:5000" + props.picture}
+            alt={props.picture}
           />
           <div>
             <p className={classes.Title}>{props.name}</p>

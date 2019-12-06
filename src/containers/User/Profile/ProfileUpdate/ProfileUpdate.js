@@ -5,9 +5,6 @@ import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import { Alert } from "reactstrap";
-import withAlertMessagesContainer from "../../../../hoc/withAlertMessagesContainer/withAlertMessagesContainer";
-import Axios from "axios";
-import withErrorHandler from "../../../../hoc/withErrorHandler/withErrorHandler";
 class ProfileUpdate extends Component {
   state = {
     controls: {
@@ -130,10 +127,6 @@ class ProfileUpdate extends Component {
     visible: false,
     message: null
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.setState(prevstate => ({

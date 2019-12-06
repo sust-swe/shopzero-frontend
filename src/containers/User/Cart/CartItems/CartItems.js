@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CartItem from "./CartItem/CartItem";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 class CartItems extends Component {
   render() {

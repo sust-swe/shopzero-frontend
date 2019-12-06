@@ -2,7 +2,6 @@ import classes from "./Profile.css";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Alert } from "reactstrap";
 
 class Profile extends Component {
   state = {};
