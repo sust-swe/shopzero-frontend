@@ -2,17 +2,18 @@
   float: left;
   width: 220px;
   height: 260px;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 3px #ccc;
+  /*border: 1px solid #eee;*/
+  /*box-shadow: 0 2px 3px #ccc;*/
   padding: 10px;
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
 }
 
 .Image {
-  display: inline-block;
-  width: 100%;
-  height: 70%;
-  border: 1px solid #ccc;
+  display: block;
+  margin: auto;
+  width: auto;
+  height: 60%;
+  /*border: 1px solid #ccc;*/
   padding: 5px;
 }
 

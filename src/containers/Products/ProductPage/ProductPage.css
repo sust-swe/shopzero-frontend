@@ -41,9 +41,9 @@
 }
 
 .Img {
-  height: 200px;
-  width: 200px;
-  border: 1px solid black;
+  display: block;
+  margin: auto;
+  height: 250px;
 }
 
 .Button {
