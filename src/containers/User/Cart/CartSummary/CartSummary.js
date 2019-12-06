@@ -14,7 +14,7 @@ class CartSummary extends Component {
 
     if (this.props.cart) {
       this.props.cart.map(item => {
-        totalPrice += item.count * item.product.sales_price;
+        return (totalPrice += item.count * item.product.sales_price);
       });
     }
 
