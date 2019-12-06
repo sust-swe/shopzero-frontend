@@ -185,6 +185,8 @@ class Checkout extends Component {
           }
         }
       }));
+
+      // this.inputChangedHandler(this.state.controls.road);
     } else {
       let message =
         "Update your profile with these infos first or just fill up the form";
