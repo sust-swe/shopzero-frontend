@@ -3,9 +3,6 @@ import classes from "./Order.css";
 
 const Order = props => {
   return (
-    // <div>
-    //   <h1>hi</h1>
-    // </div>
     <div className={classes.Row}>
       <div className={classes.Order}>
         <div className={classes.Row}>
@@ -16,7 +13,7 @@ const Order = props => {
           <div>
             <p className={classes.Title}>{props.name}</p>
             <em>by</em>
-            <p className={classes.Brand}>Brand</p>
+            <p className={classes.Brand}>{props.brand}</p>
           </div>
           <div>
             <div className={classes.Price}>

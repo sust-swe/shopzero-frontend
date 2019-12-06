@@ -4,7 +4,10 @@ import classes from "./ProfileUpdate.css";
 import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
 import { withRouter } from "react-router-dom";
-
+import { Alert } from "reactstrap";
+import withAlertMessagesContainer from "../../../../hoc/withAlertMessagesContainer/withAlertMessagesContainer";
+import Axios from "axios";
+import withErrorHandler from "../../../../hoc/withErrorHandler/withErrorHandler";
 class ProfileUpdate extends Component {
   state = {
     controls: {
@@ -123,13 +126,21 @@ class ProfileUpdate extends Component {
       }
     },
     formIsValid: false,
-    username: null
+    username: null,
+    visible: false,
+    message: null
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     this.setState(prevstate => ({
       ...prevstate,
+      visible: false,
       username: this.props.user.username,
+      message: null,
       controls: {
         ...prevstate.controls,
         firstname: {
@@ -233,9 +244,20 @@ class ProfileUpdate extends Component {
         country: this.state.controls.country.value
       }
     };
-
     this.props.onUpdateProfile(this.state.username, updateInfo);
-    this.props.history.push("/profile");
+    this.onShowAlert();
+  };
+
+  onShowAlert = () => {
+    this.setState(
+      { message: "Your Profile has been updated successfully!", visible: true },
+      () => {
+        window.setTimeout(() => {
+          this.setState({ visible: false });
+          this.props.history.push("/profile");
+        }, 2000);
+      }
+    );
   };
 
   render() {
@@ -262,6 +284,9 @@ class ProfileUpdate extends Component {
 
     return (
       <div>
+        <Alert color="success" isOpen={this.state.visible}>
+          {this.state.message}
+        </Alert>
         <div className={classes.ProfileUpdate}>
           <form onSubmit={this.submitHandler}>
             {form}

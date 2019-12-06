@@ -34,7 +34,8 @@ class Layout extends Component {
 
     if (
       this.props.location.pathname === "/" ||
-      this.props.location.pathname === "/productpage"
+      this.props.location.pathname === "/productpage" ||
+      this.props.location.pathname === "/searchedProducts"
     ) {
       header = (
         <div className={[classes.Row, `row`].join(" ")}>
@@ -64,7 +65,8 @@ class Layout extends Component {
 
     if (
       (this.props.isAuthenticated && this.props.location.pathname === "/") ||
-      this.props.location.pathname === "/productpage"
+      this.props.location.pathname === "/productpage" ||
+      this.props.location.pathname === "/searchedProducts"
     ) {
       header = (
         <div className={[classes.Row, `row`].join(" ")}>

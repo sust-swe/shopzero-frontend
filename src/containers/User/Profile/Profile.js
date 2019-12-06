@@ -1,6 +1,8 @@
 import classes from "./Profile.css";
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { Alert } from "reactstrap";
 
 class Profile extends Component {
   state = {};
@@ -25,24 +27,41 @@ class Profile extends Component {
           <h3>
             <strong>email:</strong> {this.props.user.email}
           </h3>
-          <h3>
-            <strong>Phone No:</strong> {this.props.user.phone_no}
-          </h3>
-          <h3>
-            <strong>House No:</strong> {this.props.user.house_no}
-          </h3>
-          <h3>
-            <strong>Road:</strong> {this.props.user.road}
-          </h3>
-          <h3>
-            <strong>Area:</strong> {this.props.user.area}
-          </h3>
-          <h3>
-            <strong>City:</strong> {this.props.user.city}
-          </h3>
-          <h3>
-            <strong>Country:</strong> {this.props.user.country}
-          </h3>
+          {this.props.user.phone_no ? (
+            <h3>
+              <strong>Phone No:</strong> {this.props.user.phone_no}
+            </h3>
+          ) : null}
+
+          {this.props.user.house_no ? (
+            <h3>
+              <strong>House No:</strong> {this.props.user.house_no}
+            </h3>
+          ) : null}
+
+          {this.props.user.road ? (
+            <h3>
+              <strong>Road:</strong> {this.props.user.road}
+            </h3>
+          ) : null}
+
+          {this.props.user.area ? (
+            <h3>
+              <strong>Area:</strong> {this.props.user.area}
+            </h3>
+          ) : null}
+
+          {this.props.user.city ? (
+            <h3>
+              <strong>City:</strong> {this.props.user.city}
+            </h3>
+          ) : null}
+
+          {this.props.user.country ? (
+            <h3>
+              <strong>City:</strong> {this.props.user.city}
+            </h3>
+          ) : null}
         </div>
         <div className={classes.Row}>
           <button onClick={this.updateProfileHandler}>Update Profile</button>
@@ -59,4 +78,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(withRouter(Profile));

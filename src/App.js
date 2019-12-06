@@ -37,7 +37,7 @@ class App extends Component {
         <Route path="/updateprofile" component={ProfileUpdate} />
         <Route path="/signupverify" component={SignupVerification} />
         <Route path="/productpage" component={ProductPage} />
-        <Route path="/cartItems" component={CartItems}></Route>
+        <Route path="/cartItems" component={CartItems} />
         <Route path="/products" component={Products} />
         <Route path="/cartpage" component={CartPage} />
         <Route path="/checkout" component={Checkout} />

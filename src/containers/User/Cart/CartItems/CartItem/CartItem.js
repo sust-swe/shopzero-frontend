@@ -34,7 +34,7 @@ class CartItem extends Component {
             <div>
               <p className={classes.Title}>{this.props.name}</p>
               <em>by</em>
-              <p className={classes.Brand}>Brand</p>
+              <p className={classes.Brand}>{this.props.brand}</p>
             </div>
             <div>
               <div className={classes.Price}>

@@ -93,7 +93,7 @@ class ProductPage extends Component {
                       <button
                         className={classes.Button}
                         onClick={this.decreaseQuantityHandler}
-                        disabled={this.state.quantity === 0}
+                        disabled={this.state.quantity === 1}
                       >
                         -
                       </button>

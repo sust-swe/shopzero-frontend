@@ -8,32 +8,6 @@ export const saveCart = cart => {
   };
 };
 
-export const saveCartProductSuccess = product => {
-  return {
-    type: actionTypes.SAVE_CART_PRODUCT_SUCCESS,
-    product: product
-  };
-};
-
-export const saveCartProductFail = error => {
-  return {
-    type: actionTypes.SAVE_CART_PRODUCT_FAIL,
-    error: error
-  };
-};
-
-export const fetchCartProduct = id => {
-  return dispatch => {
-    Axios.get("products/" + id + "/show")
-      .then(response => {
-        dispatch(saveCartProductSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(saveCartProductFail(error));
-      });
-  };
-};
-
 export const addToCart = (id, quantity) => {
   const product = {
     product_id: id,

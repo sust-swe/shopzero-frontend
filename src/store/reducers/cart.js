@@ -3,7 +3,7 @@ import { updateObject } from "../utility";
 
 const initialState = {
   cart: null,
-  cartSize: null,
+  cartSize: 0,
   products: [],
   error: null,
   totalPrice: null
@@ -16,34 +16,18 @@ const saveCart = (state, action) => {
   });
 };
 
-const saveCartProductSuccess = (state, action) => {
-  return updateObject(state, {
-    products: state.products.concat(action.product)
-  });
-};
-
-const saveCartProductFail = (state, action) => {
-  return updateObject(state, { error: action.error });
-};
-
 const saveTotalCartPrice = (state, action) => {
   return updateObject(state, { totalPrice: action.totalPrice });
 };
 
 const deleteCart = (state, action) => {
-  return updateObject(state, { cart: null, cartSize: null });
+  return updateObject(state, { cart: null, cartSize: 0 });
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_CART:
       return saveCart(state, action);
-
-    case actionTypes.SAVE_CART_PRODUCT_SUCCESS:
-      return saveCartProductSuccess(state, action);
-
-    case actionTypes.SAVE_CART_PRODUCT_FAIL:
-      return saveCartProductFail(state, action);
 
     case actionTypes.SAVE_TOTAL_CART_PRICE:
       return saveTotalCartPrice(state, action);

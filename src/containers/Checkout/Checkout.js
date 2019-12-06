@@ -6,6 +6,7 @@ import CartSummary from "../User/Cart/CartSummary/CartSummary";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions/index";
+import { Alert } from "reactstrap";
 class Checkout extends Component {
   state = {
     controls: {
@@ -77,7 +78,9 @@ class Checkout extends Component {
         touched: false
       }
     },
-    formIsValid: false
+    formIsValid: false,
+    visible: false,
+    message: null
   };
 
   checkValidity = (value, rules) => {
@@ -132,7 +135,19 @@ class Checkout extends Component {
     };
 
     this.props.onPlaceOrder(address);
-    this.props.history.push("/");
+    this.onShowAlert();
+  };
+
+  onShowAlert = () => {
+    this.setState(
+      { message: "Your orders has been placed!", visible: true },
+      () => {
+        window.setTimeout(() => {
+          this.setState({ visible: false });
+          this.props.history.push("/orders");
+        }, 2000);
+      }
+    );
   };
 
   render() {
@@ -158,27 +173,41 @@ class Checkout extends Component {
     ));
 
     return (
-      <div className={classes.Row}>
-        <MDBCol md="6">
-          <div className={classes.Form}>
-            <form onSubmit={this.submitHandler}>
-              {form}
-              <button
-                className={classes.Button}
-                disabled={!this.state.formIsValid}
-              >
-                Place Order
-              </button>
-            </form>
-          </div>
-        </MDBCol>
-        <MDBCol md="6">
-          <CartSummary />
-        </MDBCol>
+      <div>
+        <Alert color="success" isOpen={this.state.visible}>
+          {this.state.message}
+        </Alert>
+        <div>
+          <button className={classes.ProfileInfoBtn}>Use profile info</button>
+        </div>
+        <div className={classes.Row}>
+          <MDBCol md="6">
+            <div className={classes.Form}>
+              <form onSubmit={this.submitHandler}>
+                {form}
+                <button
+                  className={classes.Button}
+                  disabled={!this.state.formIsValid}
+                >
+                  Place Order
+                </button>
+              </form>
+            </div>
+          </MDBCol>
+          <MDBCol md="6">
+            <CartSummary />
+          </MDBCol>
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    profileInfo: state.auth.user
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -186,4 +215,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Checkout));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Checkout));

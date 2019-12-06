@@ -18,6 +18,7 @@ class CartItems extends Component {
               image={cartItem.product.picture.url}
               quantity={cartItem.count}
               price={cartItem.product.sales_price}
+              brand={cartItem.product.brand.name}
             />
           ))}
         </div>
@@ -30,7 +31,8 @@ class CartItems extends Component {
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.cart.cart
+    cartItems: state.cart.cart,
+    cartSize: state.cart.cartSize
   };
 };
 

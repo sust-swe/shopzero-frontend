@@ -20,7 +20,7 @@ class Orders extends Component {
             <Order
               key={order.id}
               name={order.product.name}
-              brand={order.product.brand_id}
+              brand={order.product.brand.name}
               price={order.price}
               quantity={order.count}
               picture={order.product.picture.url}

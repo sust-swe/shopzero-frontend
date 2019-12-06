@@ -26,7 +26,6 @@ let app = (
 );
 
 Axios.interceptors.request.use(function(config) {
-  // const token = store.getState().token;
   const token = localStorage.getItem("token");
   config.headers.Authorization = token;
 

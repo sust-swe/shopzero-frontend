@@ -60,3 +60,19 @@
   padding: 10px;
   box-sizing: border-box;
 }
+
+.ProfileInfoBtn {
+  background-color: transparent;
+  border: none;
+  color: #5fd5da;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  margin-left: 250px;
+  font-weight: bold;
+}
+
+.ProfileInfoBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
