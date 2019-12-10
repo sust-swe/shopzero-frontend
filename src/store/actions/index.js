@@ -1,4 +1,11 @@
-export { auth, logout, authStateCheck, signup, updateUser } from "./auth";
+export {
+  auth,
+  logout,
+  authStateCheck,
+  signup,
+  updateUser,
+  changePassword
+} from "./auth";
 export {
   fetchProducts,
   showProduct,

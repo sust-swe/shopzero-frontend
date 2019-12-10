@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Input from "../../../../components/UI/Input/Input";
-// import {connect} from "react-redux";
+import { connect } from "react-redux";
 import classes from "./PasswordChange.css";
 import { Alert } from "reactstrap";
+import * as actions from "../../../../store/actions/index";
+import { withRouter } from "react-router-dom";
 
 class PasswordChange extends Component {
   state = {
@@ -115,13 +117,13 @@ class PasswordChange extends Component {
       this.onShowAlert(message);
     } else {
       const changedPassword = {
-        currentPassword: this.state.controls.currentPassword.value,
-        newPassword: this.state.controls.newPassword.value,
-        passwordConfirmation: this.state.controls.passwordConfirmation.value
+        password: this.state.controls.currentPassword.value,
+        new_password: this.state.controls.newPassword.value
       };
 
       message = "Password changed successfully!";
       this.onShowAlert(message);
+      this.props.onChangePassword(changedPassword);
     }
   };
 
@@ -129,6 +131,9 @@ class PasswordChange extends Component {
     this.setState({ message: message, visible: true }, () => {
       window.setTimeout(() => {
         this.setState({ visible: false });
+        if (message === "Password changed successfully!") {
+          this.props.history.push("/profile");
+        }
       }, 2000);
     });
   };
@@ -177,4 +182,10 @@ class PasswordChange extends Component {
   }
 }
 
-export default PasswordChange;
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangePassword: password => dispatch(actions.changePassword(password))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(PasswordChange));

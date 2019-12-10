@@ -165,3 +165,22 @@ export const updateUser = (username, updateInfo) => {
       });
   };
 };
+
+export const changePasswordFail = error => {
+  return {
+    type: actionTypes.CHANGE_PASSWORD_FAIL,
+    error: error
+  };
+};
+
+export const changePassword = password => {
+  return dispatch => {
+    Axios.post("users/change-password", password)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        dispatch(changePasswordFail(error));
+      });
+  };
+};

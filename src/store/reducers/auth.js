@@ -88,6 +88,10 @@ const updateUserFail = (state, action) => {
   return updateObject(state, { error: action.error });
 };
 
+const changePasswordFail = (state, action) => {
+  return updateObject(state, { error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -122,6 +126,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.UPDATE_USER_FAIL:
       return updateUserFail(state, action);
+
+    case actionTypes.CHANGE_PASSWORD_FAIL:
+      return changePasswordFail(state, action);
 
     default:
       return state;
