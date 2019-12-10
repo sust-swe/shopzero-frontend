@@ -21,6 +21,7 @@ import CartItems from "./containers/User/Cart/CartItems/CartItems";
 import ProfileUpdate from "./containers/User/Profile/ProfileUpdate/ProfileUpdate";
 import Checkout from "./containers/Checkout/Checkout";
 import Orders from "./containers/User/Orders/Orders";
+import PasswordChange from "./containers/User/Profile/PasswordChange/PasswordChange";
 
 class App extends Component {
   state = {};
@@ -33,9 +34,10 @@ class App extends Component {
     let app = null;
     let routes = (
       <Switch>
-        <Route path="/searchedproducts" component={SearchedProducts} />
-        <Route path="/updateprofile" component={ProfileUpdate} />
-        <Route path="/signupverify" component={SignupVerification} />
+        <Route path="/searchedProducts" component={SearchedProducts} />
+        <Route path="/changePassword" component={PasswordChange} />
+        <Route path="/updateProfile" component={ProfileUpdate} />
+        <Route path="/signupVerify" component={SignupVerification} />
         <Route path="/productpage" component={ProductPage} />
         <Route path="/cartItems" component={CartItems} />
         <Route path="/products" component={Products} />

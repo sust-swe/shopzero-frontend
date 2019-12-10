@@ -1,23 +1,17 @@
 import React, { Component } from "react";
-import Input from "../../components/UI/Input/Input";
-import classes from "./Auth.css";
-import * as actions from "../../store/actions/index";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import Axios from "axios";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import { MDBBtn } from "mdbreact";
+import Input from "../../../../components/UI/Input/Input";
+// import {connect} from "react-redux";
+import classes from "./PasswordChange.css";
 import { Alert } from "reactstrap";
 
-class Auth extends Component {
+class PasswordChange extends Component {
   state = {
     controls: {
-      email: {
+      currentPassword: {
         elementType: "input",
         elementConfig: {
-          type: "email",
-          placeholder: "Your Email"
+          type: "password",
+          placeholder: "Current Password"
         },
         value: "",
         validation: {
@@ -26,24 +20,39 @@ class Auth extends Component {
         valid: false,
         touched: false
       },
-
-      password: {
+      newPassword: {
         elementType: "input",
         elementConfig: {
           type: "password",
-          placeholder: "Password"
+          placeholder: "New Password"
         },
         value: "",
         validation: {
-          required: true
+          required: true,
+          isPassword: true
+        },
+        valid: false,
+        touched: false
+      },
+      passwordConfirmation: {
+        elementType: "input",
+        elementConfig: {
+          type: "password",
+          placeholder: "Password Confirmation"
+        },
+        value: "",
+        validation: {
+          required: true,
+          equalsPassword: true
         },
         valid: false,
         touched: false
       }
     },
     formIsValid: false,
-    message: null,
-    visible: false
+    username: null,
+    visible: false,
+    message: null
   };
 
   checkValidity = (value, rules) => {
@@ -61,9 +70,14 @@ class Auth extends Component {
       isValid = value.length <= rules.maxLength && isValid;
     }
 
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
+    if (rules.isPassword) {
+      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.equalsPassword) {
+      const password = this.state.controls.newPassword.value;
+      isValid = value === password && isValid;
     }
 
     return isValid;
@@ -94,14 +108,20 @@ class Auth extends Component {
   submitHandler = event => {
     event.preventDefault();
 
+    let message = null;
+
     if (!this.state.formIsValid) {
-      let message = "Please fill up the whole form correctly!";
+      message = "Please fill up the whole form correctly";
       this.onShowAlert(message);
     } else {
-      this.props.onAuth(
-        this.state.controls.email.value,
-        this.state.controls.password.value
-      );
+      const changedPassword = {
+        currentPassword: this.state.controls.currentPassword.value,
+        newPassword: this.state.controls.newPassword.value,
+        passwordConfirmation: this.state.controls.passwordConfirmation.value
+      };
+
+      message = "Password changed successfully!";
+      this.onShowAlert(message);
     }
   };
 
@@ -111,11 +131,6 @@ class Auth extends Component {
         this.setState({ visible: false });
       }, 2000);
     });
-  };
-
-  signupBtnHandler = event => {
-    event.preventDefault();
-    this.props.history.push("/signup");
   };
 
   render() {
@@ -140,57 +155,26 @@ class Auth extends Component {
       />
     ));
 
-    if (this.props.loading) {
-      form = <Spinner />;
-    }
-
-    let authRedirect = null;
-
-    if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to="/" />;
-    }
-
     return (
       <div>
-        <div className={[classes.Row, `row`].join(" ")}>
-          <div className={["col-md-10"].join(" ")}>
-            <div className={classes.Auth}>
-              {authRedirect}
-              <form onSubmit={this.submitHandler}>
-                {form}
-                <Alert color="warning" isOpen={this.state.visible}>
-                  {this.state.message}
-                </Alert>
-                <button className={classes.LoginBtn}>SIGN IN</button>
-              </form>
-            </div>
-          </div>
-          <div className={["col-md-2"].join(" ")}>
-            <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
-              SIGN UP
-            </MDBBtn>
-          </div>
+        <div className={classes.PasswordChange}>
+          <form onSubmit={this.submitHandler}>
+            {form}
+            {!this.state.formIsValid ? (
+              <Alert color="warning" isOpen={this.state.visible}>
+                {this.state.message}
+              </Alert>
+            ) : (
+              <Alert color="success" isOpen={this.state.visible}>
+                {this.state.message}
+              </Alert>
+            )}
+            <button className={classes.UpdateBtn}>Change Password</button>
+          </form>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    loading: state.auth.loading,
-    responseMessage: state.auth.responseMessage,
-    isAuthenticated: state.auth.token !== null
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withErrorHandler(Auth, Axios));
+export default PasswordChange;

@@ -57,7 +57,7 @@ const logoutFail = (state, action) => {
 };
 
 const signupSuccess = (state, action) => {
-  return updateObject(state, { signedUp: true });
+  return updateObject(state, { signedUp: true, loading: false });
 };
 
 const signupFailed = (state, action) => {
@@ -81,7 +81,7 @@ const authenticated = (state, action) => {
 };
 
 const updateUserSuccess = (state, action) => {
-  return updateObject(state, { user: action.updateInfo });
+  return updateObject(state, { user: action.updateInfo, loading: false });
 };
 
 const updateUserFail = (state, action) => {

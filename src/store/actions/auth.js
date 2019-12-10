@@ -35,7 +35,7 @@ export const auth = (email, password) => {
 
     Axios.post("sessions/login", authData)
       .then(response => {
-        console.log(response);
+        console.log(response.data);
         localStorage.setItem("token", response.data.auth_token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("userId", response.data.user.id);
@@ -110,6 +110,8 @@ export const authStateCheck = () => {
 
 export const signup = signupInfo => {
   return dispatch => {
+    dispatch(authStart());
+
     Axios.post("users/signup", signupInfo)
       .then(response => {
         console.log(response);
@@ -150,6 +152,8 @@ export const updateUserFail = error => {
 
 export const updateUser = (username, updateInfo) => {
   return dispatch => {
+    dispatch(authStart());
+
     Axios.post("users/" + username + "/update", updateInfo)
       .then(response => {
         localStorage.removeItem("user");

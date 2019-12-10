@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import classes from "./Signup.css";
+import { Alert } from "reactstrap";
+import Spinner from "../../../components/UI/Spinner/Spinner";
 class Signup extends Component {
   state = {
     controls: {
@@ -57,8 +59,7 @@ class Signup extends Component {
         value: "",
         validation: {
           required: true,
-          minLength: 6,
-          maxLength: 18
+          isPassword: true
         },
         valid: false,
         touched: false
@@ -72,8 +73,7 @@ class Signup extends Component {
         value: "",
         validation: {
           required: true,
-          minLength: 6,
-          maxLength: 18
+          equalsPassword: true
         },
         valid: false,
         touched: false
@@ -92,7 +92,9 @@ class Signup extends Component {
         touched: false
       }
     },
-    formIsValid: false
+    formIsValid: false,
+    visible: false,
+    message: null
   };
 
   checkValidity = (value, rules) => {
@@ -113,6 +115,16 @@ class Signup extends Component {
     if (rules.isNumeric) {
       const pattern = /^\d+$/;
       isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.isPassword) {
+      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.equalsPassword) {
+      const password = this.state.controls.password.value;
+      isValid = value === password && isValid;
     }
 
     return isValid;
@@ -143,18 +155,31 @@ class Signup extends Component {
   submitHandler = event => {
     event.preventDefault();
 
-    const signupInfo = {
-      user: {
-        firstname: this.state.controls.firstname.value,
-        lastname: this.state.controls.lastname.value,
-        username: this.state.controls.username.value,
-        password: this.state.controls.password.value,
-        password_confirmation: this.state.controls.passwordConfirmation.value,
-        email: this.state.controls.email.value
-      }
-    };
+    if (!this.state.formIsValid) {
+      let message = "Please fill up the whole form correctly!";
+      this.onShowAlert(message);
+    } else {
+      const signupInfo = {
+        user: {
+          firstname: this.state.controls.firstname.value,
+          lastname: this.state.controls.lastname.value,
+          username: this.state.controls.username.value,
+          password: this.state.controls.password.value,
+          password_confirmation: this.state.controls.passwordConfirmation.value,
+          email: this.state.controls.email.value
+        }
+      };
 
-    this.props.onSignup(signupInfo);
+      this.props.onSignup(signupInfo);
+    }
+  };
+
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+      }, 2000);
+    });
   };
 
   render() {
@@ -179,9 +204,9 @@ class Signup extends Component {
       />
     ));
 
-    // if (this.props.loading) {
-    //   form = <Spinner />;
-    // }
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
 
     // let response = null;
 
@@ -203,12 +228,10 @@ class Signup extends Component {
           {response} */}
           <form onSubmit={this.submitHandler}>
             {form}
-            <button
-              className={classes.SignupBtn}
-              disabled={!this.state.formIsValid}
-            >
-              SIGN UP
-            </button>
+            <Alert color="warning" isOpen={this.state.visible}>
+              {this.state.message}
+            </Alert>
+            <button className={classes.SignupBtn}>SIGN UP</button>
           </form>
         </div>
       </div>
@@ -218,7 +241,8 @@ class Signup extends Component {
 
 const mapStateToProps = state => {
   return {
-    signedUp: state.auth.signedUp
+    signedUp: state.auth.signedUp,
+    loading: state.auth.loading
   };
 };
 

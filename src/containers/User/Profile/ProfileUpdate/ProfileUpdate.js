@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import { Alert } from "reactstrap";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
 class ProfileUpdate extends Component {
   state = {
     controls: {
@@ -56,8 +57,9 @@ class ProfileUpdate extends Component {
         value: "",
         validation: {
           isNumeric: true,
-          maxLength: 11,
-          minLength: 11
+          maxLength: 14,
+          minLength: 11,
+          required: true
         },
         valid: false,
         touched: false
@@ -70,7 +72,8 @@ class ProfileUpdate extends Component {
         },
         value: "",
         validation: {
-          isNumeric: true
+          isNumeric: true,
+          required: true
         },
         valid: false,
         touched: false
@@ -83,7 +86,8 @@ class ProfileUpdate extends Component {
         },
         value: "",
         validation: {
-          isNumeric: true
+          isNumeric: true,
+          required: true
         },
         valid: false,
         touched: false
@@ -95,7 +99,9 @@ class ProfileUpdate extends Component {
           placeholder: "area"
         },
         value: "",
-        validation: {},
+        validation: {
+          required: true
+        },
         valid: false,
         touched: false
       },
@@ -106,7 +112,9 @@ class ProfileUpdate extends Component {
           placeholder: "city"
         },
         value: "",
-        validation: {},
+        validation: {
+          required: true
+        },
         valid: false,
         touched: false
       },
@@ -117,7 +125,9 @@ class ProfileUpdate extends Component {
           placeholder: "country"
         },
         value: "",
-        validation: {},
+        validation: {
+          required: true
+        },
         valid: false,
         touched: false
       }
@@ -129,51 +139,88 @@ class ProfileUpdate extends Component {
   };
 
   componentDidMount() {
-    this.setState(prevstate => ({
-      ...prevstate,
-      visible: false,
-      username: this.props.user.username,
-      message: null,
-      controls: {
-        ...prevstate.controls,
-        firstname: {
-          ...prevstate.controls.firstname,
-          value: this.props.user.firstname
-        },
-        lastname: {
-          ...prevstate.controls.lastname,
-          value: this.props.user.lastname
-        },
-        email: {
-          ...prevstate.controls.email,
-          value: this.props.user.email
-        },
-        phoneNo: {
-          ...prevstate.controls.phoneNo,
-          value: this.props.user.phone_no
-        },
-        houseNo: {
-          ...prevstate.controls.houseNo,
-          value: this.props.user.house_no
-        },
-        roadNo: {
-          ...prevstate.controls.roadNo,
-          value: this.props.user.road
-        },
-        area: {
-          ...prevstate.controls.area,
-          value: this.props.user.area
-        },
-        city: {
-          ...prevstate.controls.city,
-          value: this.props.user.city
-        },
-        country: {
-          ...prevstate.controls.country,
-          value: this.props.user.country
+    if (this.props.user.phone_no === null) {
+      this.setState(prevstate => ({
+        ...prevstate,
+        visible: false,
+        username: this.props.user.username,
+        message: null,
+        controls: {
+          ...prevstate.controls,
+          firstname: {
+            ...prevstate.controls.firstname,
+            value: this.props.user.firstname,
+            valid: true
+          },
+          lastname: {
+            ...prevstate.controls.lastname,
+            value: this.props.user.lastname,
+            valid: true
+          },
+          email: {
+            ...prevstate.controls.email,
+            value: this.props.user.email,
+            valid: true
+          }
         }
-      }
-    }));
+      }));
+    } else {
+      this.setState(prevstate => ({
+        ...prevstate,
+        visible: false,
+        username: this.props.user.username,
+        message: null,
+        controls: {
+          ...prevstate.controls,
+          firstname: {
+            ...prevstate.controls.firstname,
+            value: this.props.user.firstname,
+            valid: true
+          },
+          lastname: {
+            ...prevstate.controls.lastname,
+            value: this.props.user.lastname,
+            valid: true
+          },
+          email: {
+            ...prevstate.controls.email,
+            value: this.props.user.email,
+            valid: true
+          },
+          phoneNo: {
+            ...prevstate.controls.phoneNo,
+            value: this.props.user.phone_no,
+            valid: true
+          },
+          houseNo: {
+            ...prevstate.controls.houseNo,
+            value: this.props.user.house_no,
+            valid: true
+          },
+          roadNo: {
+            ...prevstate.controls.roadNo,
+            value: this.props.user.road,
+            valid: true
+          },
+          area: {
+            ...prevstate.controls.area,
+            value: this.props.user.area,
+            valid: true
+          },
+          city: {
+            ...prevstate.controls.city,
+            value: this.props.user.city,
+            valid: true
+          },
+          country: {
+            ...prevstate.controls.country,
+            value: this.props.user.country,
+            valid: true
+          }
+        },
+        formIsValid: true
+      }));
+    }
   }
 
   checkValidity = (value, rules) => {
@@ -224,33 +271,40 @@ class ProfileUpdate extends Component {
   submitHandler = event => {
     event.preventDefault();
 
-    const updateInfo = {
-      user: {
-        firstname: this.state.controls.firstname.value,
-        lastname: this.state.controls.lastname.value,
-        email: this.state.controls.email.value,
-        phone_no: this.state.controls.phoneNo.value,
-        house_no: this.state.controls.houseNo.value,
-        road: this.state.controls.roadNo.value,
-        area: this.state.controls.area.value,
-        city: this.state.controls.city.value,
-        country: this.state.controls.country.value
-      }
-    };
-    this.props.onUpdateProfile(this.state.username, updateInfo);
-    this.onShowAlert();
+    let message = null;
+
+    if (!this.state.formIsValid) {
+      message = "Please fill up the whole form correctly";
+      this.onShowAlert(message);
+    } else {
+      const updateInfo = {
+        user: {
+          firstname: this.state.controls.firstname.value,
+          lastname: this.state.controls.lastname.value,
+          email: this.state.controls.email.value,
+          phone_no: this.state.controls.phoneNo.value,
+          house_no: this.state.controls.houseNo.value,
+          road: this.state.controls.roadNo.value,
+          area: this.state.controls.area.value,
+          city: this.state.controls.city.value,
+          country: this.state.controls.country.value
+        }
+      };
+      this.props.onUpdateProfile(this.state.username, updateInfo);
+      message = "Your Profile has been updated successfully!";
+      this.onShowAlert(message);
+    }
   };
 
-  onShowAlert = () => {
-    this.setState(
-      { message: "Your Profile has been updated successfully!", visible: true },
-      () => {
-        window.setTimeout(() => {
-          this.setState({ visible: false });
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+        if (message === "Your Profile has been updated successfully!") {
           this.props.history.push("/profile");
-        }, 2000);
-      }
-    );
+        }
+      }, 2000);
+    });
   };
 
   render() {
@@ -275,14 +329,25 @@ class ProfileUpdate extends Component {
       />
     ));
 
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
     return (
       <div>
-        <Alert color="success" isOpen={this.state.visible}>
-          {this.state.message}
-        </Alert>
         <div className={classes.ProfileUpdate}>
           <form onSubmit={this.submitHandler}>
             {form}
+            {this.state.message ===
+            "Your Profile has been updated successfully!" ? (
+              <Alert color="success" isOpen={this.state.visible}>
+                {this.state.message}
+              </Alert>
+            ) : (
+              <Alert color="warning" isOpen={this.state.visible}>
+                {this.state.message}
+              </Alert>
+            )}
             <button className={classes.UpdateBtn}>Update Profile</button>
           </form>
         </div>
@@ -293,7 +358,8 @@ class ProfileUpdate extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    loading: state.auth.loading
   };
 };
 

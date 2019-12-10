@@ -11,6 +11,11 @@ class Profile extends Component {
     this.props.history.push("/updateprofile");
   };
 
+  passwordChangeHandler = event => {
+    event.preventDefault();
+    this.props.history.push("/changePassword");
+  };
+
   render() {
     return (
       <div className={classes.Profile}>
@@ -58,13 +63,13 @@ class Profile extends Component {
 
           {this.props.user.country ? (
             <h3>
-              <strong>City:</strong> {this.props.user.city}
+              <strong>Country:</strong> {this.props.user.country}
             </h3>
           ) : null}
         </div>
         <div className={classes.Row}>
           <button onClick={this.updateProfileHandler}>Update Profile</button>
-          <button>Change Password</button>
+          <button onClick={this.passwordChangeHandler}>Change Password</button>
         </div>
       </div>
     );

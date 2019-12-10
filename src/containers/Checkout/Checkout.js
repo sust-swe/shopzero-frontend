@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions/index";
 import { Alert } from "reactstrap";
+import Spinner from "../../components/UI/Spinner/Spinner";
 class Checkout extends Component {
   state = {
     controls: {
@@ -26,12 +27,13 @@ class Checkout extends Component {
       house: {
         elementType: "input",
         elementConfig: {
-          type: "text",
+          type: "number",
           placeholder: "House No"
         },
         value: "",
         validation: {
-          required: true
+          required: true,
+          isNumeric: true
         },
         valid: false,
         touched: false
@@ -39,12 +41,13 @@ class Checkout extends Component {
       road: {
         elementType: "input",
         elementConfig: {
-          type: "text",
+          type: "number",
           placeholder: "Road No"
         },
         value: "",
         validation: {
-          required: true
+          required: true,
+          isNumeric: true
         },
         valid: false,
         touched: false
@@ -65,14 +68,15 @@ class Checkout extends Component {
       phoneNo: {
         elementType: "input",
         elementConfig: {
-          type: "text",
+          type: "number",
           placeholder: "Phone no"
         },
         value: "",
         validation: {
           required: true,
           minLength: 11,
-          maxLength: 14
+          maxLength: 14,
+          isNumeric: true
         },
         valid: false,
         touched: false
@@ -96,6 +100,11 @@ class Checkout extends Component {
 
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
     }
 
     return isValid;
@@ -129,21 +138,28 @@ class Checkout extends Component {
     let address = {
       city: this.state.controls.city.value,
       house_no: this.state.controls.house.value,
-      road: this.state.controls.road.value,
+      road: this.state.controls.house.value,
       area: this.state.controls.area.value,
       phone_no: this.state.controls.phoneNo.value
     };
 
-    this.props.onPlaceOrder(address);
-    let message = "Your orders has been placed!";
-    this.onShowAlert(message);
+    let message = null;
+
+    if (!this.state.formIsValid) {
+      message = "Please fill up the whole form!";
+      this.onShowAlert(message);
+    } else {
+      this.props.onPlaceOrder(address);
+      message = "Your orders has been placed!";
+      this.onShowAlert(message);
+    }
   };
 
   onShowAlert = message => {
     this.setState({ message: message, visible: true }, () => {
       window.setTimeout(() => {
         this.setState({ visible: false });
-        if (message === "Your order has been placed!") {
+        if (message === "Your orders has been placed!") {
           this.props.history.push("/orders");
         }
       }, 2000);
@@ -151,13 +167,12 @@ class Checkout extends Component {
   };
 
   useProfileInfoHandler = () => {
-    if (
-      this.props.profileInfo.city !== null ||
-      this.props.profileInfo.house_no !== null ||
-      this.props.profileInfo.road !== null ||
-      this.props.profileInfo.area !== null ||
-      this.props.profileInfo.phone_no !== null
-    ) {
+    let message = null;
+    if (this.props.profileInfo.city === null) {
+      message =
+        "Update your profile with these infos first or just fill up the form";
+      this.onShowAlert(message);
+    } else {
       this.setState(prevstate => ({
         ...prevstate,
         message: null,
@@ -165,32 +180,32 @@ class Checkout extends Component {
           ...prevstate.controls,
           city: {
             ...prevstate.controls.city,
-            value: this.props.profileInfo.city
+            value: this.props.profileInfo.city,
+            valid: true
           },
           house: {
             ...prevstate.controls.house,
-            value: this.props.profileInfo.house_no
+            value: this.props.profileInfo.house_no,
+            valid: true
           },
           road: {
             ...prevstate.controls.road,
-            value: this.props.profileInfo.road
+            value: this.props.profileInfo.road,
+            valid: true
           },
           area: {
             ...prevstate.controls.area,
-            value: this.props.profileInfo.area
+            value: this.props.profileInfo.area,
+            valid: true
           },
           phoneNo: {
             ...prevstate.controls.phoneNo,
-            value: this.props.profileInfo.phone_no
+            value: this.props.profileInfo.phone_no,
+            valid: true
           }
-        }
+        },
+        formIsValid: true
       }));
-
-      // this.inputChangedHandler(this.state.controls.road);
-    } else {
-      let message =
-        "Update your profile with these infos first or just fill up the form";
-      this.onShowAlert(message);
     }
   };
 
@@ -216,11 +231,12 @@ class Checkout extends Component {
       />
     ));
 
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
     return (
       <div>
-        <Alert color="success" isOpen={this.state.visible}>
-          {this.state.message}
-        </Alert>
         <div>
           <button
             className={classes.ProfileInfoBtn}
@@ -234,12 +250,16 @@ class Checkout extends Component {
             <div className={classes.Form}>
               <form onSubmit={this.submitHandler}>
                 {form}
-                <button
-                  className={classes.Button}
-                  disabled={!this.state.formIsValid}
-                >
-                  Place Order
-                </button>
+                {this.state.message === "Your orders has been placed!" ? (
+                  <Alert color="success" isOpen={this.state.visible}>
+                    {this.state.message}
+                  </Alert>
+                ) : (
+                  <Alert color="warning" isOpen={this.state.visible}>
+                    {this.state.message}
+                  </Alert>
+                )}
+                <button className={classes.Button}>Place Order</button>
               </form>
             </div>
           </MDBCol>
@@ -254,7 +274,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
   return {
-    profileInfo: state.auth.user
+    profileInfo: state.auth.user,
+    loading: state.order.loading
   };
 };
 

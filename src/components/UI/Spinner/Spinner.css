@@ -2,9 +2,10 @@
 .Loader:before,
 .Loader:after {
   border-radius: 50%;
+  /* #e58008 */
 }
 .Loader {
-  color: #e58008;
+  color: #11bd53;
   font-size: 11px;
   text-indent: -99999em;
   margin: 55px auto;
