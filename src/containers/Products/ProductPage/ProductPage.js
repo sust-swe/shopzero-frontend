@@ -11,7 +11,7 @@ class ProductPage extends Component {
     productCategory: null,
     productBrand: null,
     productDescription: null,
-    productFeatures: null,
+    productFeatures: [],
     productImage: null,
     productStock: null,
     productId: null,
@@ -21,6 +21,8 @@ class ProductPage extends Component {
   constructor(props) {
     super(props);
     if (props.productInfo) {
+      let features = props.productInfo.features.split(";");
+
       this.state = {
         productId: props.productInfo.id,
         productName: props.productInfo.name,
@@ -28,7 +30,7 @@ class ProductPage extends Component {
         productCategory: props.productInfo.category.name,
         productBrand: props.productInfo.brand.name,
         productDescription: props.productInfo.description,
-        productFeatures: props.productInfo.features,
+        productFeatures: features,
         productImage: props.productInfo.picture.url,
         productStock: props.productInfo.stock,
         quantity: 1
@@ -79,7 +81,7 @@ class ProductPage extends Component {
                     ></img>
                   </div>
                 </div>
-                <div className={["col-md-6"].join(" ")}>
+                <div className={["col-md-6", classes.Controls].join(" ")}>
                   <div>
                     <h3>{this.state.productName}</h3>
                   </div>
@@ -117,14 +119,24 @@ class ProductPage extends Component {
                     </button>
                   </div>
                 </div>
-                <div className={["col-md-12"].join(" ")}>
-                  <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
-                    <h4>Features</h4>
-                  </div>
-                </div>
+                <h1 className={classes.FeaturesHeading}>Features</h1>
                 <div className={["col-md-12", classes.flexStart].join(" ")}>
                   <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
-                    <h4>description</h4>
+                    <ul>
+                      {this.state.productFeatures.map(feature => {
+                        return <li key={feature}>{feature}</li>;
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <h1 className={classes.DescriptionHeading}>
+                  Product Description
+                </h1>
+                <div className={["col-md-12", classes.flexStart].join(" ")}>
+                  <div
+                    className={["col-md-10", classes.evenlySpaced].join(" ")}
+                  >
+                    <h4>{this.state.productDescription}</h4>
                   </div>
                 </div>
               </div>

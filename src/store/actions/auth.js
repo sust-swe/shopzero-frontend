@@ -166,6 +166,12 @@ export const updateUser = (username, updateInfo) => {
   };
 };
 
+export const changePasswordSuccess = () => {
+  return {
+    type: actionTypes.CHANGE_PASSWORD_SUCCESS
+  };
+};
+
 export const changePasswordFail = error => {
   return {
     type: actionTypes.CHANGE_PASSWORD_FAIL,
@@ -175,9 +181,12 @@ export const changePasswordFail = error => {
 
 export const changePassword = password => {
   return dispatch => {
+    dispatch(authStart());
+
     Axios.post("users/change-password", password)
       .then(response => {
         console.log(response);
+        dispatch(changePasswordSuccess());
       })
       .catch(error => {
         dispatch(changePasswordFail(error));

@@ -1,5 +1,8 @@
 .Product {
   padding: 10px;
+}
+
+.Controls {
   text-align: center;
 }
 
@@ -58,4 +61,14 @@
 .Button:disabled {
   color: #ccc;
   cursor: not-allowed;
+}
+
+.FeaturesHeading {
+  display: flex;
+  margin-right: 1030px;
+}
+
+.DescriptionHeading {
+  display: flex;
+  margin-right: 920px;
 }

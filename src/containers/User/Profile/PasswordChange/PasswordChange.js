@@ -5,6 +5,7 @@ import classes from "./PasswordChange.css";
 import { Alert } from "reactstrap";
 import * as actions from "../../../../store/actions/index";
 import { withRouter } from "react-router-dom";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
 
 class PasswordChange extends Component {
   state = {
@@ -160,6 +161,10 @@ class PasswordChange extends Component {
       />
     ));
 
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
     return (
       <div>
         <div className={classes.PasswordChange}>
@@ -182,10 +187,19 @@ class PasswordChange extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onChangePassword: password => dispatch(actions.changePassword(password))
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(PasswordChange));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(PasswordChange));

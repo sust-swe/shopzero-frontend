@@ -1,14 +1,37 @@
 import * as actionTypes from "./actionTypes";
 import Axios from "axios";
 
+export const startOrdering = () => {
+  return {
+    type: actionTypes.START_ORDERING
+  };
+};
+
+export const placeOrderSuccess = () => {
+  return {
+    type: actionTypes.PLACE_ORDER_SUCCESS
+  };
+};
+
+export const placeOrderFail = error => {
+  return {
+    type: actionTypes.PLACE_ORDER_FAIL,
+    error: error
+  };
+};
+
 export const placeOrder = address => {
   return dispatch => {
+    dispatch(startOrdering());
+
     Axios.post("orders/create", address)
       .then(response => {
         console.log(response.data);
+        dispatch(placeOrderSuccess());
       })
       .catch(error => {
         console.log(error);
+        dispatch(placeOrderFail(error));
       });
   };
 };
