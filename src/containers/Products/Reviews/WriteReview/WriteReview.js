@@ -16,9 +16,9 @@ class WriteReview extends Component {
   render() {
     return (
       <div>
-        <h2>
+        <h6>
           <strong>Rate this Product</strong>
-        </h2>
+        </h6>
         <Rating
           className={classes.Rating}
           onChange={value => this.ratingChangedHandler(value)}
@@ -27,12 +27,12 @@ class WriteReview extends Component {
           placeholderSymbol={<img src={Star} className="icon" />}
           fullSymbol={<img src={StarYellow} className="icon" />}
         />
-        <h2>
+        <h6>
           <strong>Write a review about it</strong>
-        </h2>
+        </h6>
         <input className={classes.Title} placeholder="title"></input>
-        <textarea className={classes.Review} placeholder="review"></textarea>
-        <button className={classes.PostBtn}>Post</button>
+        <textarea className={classes.Title} placeholder="review"></textarea>
+        <button className="btn-danger btn-sm">Post</button>
       </div>
     );
   }

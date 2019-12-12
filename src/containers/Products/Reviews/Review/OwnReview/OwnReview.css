@@ -3,6 +3,7 @@
 }
 
 .Title {
+  text-align: center;
   margin-bottom: 10px;
 }
 
@@ -51,4 +52,9 @@
 
 .ButtonMargin {
   margin-bottom: 50px;
+}
+
+.manageReviewBtn {
+  display: flex;
+  justify-content: space-evenly;
 }

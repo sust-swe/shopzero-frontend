@@ -10,9 +10,7 @@ class OwnReview extends Component {
   render() {
     return (
       <div>
-        <h4>
-          <b>username</b>
-        </h4>
+        <p className="font-weight-light">on {"2019-4-24 6:0 GMT"}, you wrote</p>
         <Rating
           className={classes.Rating}
           initialRating={1}
@@ -21,12 +19,16 @@ class OwnReview extends Component {
           fullSymbol={<img src={StarYellow} className="icon" />}
           readonly
         />
-        <h3 className={classes.Title}>Title</h3>
-        <h4 className={classes.Review}>Review</h4>
-        <MDBRow className={classes.ButtonMargin}>
-          <button className={classes.UpdateBtn}>Update</button>
-          <button className={classes.DeleteBtn}>Delete</button>
-        </MDBRow>
+        <p className="font-weight-bold font-italic">Eu fugiat.</p>
+
+        <p className="font-weight-light font-italic">
+          Elit occaecat ut exercitation dolore est voluptate in in reprehenderit
+          mollit.
+        </p>
+        <div className={classes.manageReviewBtn}>
+          <button className="btn-info btn-sm">Update</button>
+          <button className="btn-danger btn-sm">Delete</button>
+        </div>
       </div>
     );
   }

@@ -7,6 +7,9 @@ import { Redirect, withRouter } from "react-router-dom";
 import WriteReview from "../Reviews/WriteReview/WriteReview";
 import Reviews from "../Reviews/Reviews";
 import OwnReview from "../Reviews/Review/OwnReview/OwnReview";
+import Rating from "react-rating";
+import Star from "../../../assets/images/star-grey.png";
+import StarYellow from "../../../assets/images/star-red.png";
 
 class ProductPage extends Component {
   state = {
@@ -86,32 +89,34 @@ class ProductPage extends Component {
                   </div>
                 </div>
                 <div className={["col-md-6", classes.Controls].join(" ")}>
-                  <div>
-                    <h3>{this.state.productName}</h3>
-                  </div>
-                  <div>
-                    <h3>{this.state.productBrand}</h3>
-                  </div>
-                  <div>
-                    <h3>${this.state.productPrice}</h3>
-                  </div>
-                  <div>
-                    <div className={classes.row}>
-                      <button
-                        className={classes.Button}
-                        onClick={this.decreaseQuantityHandler}
-                        disabled={this.state.quantity === 1}
-                      >
-                        -
-                      </button>
-                      <h6>Quantity: {this.state.quantity}</h6>
-                      <button
-                        className={classes.Button}
-                        onClick={this.increaseQuantityHandler}
-                      >
-                        +
-                      </button>
-                    </div>
+                  <h3>{this.state.productName}</h3>
+                  <h3>{this.state.productBrand}</h3>
+                  <h3>${this.state.productPrice}</h3>
+                  Ratings:{" "}
+                  <Rating
+                    className={classes.Rating}
+                    initialRating={3.7}
+                    emptySymbol={<img src={Star} className="icon" />}
+                    placeholderSymbol={<img src={Star} className="icon" />}
+                    fullSymbol={<img src={StarYellow} className="icon" />}
+                    readonly
+                  />
+                  <br />
+                  <div className={classes.row}>
+                    <button
+                      className={classes.Button}
+                      onClick={this.decreaseQuantityHandler}
+                      disabled={this.state.quantity === 1}
+                    >
+                      -
+                    </button>
+                    <h6>Quantity: {this.state.quantity}</h6>
+                    <button
+                      className={classes.Button}
+                      onClick={this.increaseQuantityHandler}
+                    >
+                      +
+                    </button>
                   </div>
                   <div>
                     <button
@@ -126,37 +131,37 @@ class ProductPage extends Component {
               </div>
             </MDBCol>
           </div>
-          <div className={[classes.Row, "row"].join(" ")}>
-            <MDBCol md="12" className={classes.Product}>
-              <h1 className={classes.FeaturesHeading}>Features</h1>
-              <div className={["col-md-6", classes.flexStart].join(" ")}>
-                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
-                  <ul>
-                    {this.state.productFeatures.map(feature => {
-                      return <li key={feature}>{feature}</li>;
-                    })}
-                  </ul>
-                </div>
-              </div>
-              <h1 className={classes.DescriptionHeading}>
-                Product Description
-              </h1>
-              <div className={["col-md-12", classes.flexStart].join(" ")}>
-                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
-                  <h4>{this.state.productDescription}</h4>
-                </div>
-                <WriteReview />
-              </div>
-            </MDBCol>
-          </div>
-          <h1 className={classes.DescriptionHeading}>Your review</h1>
-          <div>
-            <OwnReview />
-          </div>
+          <div className="row">
+            <div className="col-md-7">
+              <h3 className={classes.FeaturesHeading}>Features</h3>
+              <ul>
+                {this.state.productFeatures.map(feature => {
+                  return <li key={feature}>{feature}</li>;
+                })}
+              </ul>
+            </div>
 
-          <h1 className={classes.DescriptionHeading}>All Reviews</h1>
+            {/*This is commented because only one item will be visible at a time*/}
+            {/*<div id="writereview" className="col-md-5">
+                          <WriteReview />
+                        </div>*/}
+
+            <div id="ownreview" className="col-md-3">
+              <OwnReview />
+            </div>
+            <div>
+              <h3>Product Description</h3>
+              <p>{this.state.productDescription}</p>
+            </div>
+          </div>
+          <hr />
           <div>
-            <Reviews />
+            <h3 className={classes["AllReviewsHeading"]}>
+              Customer Reviews(2)
+            </h3>
+            <div>
+              <Reviews />
+            </div>
           </div>
         </div>
       );

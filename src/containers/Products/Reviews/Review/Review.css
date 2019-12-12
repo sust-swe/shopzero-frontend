@@ -3,9 +3,10 @@
 }
 
 .Title {
+  text-align: center;
   margin-bottom: 10px;
 }
 
 .Review {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }

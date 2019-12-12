@@ -7,9 +7,9 @@ import Rating from "react-rating";
 const Review = () => {
   return (
     <div>
-      <h4>
-        <b>username</b>
-      </h4>
+      <p className="font-weight-light">
+        on <i>{"2019-4-24 6:0 GMT"}</i>, {"username"} wrote
+      </p>
       <Rating
         className={classes.Rating}
         initialRating={1}
@@ -18,8 +18,12 @@ const Review = () => {
         fullSymbol={<img src={StarYellow} className="icon" />}
         readonly
       />
-      <h3 className={classes.Title}>Title</h3>
-      <h4 className={classes.Review}>Review</h4>
+      <p className="font-weight-bold font-italic">Eu fugiat.</p>
+
+      <p className="font-weight-light font-italic">
+        Elit occaecat ut exercitation dolore est voluptate in in reprehenderit
+        mollit.
+      </p>
     </div>
   );
 };

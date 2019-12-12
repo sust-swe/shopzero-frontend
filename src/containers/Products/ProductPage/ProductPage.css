@@ -1,3 +1,40 @@
+/*.Body {
+  font-family: cursive;
+}
+
+.Img {
+  display: block;
+  margin: auto;
+  width: auto;
+  height: 250px;
+}
+
+.panelTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Button {
+  font-size: 3vmin;
+  background-color: transparent;
+  border: 0.5px solid;
+  color: #5c9210;
+  outline: none;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: initial;
+}
+*/
+
 .Product {
   padding: 10px;
 }
@@ -71,4 +108,8 @@
 .DescriptionHeading {
   display: flex;
   margin-right: 920px;
+}
+
+.AllReviewsHeading {
+  text-align: center;
 }
