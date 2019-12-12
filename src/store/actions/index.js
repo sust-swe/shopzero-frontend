@@ -24,4 +24,12 @@ export {
   deleteCart
 } from "./cart";
 
+export {
+  createReview,
+  canCreateReview,
+  fetchReviews,
+  deleteReviews,
+  deleteReview
+} from "./review";
+
 export { placeOrder, fetchOrders, deleteOrders } from "./order";

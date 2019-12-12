@@ -6,6 +6,7 @@ import * as actions from "../../../store/actions/index";
 import { Redirect, withRouter } from "react-router-dom";
 import WriteReview from "../Reviews/WriteReview/WriteReview";
 import Reviews from "../Reviews/Reviews";
+import OwnReview from "../Reviews/Review/OwnReview/OwnReview";
 
 class ProductPage extends Component {
   state = {
@@ -150,7 +151,7 @@ class ProductPage extends Component {
           </div>
           <h1 className={classes.DescriptionHeading}>Your review</h1>
           <div>
-            <Reviews />
+            <OwnReview />
           </div>
 
           <h1 className={classes.DescriptionHeading}>All Reviews</h1>
