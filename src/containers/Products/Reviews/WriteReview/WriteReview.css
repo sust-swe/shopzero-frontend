@@ -1,0 +1,32 @@
+.Rating {
+  margin-bottom: 40px;
+}
+
+.Title {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.Review {
+  width: 30%;
+  height: 100%;
+  display: flex;
+}
+
+.PostBtn {
+  background-color: transparent;
+  border: none;
+  color: #5c9210;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+  margin-left: 360px;
+}
+
+.PostBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}

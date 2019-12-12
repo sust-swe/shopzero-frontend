@@ -4,6 +4,8 @@ import classes from "./ProductPage.css";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Redirect, withRouter } from "react-router-dom";
+import WriteReview from "../Reviews/WriteReview/WriteReview";
+
 class ProductPage extends Component {
   state = {
     productName: null,
@@ -119,31 +121,35 @@ class ProductPage extends Component {
                     </button>
                   </div>
                 </div>
-                <h1 className={classes.FeaturesHeading}>Features</h1>
-                <div className={["col-md-12", classes.flexStart].join(" ")}>
-                  <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
-                    <ul>
-                      {this.state.productFeatures.map(feature => {
-                        return <li key={feature}>{feature}</li>;
-                      })}
-                    </ul>
-                  </div>
-                </div>
-                <h1 className={classes.DescriptionHeading}>
-                  Product Description
-                </h1>
-                <div className={["col-md-12", classes.flexStart].join(" ")}>
-                  <div
-                    className={["col-md-10", classes.evenlySpaced].join(" ")}
-                  >
-                    <h4>{this.state.productDescription}</h4>
-                  </div>
-                </div>
               </div>
-
-              <MDBCol md="2"></MDBCol>
             </MDBCol>
           </div>
+          <div className={[classes.Row, "row"].join(" ")}>
+            <MDBCol md="12" className={classes.Product}>
+              <h1 className={classes.FeaturesHeading}>Features</h1>
+              <div className={["col-md-6", classes.flexStart].join(" ")}>
+                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
+                  <ul>
+                    {this.state.productFeatures.map(feature => {
+                      return <li key={feature}>{feature}</li>;
+                    })}
+                  </ul>
+                </div>
+              </div>
+              <h1 className={classes.DescriptionHeading}>
+                Product Description
+              </h1>
+              <div className={["col-md-12", classes.flexStart].join(" ")}>
+                <div className={["col-md-6", classes.evenlySpaced].join(" ")}>
+                  <h4>{this.state.productDescription}</h4>
+                </div>
+                <WriteReview />
+              </div>
+            </MDBCol>
+          </div>
+          <h1 className={classes.DescriptionHeading}>Your review</h1>
+
+          <h1 className={classes.DescriptionHeading}>All Reviews</h1>
         </div>
       );
     }
