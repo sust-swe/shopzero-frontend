@@ -47,6 +47,15 @@
   margin: 2px;
 }
 
+.Status {
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Operator Mono", "Comic Sans Ms";
+  text-align: center;
+  font-style: bold;
+  margin: 2px;
+}
+
 .Price {
   text-align: left;
   font-family: cursive;

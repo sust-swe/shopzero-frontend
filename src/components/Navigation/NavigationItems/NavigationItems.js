@@ -19,6 +19,7 @@ const NavigationItems = props => (
     ) : null}
 
     <NavigationItem link="/rating">Rating</NavigationItem>
+    <NavigationItem link="/review">Review</NavigationItem>
   </ul>
 );
 

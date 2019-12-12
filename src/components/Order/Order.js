@@ -24,6 +24,12 @@ const Order = props => {
             <div className={classes.Quantity}>
               <p>Quantity: {props.quantity}</p>
             </div>
+
+            <div className={classes.Status}>
+              <p>
+                Status: <b>{props.status ? "Delivered" : "Pending"}</b>
+              </p>
+            </div>
           </div>
         </div>
       </div>

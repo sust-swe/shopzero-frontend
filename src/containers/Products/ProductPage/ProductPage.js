@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Redirect, withRouter } from "react-router-dom";
 import WriteReview from "../Reviews/WriteReview/WriteReview";
+import Reviews from "../Reviews/Reviews";
 
 class ProductPage extends Component {
   state = {
@@ -148,8 +149,14 @@ class ProductPage extends Component {
             </MDBCol>
           </div>
           <h1 className={classes.DescriptionHeading}>Your review</h1>
+          <div>
+            <Reviews />
+          </div>
 
           <h1 className={classes.DescriptionHeading}>All Reviews</h1>
+          <div>
+            <Reviews />
+          </div>
         </div>
       );
     }

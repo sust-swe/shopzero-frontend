@@ -25,6 +25,7 @@ class Orders extends Component {
               price={order.price}
               quantity={order.count}
               picture={order.product.picture.url}
+              status={order.delivered}
             />
           ))}
         </div>
