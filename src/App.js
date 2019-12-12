@@ -22,8 +22,6 @@ import ProfileUpdate from "./containers/User/Profile/ProfileUpdate/ProfileUpdate
 import Checkout from "./containers/Checkout/Checkout";
 import Orders from "./containers/User/Orders/Orders";
 import PasswordChange from "./containers/User/Profile/PasswordChange/PasswordChange";
-import WriteReview from "./containers/Products/Reviews/WriteReview/WriteReview";
-import Review from "./containers/Products/Reviews/Review/Review";
 
 class App extends Component {
   state = {};
@@ -53,8 +51,6 @@ class App extends Component {
         <Route path="/signin" component={Auth} />
         <Route path="/signup" component={Signup} />
         <Route path="/orders" component={Orders} />
-        <Route path="/rating" component={WriteReview} />
-        <Route path="/review" component={Review} />
         <Route path="/help" component={Help} />
         <Route path="/" exact component={Home} />
       </Switch>
