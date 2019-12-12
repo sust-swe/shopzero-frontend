@@ -14,7 +14,7 @@ export const createReviewSuccess = (state, action) => {
 };
 
 export const createReviewFail = (state, action) => {
-  return updateObject(state, { error: error });
+  return updateObject(state, { error: action.error });
 };
 
 export const canCreateReviewSuccess = (state, action) => {
@@ -25,7 +25,7 @@ export const canCreateReviewSuccess = (state, action) => {
 };
 
 export const canCreateReviewFail = (state, action) => {
-  return updateObject(state, { error: error });
+  return updateObject(state, { error: action.error });
 };
 
 export const deleteReviews = (state, action) => {
@@ -37,15 +37,15 @@ export const deleteReviewSuccess = (state, action) => {
 };
 
 export const deleteReviewFail = (state, action) => {
-  return updateObject(state, { error: error });
+  return updateObject(state, { error: action.error });
 };
 
 export const fetchReviewsSuccess = (state, action) => {
-  return updateObject(state, { reviews: reviews });
+  return updateObject(state, { reviews: action.reviews });
 };
 
 export const fetchReviewsFail = (state, action) => {
-  return updateObject(state, { error: error });
+  return updateObject(state, { error: action.error });
 };
 
 const reducer = (state = initialState, action) => {
@@ -81,3 +81,5 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default reducer;
