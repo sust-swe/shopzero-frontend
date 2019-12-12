@@ -22,6 +22,11 @@ class Products extends Component {
     let redirectTo = null;
 
     if (this.props.productInfo) {
+      this.props.onFetchReviews(this.props.productInfo.id);
+      if (this.props.authenticated) {
+        this.props.onCanCreateReview(this.props.productInfo.id);
+      }
+
       redirectTo = <Redirect to="/productpage" />;
     }
 
@@ -51,14 +56,18 @@ class Products extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    productInfo: state.products.productInfo
+    productInfo: state.products.productInfo,
+    authenticated: state.auth.token !== null
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onFetchProducts: () => dispatch(actions.fetchProducts()),
-    onShowProduct: id => dispatch(actions.showProduct(id))
+    onShowProduct: id => dispatch(actions.showProduct(id)),
+    onFetchReviews: product_id => dispatch(actions.fetchReviews(product_id)),
+    onCanCreateReview: product_id =>
+      dispatch(actions.canCreateReview(product_id))
   };
 };
 

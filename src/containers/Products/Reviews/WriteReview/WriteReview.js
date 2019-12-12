@@ -3,6 +3,8 @@ import Rating from "react-rating";
 import Star from "../../../../assets/images/star.png";
 import StarYellow from "../../../../assets/images/yellow-star.png";
 import classes from "./WriteReview.css";
+import { connect } from "react-redux";
+import * as actions from "../../../../store/actions/index";
 
 class WriteReview extends Component {
   state = {};
@@ -11,6 +13,10 @@ class WriteReview extends Component {
 
   ratingChangedHandler = value => {
     console.log(value);
+  };
+
+  titleChangedHandler = event => {
+    console.log(event.target.value);
   };
 
   render() {
@@ -31,11 +37,21 @@ class WriteReview extends Component {
           <strong>Write a review about it</strong>
         </h6>
         <input className={classes.Title} placeholder="title"></input>
-        <textarea className={classes.Title} placeholder="review"></textarea>
-        <button className="btn-danger btn-sm">Post</button>
+        <textarea
+          className={classes.Title}
+          placeholder="review"
+          onChange={this.titleChangedHandler}
+        ></textarea>
+        <button className="btn-success btn-sm">Post</button>
       </div>
     );
   }
 }
 
-export default WriteReview;
+const mapDispatchToProps = dispatch => {
+  return {
+    onCreateReview: review => dispatch(actions.createReview(review))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(WriteReview);

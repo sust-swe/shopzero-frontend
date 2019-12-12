@@ -9,7 +9,8 @@ import Reviews from "../Reviews/Reviews";
 import OwnReview from "../Reviews/Review/OwnReview/OwnReview";
 import Rating from "react-rating";
 import Star from "../../../assets/images/star-grey.png";
-import StarYellow from "../../../assets/images/star-red.png";
+import StarYellow from "../../../assets/images/star-yellow.png";
+import Review from "../Reviews/Review/Review";
 
 class ProductPage extends Component {
   state = {
@@ -22,7 +23,11 @@ class ProductPage extends Component {
     productImage: null,
     productStock: null,
     productId: null,
-    quantity: 1
+    quantity: 1,
+    review: null,
+    reviews: null,
+    totalRating: null,
+    canReview: false
   };
 
   constructor(props) {
@@ -46,7 +51,6 @@ class ProductPage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.info);
     this.props.onSetProductInfoToNull();
   }
 
@@ -95,7 +99,7 @@ class ProductPage extends Component {
                   Ratings:{" "}
                   <Rating
                     className={classes.Rating}
-                    initialRating={3.7}
+                    initialRating={this.props.totalRating}
                     emptySymbol={<img src={Star} className="icon" />}
                     placeholderSymbol={<img src={Star} className="icon" />}
                     fullSymbol={<img src={StarYellow} className="icon" />}
@@ -134,7 +138,7 @@ class ProductPage extends Component {
           <div className="row">
             <div className="col-md-7">
               <h3 className={classes.FeaturesHeading}>Features</h3>
-              <ul>
+              <ul className={classes.Features}>
                 {this.state.productFeatures.map(feature => {
                   return <li key={feature}>{feature}</li>;
                 })}
@@ -142,25 +146,47 @@ class ProductPage extends Component {
             </div>
 
             {/*This is commented because only one item will be visible at a time*/}
-            {/*<div id="writereview" className="col-md-5">
-                          <WriteReview />
-                        </div>*/}
+            {this.props.canReview && !this.props.review ? (
+              <div id="writereview" className="col-md-5">
+                <WriteReview productId={this.state.productId} />
+              </div>
+            ) : (
+              <div id="writereview" className="col-md-5"></div>
+            )}
 
-            <div id="ownreview" className="col-md-3">
-              <OwnReview />
-            </div>
+            {this.props.review ? (
+              <div id="ownreview" className="col-md-3">
+                <OwnReview
+                  productId={this.state.productId}
+                  id={this.props.review.id}
+                  title={this.props.review.title}
+                  rating={this.props.review.rating}
+                  body={this.props.review.body}
+                />
+              </div>
+            ) : null}
+
             <div>
-              <h3>Product Description</h3>
+              <h3 className={classes.ProductDescription}>
+                Product Description
+              </h3>
               <p>{this.state.productDescription}</p>
             </div>
           </div>
           <hr />
           <div>
             <h3 className={classes["AllReviewsHeading"]}>
-              Customer Reviews(2)
+              Customer Reviews({this.props.reviews.length})
             </h3>
             <div>
-              <Reviews />
+              {this.props.reviews.map(review => (
+                <Review
+                  key={review.id}
+                  rating={review.rating}
+                  title={review.title}
+                  body={review.body}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -185,14 +211,20 @@ class ProductPage extends Component {
 const mapStateToProps = state => {
   return {
     productInfo: state.products.productInfo,
-    authenticated: state.auth.token !== null
+    authenticated: state.auth.token !== null,
+    reviews: state.review.reviews,
+    review: state.review.review,
+    totalRating: state.review.totalRating,
+    canReview: state.review.canReview
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onSetProductInfoToNull: () => dispatch(actions.setProductInfoToNull()),
-    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity))
+    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity)),
+    onCreateReview: review => dispatch(actions.createReview(review)),
+    onDeleteReview: review_id => dispatch(actions.deleteReview(review_id))
   };
 };
 

@@ -10,6 +10,7 @@ class Logout extends Component {
     this.props.onLogout();
     this.props.onDeleteCart();
     this.props.onDeleteOrders();
+    this.props.onDeleteReviews();
   }
 
   render() {
@@ -21,7 +22,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogout: () => dispatch(actions.logout()),
     onDeleteCart: () => dispatch(actions.deleteCart()),
-    onDeleteOrders: () => dispatch(actions.deleteOrders())
+    onDeleteOrders: () => dispatch(actions.deleteOrders()),
+    onDeleteReviews: () => dispatch(actions.deleteReviews())
   };
 };
 

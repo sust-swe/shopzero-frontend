@@ -24,7 +24,7 @@
 .Image {
   width: 100px;
   height: 100px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
 }
 .Brand {
   font-family: "OperatorMono-Book", "Comic Sans Ms";

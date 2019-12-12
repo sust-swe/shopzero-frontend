@@ -1,12 +1,24 @@
 import * as actionTypes from "./actionTypes";
+import Axios from "axios";
+// product_id, body, title, rating
 
-export const createReview = (product_id, body, title, rating) => {
-  return dispatch => {};
+export const createReview = review => {
+  return dispatch => {
+    Axios.post("reviews/", review)
+      .then(response => {
+        console.log(response.data);
+        dispatch(createReviewSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(createReviewFail(error));
+      });
+  };
 };
 
-export const createReviewSuccess = review => {
+export const createReviewSuccess = info => {
   return {
-    type: actionTypes.CREATE_REVIEW_SUCCESS
+    type: actionTypes.CREATE_REVIEW_SUCCESS,
+    info: info
   };
 };
 
@@ -17,8 +29,17 @@ export const createReviewFail = error => {
   };
 };
 
-export const canCreateReview = () => {
-  return dispatch => {};
+export const canCreateReview = product_id => {
+  return dispatch => {
+    Axios.get("reviews/new?product_id=" + product_id)
+      .then(response => {
+        console.log(response.data);
+        dispatch(canCreateReviewSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(canCreateReviewFail(error));
+      });
+  };
 };
 
 export const canCreateReviewSuccess = info => {
@@ -41,14 +62,21 @@ export const deleteReviews = () => {
   };
 };
 
-export const deleteReview = reviewId => {
-  return dispatch => {};
+export const deleteReview = review_id => {
+  return dispatch => {
+    Axios.delete("reviews/" + review_id)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        dispatch(deleteReviewFail(error));
+      });
+  };
 };
 
-export const deleteReviewSuccess = info => {
+export const deleteReviewSuccess = () => {
   return {
-    type: actionTypes.DELETE_REVIEW_SUCCESS,
-    info: info
+    type: actionTypes.DELETE_REVIEW_SUCCESS
   };
 };
 
@@ -60,7 +88,16 @@ export const deleteReviewFail = error => {
 };
 
 export const fetchReviews = product_id => {
-  return dispatch => {};
+  return dispatch => {
+    Axios.get("reviews/" + product_id)
+      .then(response => {
+        console.log(response.data);
+        dispatch(fetchReviewsSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(fetchReviewsFail(error));
+      });
+  };
 };
 
 export const fetchReviewsSuccess = reviews => {

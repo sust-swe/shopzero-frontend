@@ -6,11 +6,12 @@ const initialState = {
   canReview: false,
   reviews: [],
   review: null,
-  error: null
+  error: null,
+  totalRating: null
 };
 
 export const createReviewSuccess = (state, action) => {
-  return updateObject(state, { review: action.review, canReview: true });
+  return updateObject(state, { review: action.info.review, canReview: true });
 };
 
 export const createReviewFail = (state, action) => {
@@ -20,7 +21,7 @@ export const createReviewFail = (state, action) => {
 export const canCreateReviewSuccess = (state, action) => {
   return updateObject(state, {
     review: action.info.review,
-    canReview: action.info.canReview
+    canReview: action.info.can_review
   });
 };
 
@@ -41,7 +42,10 @@ export const deleteReviewFail = (state, action) => {
 };
 
 export const fetchReviewsSuccess = (state, action) => {
-  return updateObject(state, { reviews: action.reviews });
+  return updateObject(state, {
+    reviews: action.reviews.review,
+    totalRating: action.reviews.total_rating
+  });
 };
 
 export const fetchReviewsFail = (state, action) => {
