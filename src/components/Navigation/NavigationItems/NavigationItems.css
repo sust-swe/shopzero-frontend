@@ -15,7 +15,7 @@
     list-style: none;
     height: 100%;
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
     align-items: center;
   }
 }

@@ -3,9 +3,12 @@ import Input from "../../components/UI/Input/Input";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "axios";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import { MDBBtn } from "mdbreact";
+import { Alert } from "reactstrap";
 
 class Auth extends Component {
   state = {
@@ -18,8 +21,7 @@ class Auth extends Component {
         },
         value: "",
         validation: {
-          required: true,
-          isEmail: true
+          required: true
         },
         valid: false,
         touched: false
@@ -33,14 +35,15 @@ class Auth extends Component {
         },
         value: "",
         validation: {
-          required: true,
-          minLength: 6,
-          maxLength: 18
+          required: true
         },
         valid: false,
         touched: false
       }
-    }
+    },
+    formIsValid: false,
+    message: null,
+    visible: false
   };
 
   checkValidity = (value, rules) => {
@@ -56,11 +59,6 @@ class Auth extends Component {
 
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-      isValid = pattern.test(value) && isValid;
     }
 
     if (rules.isNumeric) {
@@ -85,15 +83,39 @@ class Auth extends Component {
       }
     };
 
-    this.setState({ controls: updatedControls });
+    let formIsValid = true;
+    for (let controlName in updatedControls) {
+      formIsValid = updatedControls[controlName].valid && formIsValid;
+    }
+
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
   };
 
   submitHandler = event => {
     event.preventDefault();
-    this.props.onAuth(
-      this.state.controls.email.value,
-      this.state.controls.password.value
-    );
+
+    if (!this.state.formIsValid) {
+      let message = "Please fill up the whole form correctly!";
+      this.onShowAlert(message);
+    } else {
+      this.props.onAuth(
+        this.state.controls.email.value,
+        this.state.controls.password.value
+      );
+    }
+  };
+
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+      }, 2000);
+    });
+  };
+
+  signupBtnHandler = event => {
+    event.preventDefault();
+    this.props.history.push("/signup");
   };
 
   render() {
@@ -122,19 +144,33 @@ class Auth extends Component {
       form = <Spinner />;
     }
 
-    let response = null;
+    let authRedirect = null;
 
-    if (this.props.responseMessage) {
-      response = <p>{this.props.responseMessage}</p>;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/" />;
     }
 
     return (
-      <div className={classes.Auth}>
-        <form onSubmit={this.submitHandler}>
-          {form}
-          <button className={classes.LoginBtn}>SIGN IN</button>
-        </form>
-        {response}
+      <div>
+        <div className={[classes.Row, `row`].join(" ")}>
+          <div className={["col-md-10"].join(" ")}>
+            <div className={classes.Auth}>
+              {authRedirect}
+              <form onSubmit={this.submitHandler}>
+                {form}
+                <Alert color="warning" isOpen={this.state.visible}>
+                  {this.state.message}
+                </Alert>
+                <button className={classes.LoginBtn}>SIGN IN</button>
+              </form>
+            </div>
+          </div>
+          <div className={["col-md-2"].join(" ")}>
+            <MDBBtn color="light-green" onClick={this.signupBtnHandler}>
+              SIGN UP
+            </MDBBtn>
+          </div>
+        </div>
       </div>
     );
   }
@@ -142,8 +178,9 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.loading,
-    responseMessage: state.responseMessage
+    loading: state.auth.loading,
+    responseMessage: state.auth.responseMessage,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

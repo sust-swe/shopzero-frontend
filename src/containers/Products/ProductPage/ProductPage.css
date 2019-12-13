@@ -1,0 +1,123 @@
+/*.Body {
+  font-family: cursive;
+}
+
+.Img {
+  display: block;
+  margin: auto;
+  width: auto;
+  height: 250px;
+}
+
+.panelTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Button {
+  font-size: 3vmin;
+  background-color: transparent;
+  border: 0.5px solid;
+  color: #5c9210;
+  outline: none;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: initial;
+}
+*/
+
+.Product {
+  padding: 10px;
+}
+
+.Controls {
+  text-align: center;
+}
+
+.body {
+  font-family: cursive;
+}
+
+.Logo {
+  box-shadow: 0 0 black;
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.row {
+  padding: 10px;
+  display: inline-flex;
+}
+
+.Border {
+  border: 1px solid;
+}
+
+.evenlySpaced {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.left {
+  float: left;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Img {
+  display: block;
+  margin: auto;
+  height: 250px;
+}
+
+.Button {
+  font-size: 3vmin;
+  background-color: transparent;
+  border: 1px solid;
+  color: #5c9210;
+  outline: none;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.FeaturesHeading {
+  display: flex;
+  margin-right: 1030px;
+}
+
+.DescriptionHeading {
+  display: flex;
+  margin-right: 920px;
+}
+
+.AllReviewsHeading {
+  text-align: center;
+}
+
+.ProductDescription {
+  margin-top: 50px;
+}
+
+.Features {
+  margin-bottom: 50px;
+}

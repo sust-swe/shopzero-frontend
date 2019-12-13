@@ -311,6 +311,7 @@ module.exports = function(webpackEnv) {
         }),
         ...(modules.webpackAliases || {})
       },
+
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
@@ -339,7 +340,7 @@ module.exports = function(webpackEnv) {
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
         {
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
+          test: /\.(js|mjs|jsx|ts|tsxzz)$/,
           enforce: "pre",
           use: [
             {
@@ -438,14 +439,36 @@ module.exports = function(webpackEnv) {
             // of CSS.
             // By default we support CSS Modules with the extension .module.css
             {
-              test: cssRegex,
-              exclude: cssModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                localIdentName: "[name]__[local]__[hash:base64:5]"
-              }),
+              test: /node_modules\/.*\.css$/,
+              use: [
+                {
+                  loader: 'style-loader',
+                },
+                {
+                  loader: 'css-loader',
+                  options: {
+                    sourceMap: true,
+                  },
+                },
+              ],
+            },
+            {
+              test: /\.css$/,
+              exclude: /node_modules/,
+              use: [
+                {
+                  loader: 'style-loader',
+                },
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: true,
+                    sourceMap: true,
+                    importLoaders: 1,
+                    localIdentName: '[name]__[local]__[hash:base64:5]',
+                  },
+                },
+              ],
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
@@ -454,15 +477,15 @@ module.exports = function(webpackEnv) {
             },
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
             // using the extension .module.css
-            {
-              test: cssModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent
-              })
-            },
+            // {
+            //   test: cssModuleRegex,
+            //   use: getStyleLoaders({
+            //     importLoaders: 1,
+            //     sourceMap: isEnvProduction && shouldUseSourceMap,
+            //     modules: true,
+            //     getLocalIdent: getCSSModuleLocalIdent
+            //   })
+            // },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass

@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "OperatorMono-Book";
+  src: local("OperatorMono-Book"),
+    url(../../../../../fonts/OperatorMono-Book.otf) format("opentype");
+}
+.Row {
+  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CartItem {
+  border: 0.1px solid #def;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+  /* border: 1px solid #eee; */
+  box-shadow: 0 2px 3px #ccc;
+  padding: 10px;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+
+.Image {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+}
+.Brand {
+  font-family: "OperatorMono-Book", "Comic Sans Ms";
+}
+.Title {
+  width: 250px;
+  font-size: 20px;
+  font-family: "OperatorMono-Book", "Comic Sans Ms";
+  text-align: center;
+  font-style: bold;
+  margin: 2px;
+}
+
+.Quantity {
+  display: inline-flex;
+  justify-content: space-evenly;
+  font-family: "Operator Mono", "Comic Sans Ms";
+  text-align: center;
+  font-style: bold;
+  margin: 2px;
+}
+
+.Price {
+  text-align: left;
+  font-family: cursive;
+  font-style: bold;
+}
+.Remove {
+  border: none;
+  white-space: normal;
+  color: red;
+  font-family: Comic Sans MS;
+  background: transparent;
+}
+.AddRemoveBtn {
+  height: 0px;
+  margin: -1px;
+  border: none;
+  white-space: normal;
+  font-style: bold;
+  color: green;
+  font-family: Comic Sans MS;
+  background: transparent;
+}
+.AddRemoveNumber {
+  margin: -1px;
+  border: none;
+  white-space: normal;
+  font-style: bold;
+  color: green;
+  font-family: Comic Sans MS;
+  background: transparent;
+}

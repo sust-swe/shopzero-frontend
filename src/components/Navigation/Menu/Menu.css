@@ -1,0 +1,16 @@
+.Menu {
+  text-align: center;
+  position: relative;
+  /* border: 1px solid blue; */
+  width: 100%;
+  /* width: 20%; */
+  /* max-width: 30%; */
+  max-height: min-content;
+  /* padding: 16px 16px; */
+}
+
+@media (max-width: 500px) {
+  .Menu {
+    display: none;
+  }
+}

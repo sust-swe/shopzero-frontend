@@ -1,0 +1,60 @@
+.Rating {
+  margin-bottom: 20px;
+}
+
+.Title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.Review {
+  margin-bottom: 20px;
+}
+
+.Button {
+  margin-bottom: 50px;
+}
+
+.UpdateBtn {
+  background-color: transparent;
+  border: none;
+  color: #5c9210;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.UpdateBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.DeleteBtn {
+  background-color: transparent;
+  border: none;
+  color: #f70909;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+.DeleteBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.ButtonMargin {
+  margin-bottom: 50px;
+}
+
+.manageReviewBtn {
+  display: flex;
+  justify-content: space-evenly;
+}

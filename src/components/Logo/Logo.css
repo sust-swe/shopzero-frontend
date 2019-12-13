@@ -1,0 +1,17 @@
+.Logo {
+  text-align: center;
+  font-family: "Baloo Bhai", cursive;
+  color: green;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Logo:hover {
+  color: rgb(1, 42, 1);
+}
+
+.Logo img {
+  height: 100%;
+}

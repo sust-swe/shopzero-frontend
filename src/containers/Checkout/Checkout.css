@@ -1,0 +1,78 @@
+.Checkout {
+  text-align: center;
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 600px) {
+  .Row {
+    display: inline;
+  }
+}
+
+.row {
+  padding: 10px;
+  display: inline-flex;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Img {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.Button {
+  background-color: transparent;
+  border: none;
+  color: #5c9210;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Input {
+  display: block;
+}
+
+.Form {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.ProfileInfoBtn {
+  background-color: transparent;
+  border: none;
+  color: #5fd5da;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  margin-left: 250px;
+  font-weight: bold;
+}
+
+.ProfileInfoBtn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}

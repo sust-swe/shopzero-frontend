@@ -1,3 +1,53 @@
 .Content {
   margin: 72px;
 }
+
+.Main {
+  margin: 5px;
+}
+
+.Home {
+  text-align: center;
+}
+
+.Button {
+  display: flex;
+}
+
+.Logo {
+  box-shadow: 0 0 black;
+}
+
+.Logo1 {
+  box-shadow: 0 0 black;
+  margin-right: 500px;
+}
+
+.Menu {
+  float: left;
+}
+
+.Products {
+  float: left;
+}
+
+.Signup {
+  float: left;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.Row {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Cart {
+  float: right;
+}
