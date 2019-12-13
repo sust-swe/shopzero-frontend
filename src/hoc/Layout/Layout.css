@@ -18,6 +18,11 @@
   box-shadow: 0 0 black;
 }
 
+.Logo1 {
+  box-shadow: 0 0 black;
+  margin-right: 500px;
+}
+
 .Menu {
   float: left;
 }

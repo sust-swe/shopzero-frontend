@@ -4,9 +4,9 @@ import classes from "./Contact.css";
 const Contact = () => {
   return (
     <div>
-      <h1 className={classes.Contact}>
+      {/* <h1 className={classes.Contact}>
         <strong>Contact Page</strong>
-      </h1>
+      </h1> */}
       <div className={classes.Information}>
         <h3>
           <strong>Company: </strong> ShopZero

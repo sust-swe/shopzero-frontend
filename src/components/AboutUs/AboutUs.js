@@ -4,9 +4,6 @@ import classes from "./AboutUs.css";
 const AboutUs = () => {
   return (
     <div>
-      <h1 className={classes.AboutUs}>
-        <strong>AboutUs Page</strong>
-      </h1>
       <div className={classes.Information}>
         <h3>
           This website's been created with a view to motivate people to use

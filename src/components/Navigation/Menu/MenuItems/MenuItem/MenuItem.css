@@ -1,24 +1,29 @@
 .MenuItem {
-	margin: 10px;
-	font-family: cursive;
-	font-size: 18px;
-	color: white;
-	background: #f8f7ec;
-	/*border: 1px solid black;*/
+  margin: 10px;
+  font-family: cursive;
+  font-size: 18px;
+  color: white;
+  background: #f8f7ec;
+  /*border: 1px solid black;*/
 }
 
 .MenuItem a {
-	color: #233;
-	text-decoration: none;
-	width: 100%;
-	padding: 5px;
-	display: block;
+  color: #233;
+  text-decoration: none;
+  width: 100%;
+  padding: 5px;
+  display: block;
 }
 
 .MenuItem a:hover,
-.MenuItem a:active,
+.MenuItem a:active {
+  outline: none;
+  color: green;
+  /* border-left: 2px solid green; */
+}
+
 .MenuItem a.active {
-	outline: none;
-	color: black;
-	border-left: 2px solid green;
+  outline: none;
+  color: green;
+  border-left: 2px solid green;
 }

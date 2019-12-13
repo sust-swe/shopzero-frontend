@@ -50,7 +50,11 @@ class ProductPage extends Component {
     }
   }
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   this.props.onSetProductInfoToNull();
+  // }
+
+  componentWillUnmount() {
     this.props.onSetProductInfoToNull();
   }
 
@@ -148,12 +152,9 @@ class ProductPage extends Component {
             {/*This is commented because only one item will be visible at a time*/}
             {this.props.canReview && !this.props.review ? (
               <div id="writereview" className="col-md-5">
-                {/* <WriteReview productId={this.state.productId} /> */}
                 <WriteReview productId={this.state.productId} />
               </div>
-            ) : (
-              <div id="writereview" className="col-md-5"></div>
-            )}
+            ) : null}
 
             {this.props.review ? (
               <div id="ownreview" className="col-md-3">

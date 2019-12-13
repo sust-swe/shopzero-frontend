@@ -56,6 +56,8 @@ class Layout extends Component {
             <Logo className={classes.Logo} />
           </div>
 
+          {/* <div className="col-md-9"></div> */}
+
           <div className="col-md-1">
             <Cart className={classes.Cart} />
           </div>

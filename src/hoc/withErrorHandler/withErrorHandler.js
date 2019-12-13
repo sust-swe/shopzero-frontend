@@ -4,7 +4,8 @@ import Modal from "../../components/UI/Modal/Modal";
 const withErrorHandler = (WrappedComponent, Axios) => {
   return class extends Component {
     state = {
-      error: null
+      error: null,
+      message: null
     };
 
     constructor() {
