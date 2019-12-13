@@ -8,10 +8,13 @@ import * as actions from "../../../../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import Modal from "../../../../../components/UI/Modal/Modal";
 import WriteReview from "../../WriteReview/WriteReview";
+import { Alert } from "reactstrap";
 
 class OwnReview extends Component {
   state = {
-    updating: false
+    updating: false,
+    visible: false,
+    message: null
   };
 
   updateReviewHandler = event => {
@@ -27,12 +30,25 @@ class OwnReview extends Component {
   deleteReviewHandler = event => {
     event.preventDefault();
     this.props.onDeleteReview(this.props.id);
-    this.props.history.push("/");
+    this.onShowAlert(
+      "Your review has been deleted, it will be updated shortly"
+    );
+  };
+
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+      }, 2000);
+    });
   };
 
   render() {
     return (
       <div>
+        <Alert color="success" isOpen={this.state.visible}>
+          {this.state.message}
+        </Alert>
         <Modal
           show={this.state.updating}
           modalClosed={this.updateCancelledHandler}

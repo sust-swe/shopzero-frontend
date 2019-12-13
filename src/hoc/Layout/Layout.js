@@ -8,6 +8,7 @@ import Logo from "../../components/Logo/Logo";
 import SearchBar from "../../containers/Home/SearchBar/SearchBar";
 import Cart from "../../containers/User/Cart/Cart";
 import { withRouter } from "react-router-dom";
+import Footer from "../../components/Navigation/NavigationItems/Footer/Footer";
 class Layout extends Component {
   state = {
     showSideDrawer: false
@@ -109,6 +110,7 @@ class Layout extends Component {
             <main className={classes.Main}>{this.props.children}</main>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

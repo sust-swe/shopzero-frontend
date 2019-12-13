@@ -7,7 +7,9 @@ const initialState = {
   reviews: [],
   review: null,
   error: null,
-  totalRating: null
+  totalRating: null,
+  postSuccess: false,
+  deleteSuccess: false
 };
 
 export const createReviewSuccess = (state, action) => {

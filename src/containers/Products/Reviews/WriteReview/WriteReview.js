@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 
 class WriteReview extends Component {
   state = {
-    rating: 1,
+    rating: 5,
     title: null,
     review: null,
     visible: false,
@@ -41,7 +41,7 @@ class WriteReview extends Component {
       };
 
       this.props.onCreateReview(review);
-      this.props.history.push("/");
+      this.props.history.push("/productpage");
     } else {
       this.onShowAlert("Please give both title and review");
     }
