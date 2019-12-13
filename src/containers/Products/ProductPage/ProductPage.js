@@ -50,13 +50,13 @@ class ProductPage extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.onSetProductInfoToNull();
-  // }
-
-  componentWillUnmount() {
+  componentDidMount() {
     this.props.onSetProductInfoToNull();
   }
+
+  // componentWillUnmount() {
+  //   this.props.onSetProductInfoToNull();
+  // }
 
   addToCartHandler = event => {
     event.preventDefault();

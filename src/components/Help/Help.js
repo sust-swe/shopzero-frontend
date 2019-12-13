@@ -6,9 +6,7 @@ const Help = () => {
     <div>
       <h1>Frequently Asked Questions</h1>
       <div>
-        <h4 className={classes["accordion"]}>
-          What is the motivation of this website?
-        </h4>
+        <h4 className={classes["accordion"]}>How to buy a product?</h4>
         <div className="panel">
           <p>
             Products of the site can be explored without signing up, but if you
