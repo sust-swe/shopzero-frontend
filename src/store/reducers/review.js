@@ -30,7 +30,7 @@ export const canCreateReviewFail = (state, action) => {
 };
 
 export const deleteReviews = (state, action) => {
-  return updateObject(state, { reviews: null, review: null, canReview: false });
+  return updateObject(state, { review: null, canReview: false });
 };
 
 export const deleteReviewSuccess = (state, action) => {

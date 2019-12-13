@@ -148,6 +148,7 @@ class ProductPage extends Component {
             {/*This is commented because only one item will be visible at a time*/}
             {this.props.canReview && !this.props.review ? (
               <div id="writereview" className="col-md-5">
+                {/* <WriteReview productId={this.state.productId} /> */}
                 <WriteReview productId={this.state.productId} />
               </div>
             ) : (

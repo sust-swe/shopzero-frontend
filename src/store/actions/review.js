@@ -2,9 +2,9 @@ import * as actionTypes from "./actionTypes";
 import Axios from "axios";
 // product_id, body, title, rating
 
-export const createReview = review => {
+export const createReview = data => {
   return dispatch => {
-    Axios.post("reviews/", review)
+    Axios.post("reviews/", data)
       .then(response => {
         console.log(response.data);
         dispatch(createReviewSuccess(response.data));

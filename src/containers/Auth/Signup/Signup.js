@@ -208,12 +208,6 @@ class Signup extends Component {
       form = <Spinner />;
     }
 
-    // let response = null;
-
-    // if (this.props.responseMessage) {
-    //   response = <p>{this.props.responseMessage}</p>;
-    // }
-
     let redirectTo = null;
 
     if (this.props.signedUp) {

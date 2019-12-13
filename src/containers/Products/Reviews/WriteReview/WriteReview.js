@@ -5,18 +5,54 @@ import StarYellow from "../../../../assets/images/yellow-star.png";
 import classes from "./WriteReview.css";
 import { connect } from "react-redux";
 import * as actions from "../../../../store/actions/index";
+import { Alert } from "reactstrap";
+import { withRouter } from "react-router-dom";
 
 class WriteReview extends Component {
-  state = {};
-
-  hoverHandler = () => {};
+  state = {
+    rating: 1,
+    title: null,
+    review: null,
+    visible: false,
+    message: null
+  };
 
   ratingChangedHandler = value => {
-    console.log(value);
+    this.setState({ rating: value });
   };
 
   titleChangedHandler = event => {
-    console.log(event.target.value);
+    this.setState({ title: event.target.value });
+  };
+
+  reviewChangedHandler = event => {
+    this.setState({ review: event.target.value });
+  };
+
+  postHandler = event => {
+    event.preventDefault();
+
+    if (this.state.rating && this.state.title && this.state.review) {
+      const review = {
+        product_id: this.props.productId,
+        title: this.state.title,
+        body: this.state.review,
+        rating: this.state.rating
+      };
+
+      this.props.onCreateReview(review);
+      this.props.history.push("/");
+    } else {
+      this.onShowAlert("Please give both title and review");
+    }
+  };
+
+  onShowAlert = message => {
+    this.setState({ message: message, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false });
+      }, 2000);
+    });
   };
 
   render() {
@@ -28,7 +64,7 @@ class WriteReview extends Component {
         <Rating
           className={classes.Rating}
           onChange={value => this.ratingChangedHandler(value)}
-          initialRating={1}
+          initialRating={this.state.rating}
           emptySymbol={<img src={Star} className="icon" />}
           placeholderSymbol={<img src={Star} className="icon" />}
           fullSymbol={<img src={StarYellow} className="icon" />}
@@ -36,13 +72,22 @@ class WriteReview extends Component {
         <h6>
           <strong>Write a review about it</strong>
         </h6>
-        <input className={classes.Title} placeholder="title"></input>
+        <input
+          className={classes.Title}
+          placeholder="title"
+          onChange={this.titleChangedHandler}
+        ></input>
         <textarea
           className={classes.Title}
           placeholder="review"
-          onChange={this.titleChangedHandler}
+          onChange={this.reviewChangedHandler}
         ></textarea>
-        <button className="btn-success btn-sm">Post</button>
+        <Alert color="warning" isOpen={this.state.visible}>
+          {this.state.message}
+        </Alert>
+        <button className="btn-success btn-sm" onClick={this.postHandler}>
+          Post
+        </button>
       </div>
     );
   }
@@ -54,4 +99,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(WriteReview);
+export default connect(null, mapDispatchToProps)(withRouter(WriteReview));
