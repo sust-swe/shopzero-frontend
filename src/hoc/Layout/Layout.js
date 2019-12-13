@@ -9,6 +9,7 @@ import SearchBar from "../../containers/Home/SearchBar/SearchBar";
 import Cart from "../../containers/User/Cart/Cart";
 import { withRouter } from "react-router-dom";
 import Footer from "../../components/Navigation/NavigationItems/Footer/Footer";
+import StickyFooter from "react-sticky-footer";
 class Layout extends Component {
   state = {
     showSideDrawer: false
@@ -88,28 +89,31 @@ class Layout extends Component {
 
     return (
       <div>
-        <div className={classes.Content}>
-          {/* <div>Toolbar, SideDrawer, Backdrop</div> */}
-          <Toolbar
-            authenticated={this.props.isAuthenticated}
-            drawerToggleClicked={this.sideDrawerToggleHandler}
-          />
-          <SideDrawer
-            open={this.state.showSideDrawer}
-            closed={this.sideDrawerClosed}
-            authenticated={this.props.isAuthenticated}
-          />
-        </div>
-        {header}
+        <div style={{ minHeight: "100vh" }}>
+          <div className={classes.Content}>
+            {/* <div>Toolbar, SideDrawer, Backdrop</div> */}
+            <Toolbar
+              authenticated={this.props.isAuthenticated}
+              drawerToggleClicked={this.sideDrawerToggleHandler}
+            />
+            <SideDrawer
+              open={this.state.showSideDrawer}
+              closed={this.sideDrawerClosed}
+              authenticated={this.props.isAuthenticated}
+            />
+          </div>
+          {header}
 
-        <div className={[classes.Row, `row`].join(" ")}>
-          <div className={["col-md-2"].join(" ")}>
-            <ShowMenu />
-          </div>
-          <div className={["col-md-10"].join(" ")}>
-            <main className={classes.Main}>{this.props.children}</main>
+          <div className={[classes.Row, `row`].join(" ")}>
+            <div className={["col-md-2"].join(" ")}>
+              <ShowMenu />
+            </div>
+            <div className={["col-md-10"].join(" ")}>
+              <main className={classes.Main}>{this.props.children}</main>
+            </div>
           </div>
         </div>
+
         <Footer />
       </div>
     );

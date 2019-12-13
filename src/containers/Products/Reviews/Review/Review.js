@@ -8,7 +8,7 @@ const Review = props => {
   return (
     <div>
       <p className="font-weight-light">
-        on <i>{"2019-4-24 6:0 GMT"}</i>, {"username"} wrote
+        on <i>{props.updatedAt}</i>, {props.username} wrote
       </p>
       <Rating
         className={classes.Rating}

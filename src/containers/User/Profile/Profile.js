@@ -68,8 +68,18 @@ class Profile extends Component {
           ) : null}
         </div>
         <div className={classes.Row}>
-          <button onClick={this.updateProfileHandler}>Update Profile</button>
-          <button onClick={this.passwordChangeHandler}>Change Password</button>
+          <button
+            onClick={this.updateProfileHandler}
+            className={classes.Button}
+          >
+            Update Profile
+          </button>
+          <button
+            onClick={this.passwordChangeHandler}
+            className={classes.Button}
+          >
+            Change Password
+          </button>
         </div>
       </div>
     );

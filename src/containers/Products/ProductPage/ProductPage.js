@@ -187,6 +187,8 @@ class ProductPage extends Component {
                   rating={review.rating}
                   title={review.title}
                   body={review.body}
+                  username={review.user.username}
+                  updatedAt={review.updated_at}
                 />
               ))}
             </div>
