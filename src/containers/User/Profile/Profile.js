@@ -1,7 +1,7 @@
 import classes from "./Profile.css";
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 class Profile extends Component {
   state = {};
@@ -88,7 +88,8 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

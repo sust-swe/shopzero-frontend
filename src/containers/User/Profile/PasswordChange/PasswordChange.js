@@ -58,6 +58,12 @@ class PasswordChange extends Component {
     message: null
   };
 
+  componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
   checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -189,7 +195,8 @@ class PasswordChange extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

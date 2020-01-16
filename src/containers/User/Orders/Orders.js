@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import Order from "../../../components/Order/Order";
 import * as actions from "../../../store/actions/index";
 import { connect } from "react-redux";
-import Spinner from "../../../components/UI/Spinner/Spinner";
+import { withRouter } from "react-router-dom";
 
 class Orders extends Component {
   state = {};
 
   componentDidMount() {
-    this.props.onFetchOrders();
+    if (this.props.isAuthenticated) {
+      this.props.onFetchOrders();
+    } else {
+      this.props.history.push("/");
+    }
   }
 
   render() {
@@ -38,7 +42,8 @@ class Orders extends Component {
 
 const mapStateToProps = state => {
   return {
-    orders: state.order.orders
+    orders: state.order.orders,
+    isAuthenticated: state.auth.token !== null
   };
 };
 
@@ -48,4 +53,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));

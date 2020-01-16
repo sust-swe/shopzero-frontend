@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from "react";
 import Modal from "../../components/UI/Modal/Modal";
+import { Alert } from "reactstrap";
 
 const withErrorHandler = (WrappedComponent, Axios) => {
   return class extends Component {
     state = {
       error: null,
-      message: null
+      message: null,
+      visible: false
     };
 
     constructor() {
@@ -17,7 +19,8 @@ const withErrorHandler = (WrappedComponent, Axios) => {
       this.resInterceptor = Axios.interceptors.response.use(
         res => res,
         error => {
-          this.setState({ error: error });
+          this.setState({ error: error.response.status });
+          this.onShowAlert(error.response.status);
         }
       );
     }
@@ -31,6 +34,15 @@ const withErrorHandler = (WrappedComponent, Axios) => {
       this.setState({ error: null });
     };
 
+    onShowAlert = message => {
+      this.setState({ message: message, visible: true }, () => {
+        window.setTimeout(() => {
+          this.setState({ visible: false });
+          this.errorConfirmedHandler();
+        }, 2000);
+      });
+    };
+
     render() {
       return (
         <Fragment>
@@ -38,7 +50,11 @@ const withErrorHandler = (WrappedComponent, Axios) => {
             show={this.state.error}
             modalClosed={this.errorConfirmedHandler}
           >
-            {this.state.error ? this.state.error.message : null}
+            {this.state.error ? (
+              <Alert isOpen={this.state.visible} color="danger">
+                {this.state.message}
+              </Alert>
+            ) : null}
           </Modal>
           <WrappedComponent {...this.props} />
         </Fragment>

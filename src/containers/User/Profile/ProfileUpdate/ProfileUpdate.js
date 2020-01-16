@@ -139,6 +139,10 @@ class ProfileUpdate extends Component {
   };
 
   componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
+
     if (this.props.user.phone_no === null) {
       this.setState(prevstate => ({
         ...prevstate,
@@ -359,7 +363,8 @@ class ProfileUpdate extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

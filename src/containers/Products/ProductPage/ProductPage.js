@@ -4,13 +4,12 @@ import classes from "./ProductPage.css";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Redirect, withRouter } from "react-router-dom";
-import WriteReview from "../Reviews/WriteReview/WriteReview";
-import Reviews from "../Reviews/Reviews";
-import OwnReview from "../Reviews/Review/OwnReview/OwnReview";
+import WriteReview from "../Reviews/WriteReviews/WriteReview";
+import OwnReview from "../Reviews/OwnReview/OwnReview";
 import Rating from "react-rating";
-import Star from "../../../assets/images/star-grey.png";
-import StarYellow from "../../../assets/images/star-yellow.png";
-import Review from "../Reviews/Review/Review";
+import Star from "../../../assets/images/star.png";
+import StarYellow from "../../../assets/images/yellow-star.png";
+import Review from "../../../components/Review/Review";
 
 class ProductPage extends Component {
   state = {
@@ -122,18 +121,22 @@ class ProductPage extends Component {
                     <button
                       className={classes.Button}
                       onClick={this.increaseQuantityHandler}
+                      disabled={this.state.productStock < 1}
                     >
                       +
                     </button>
                   </div>
                   <div>
-                    <button
-                      className="btn btn-success"
-                      onClick={this.addToCartHandler}
-                      disabled={this.state.productStock < 1}
-                    >
-                      Add to Cart
-                    </button>
+                    {this.state.productStock < 1 ? (
+                      <h4 style={{ color: "red" }}>**out of stock</h4>
+                    ) : (
+                      <button
+                        className="btn btn-success"
+                        onClick={this.addToCartHandler}
+                      >
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -152,7 +155,7 @@ class ProductPage extends Component {
             {/*This is commented because only one item will be visible at a time*/}
             {this.props.canReview && !this.props.review ? (
               <div id="writereview" className="col-md-5">
-                <WriteReview productId={this.state.productId} />
+                <WriteReview productId={this.state.productId} modal={false} />
               </div>
             ) : null}
 

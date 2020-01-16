@@ -87,6 +87,12 @@ class Checkout extends Component {
     message: null
   };
 
+  componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
   checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -275,7 +281,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
   return {
     profileInfo: state.auth.user,
-    loading: state.order.loading
+    loading: state.order.loading,
+    isAuthenticated: state.auth.token !== null
   };
 };
 

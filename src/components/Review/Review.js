@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Review.css";
-import Star from "../../../../assets/images/star.png";
-import StarYellow from "../../../../assets/images/yellow-star.png";
+import Star from "../../assets/images/star.png";
+import StarYellow from "../../assets/images/yellow-star.png";
 import Rating from "react-rating";
 
 const Review = props => {

@@ -8,9 +8,8 @@ const Footer = () => {
       <MDBFooter color="black" className="font-small pt-4 mt-4">
         <MDBContainer fluid className="text-center ">
           <h6>
-            Developed and Maintained by{"   "}
-            <a href="https://github.com/r-0-0-t">r-0-0-t</a>
-            {"   "}and{"   "}
+            Developed and Maintained by{" "}
+            <a href="https://github.com/r-0-0-t">r-0-0-t</a> and{" "}
             <a href="https://github.com/TushitaTahsin">TushitaTahsin</a>
           </h6>
         </MDBContainer>
